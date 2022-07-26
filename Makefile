@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/07/26 15:53:15 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/07/26 17:35:24 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,16 +19,24 @@ CC = clang
 
 S = src/
 O = obj/
-I = inc/
+I = inc/ dep/libsdl2/include/
 D = dep/
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
 
-CFLAGS += -Wall -Wextra -Werror
+SDL2_MK = libsdl2/Makefile
+SDL2_LIB = $Dlibsdl2/lib/libSDL2.a
+SDL2_CFLAGS = `$Dlibsdl2/bin/sdl2-config --cflags`
+SDL2_LDFLAGS = `$Dlibsdl2/bin/sdl2-config --libs`
+
+CFLAGS += -c -Wall -Wextra -Werror
 CFLAGS += -Wconversion -Wuninitialized
-CFLAGS += -I$I
-LDFLAGS += -g -fsanitize=address
+CFLAGS += $(SDL2_CFLAGS)
+CFLAGS += $(addprefix -I, $I)
+
+#LDFLAGS += -g -fsanitize=address
+LDFLAGS += $(SDL2_LDFLAGS)
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
@@ -40,10 +48,13 @@ RMDIR = /bin/rmdir
 
 all: $(NAME)
 
+$(NAME): $(OBJ)
+	$(CC) $(LDFLAGS) $^ -o $@
+
 $O:
 	@mkdir $@
 
-$(OBJ): | $O
+$(OBJ): $(SDL2_LIB) | $O
 
 $(OBJ): $O%.o: $S%
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -56,8 +67,12 @@ $(DEP): | $D
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
-$(NAME): $(OBJ)
-	$(CC) $(LDFLAGS) $^ -o $@
+$(SDL2_MK):
+	cd libsdl2 && ./configure --prefix=$(abspath $Dlibsdl2) --disable-shared --disable-video-wayland
+	$(MAKE) --directory=libsdl2
+
+$(SDL2_LIB): $(SDL2_MK) | $D
+	$(MAKE) --directory=libsdl2 install
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))
