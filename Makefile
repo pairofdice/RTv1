@@ -6,42 +6,76 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/07/25 20:09:09 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/07/26 15:53:15 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RTv1
 
+SRC = $Smain.c \
+	  $Stests.c
+
 CC = clang
+
 S = src/
 O = obj/
-I = include/
+I = inc/
+D = dep/
 
-SRCS = $Smain.c \
-	   $Stests.c
-OBJS = $(patsubst $S%.c,$O%.o, $(SRCS))
-INCLS = $IRTv1.h
+OBJ = $(SRC:$S%=$O%.o)
+DEP = $(SRC:$S%=$D%.d)
 
+CFLAGS += -Wall -Wextra -Werror
+CFLAGS += -Wconversion -Wuninitialized
+CFLAGS += -I$I
+LDFLAGS += -g -fsanitize=address
 
-CFLAGS = -Wall -Wextra -Werror -Wconversion -Wuninitialized
+OBJ = $(SRC:$S%=$O%.o)
+DEP = $(SRC:$S%=$D%.d)
 
 RM = /bin/rm -f
+RMDIR = /bin/rmdir
+
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) -o $@ $(OBJS) $(INCLS) $(LDFLAGS) 
+$O:
+	@mkdir $@
 
-$O%.o: $S%.c $(INCLS)
-	@mkdir -p "$(@D)"
-	$(CC) -c $< -o $@ $(CFLAGS) $I
+$(OBJ): | $O
 
-clean:
-	$(RM) $(OBJS)
+$(OBJ): $O%.o: $S%
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$D:
+	@mkdir $@
+
+$(DEP): | $D
+
+$(DEP): $D%.d: $S%
+	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
+
+$(NAME): $(OBJ)
+	$(CC) $(LDFLAGS) $^ -o $@
+
+cleanobj:
+	$(RM) $(wildcard $(OBJ))
+
+cleanobjdir: cleanobj
+	$(RMDIR) $O
+
+cleandep:
+	$(RM) $(wildcard $(DEP))
+
+cleandepdir: cleandep
+	$(RMDIR) $D
+
+clean: cleanobjdir cleandepdir
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+-include $(DEP)

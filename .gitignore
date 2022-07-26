@@ -1,2 +1,5 @@
 RTv1
-obj/*
+obj/
+.DS_Store
+jh/
+dep/
