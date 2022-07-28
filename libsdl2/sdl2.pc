@@ -1,6 +1,6 @@
 # sdl pkg-config source file
 
-prefix=/Users/jsaarine/work/code/RTv1/dep/libsdl2
+prefix=/Users/jsaarine/work/code/RTv1/build/libsdl2
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

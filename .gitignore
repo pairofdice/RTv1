@@ -4,3 +4,8 @@ obj/
 jh/
 dep/
 .vscode/
+.jh/
+Makefilejh
+build/
+libsdl2/build/
+hello_world.bmp

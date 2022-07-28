@@ -6,14 +6,15 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/07/26 17:35:24 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/07/28 18:25:14 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RTv1
 
 SRC = $Smain.c \
-	  $Stests.c
+	$Sinit.c \
+	$Stests.c
 
 CC = clang
 
