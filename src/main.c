@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 15:10:21 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:11:15 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,62 +45,55 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
-		//Load media
-		if( !loadMedia() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{			
-				int	*texture_data;
-				int	texture_pitch;
-			//Main loop flag
-			bool quit = false;
+	
+			int	*texture_data;
+			int	texture_pitch;
+		//Main loop flag
+		bool quit = false;
 
-			//Event handler
-			SDL_Event e;
-			if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch) < 0)
-				{
-					//ctx.ok = rt_false;
-				}
-				t_color c = (t_color) {255, 255, 255};
-				int color = rgb_to_int(c);
-				int x = 0;
-				while (x < WIN_W)
-				{
-					int y = 0;
-					while (y < WIN_H)
-					{
-						img_pixel_put(&ctx.frame_buffer, x, y, color);
-						y++;
-					}
-					x++;
-				}
-
-				//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
-				ft_memcpy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel * 8);
-				SDL_UnlockTexture(ctx.texture);
-
-			//While application is running
-			while( !quit )
+		//Event handler
+		SDL_Event e;
+		if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch) < 0)
 			{
-				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-				}
-
-
-				//Render texture to screen
-                SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
-			
-				//Update screen
-                SDL_RenderPresent( ctx.renderer );
+				//ctx.ok = rt_false;
 			}
+			t_color c = (t_color) {255, 255, 255};
+			int color = rgb_to_int(c);
+			int x = 0;
+			while (x < WIN_W)
+			{
+				int y = 0;
+				while (y < WIN_H)
+				{
+					img_pixel_put(&ctx.frame_buffer, x, y, color);
+					y++;
+				}
+				x++;
+			}
+
+			//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
+			ft_memcpy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel * 8);
+			SDL_UnlockTexture(ctx.texture);
+
+		//While application is running
+		while( !quit )
+		{
+			//Handle events on queue
+			while( SDL_PollEvent( &e ) != 0 )
+			{
+				//User requests quit
+				if( e.type == SDL_QUIT )
+				{
+					quit = true;
+				}
+			}
+
+
+			//Render texture to screen
+			SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
+		
+			//Update screen
+			SDL_RenderPresent( ctx.renderer );
 		}
 	}
 
