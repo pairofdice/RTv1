@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 15:20:55 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:22:25 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,11 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-//The image we will load and show on the screen
-SDL_Surface* img = NULL;
-
-
 void close(t_context *ctx)
 {
 	//Deallocate surface
-	SDL_FreeSurface( img );
-	img = NULL;
+/* 	SDL_FreeSurface( img );
+	img = NULL; */
 
 	//Destroy window
 	SDL_DestroyWindow( ctx->window );
