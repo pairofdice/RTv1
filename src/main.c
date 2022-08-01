@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 15:22:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 17:20:58 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,25 @@ int main( int argc, char* args[] )
 			int	*texture_data;
 			int	texture_pitch;
 			SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
+			ctx.frame_buffer.data = malloc(WIN_H * texture_pitch);
 
-			t_color c = (t_color) {255, 255, 255};
-			int color = rgb_to_int(c);
-			int x = 0;
-			while (x < WIN_W)
+			// t_color c = (t_color) {255, 255, 255};
+			// int color = rgb_to_int(c);
+			int y = 0;
+			while (y < WIN_H)
 			{
-				int y = 0;
-				while (y < WIN_H)
+				int x = 0;
+					printf("asdf\n");
+				while (x < WIN_W)
 				{
-					img_pixel_put(&ctx.frame_buffer, x, y, color);
-					y++;
+					img_pixel_put(&ctx.frame_buffer, x, y, 0xFFFFFF);
+					x++;
 				}
-				x++;
+				y++;
 			}
 
 			//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
-			ft_memcpy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel * 8);
+			ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * texture_pitch);
 			SDL_UnlockTexture(ctx.texture);
 
 			//Render texture to screen

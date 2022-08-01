@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 12:20:23 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 14:29:07 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 17:16:03 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	img_pixel_put(t_frame_buffer *fb, unsigned long x,
 {
 	char	*dst;
 
-	dst = fb->data + (y * fb->line_length + x * (fb->bits_per_pixel / 8));
+	dst = fb->data + (y * WIN_W + x );
 	*(unsigned int *)dst = color;
 }
 
