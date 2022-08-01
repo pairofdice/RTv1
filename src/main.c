@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 15:09:38 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:10:21 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,14 @@ int main( int argc, char* args[] )
 					int y = 0;
 					while (y < WIN_H)
 					{
-
 						img_pixel_put(&ctx.frame_buffer, x, y, color);
 						y++;
 					}
 					x++;
 				}
 
-				buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
-				//ft_memcpy(texture_data, ctx.frame_buffer.data,
-				//	ctx.frame_buffer.bits_per_pixel * 8);
+				//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
+				ft_memcpy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel * 8);
 				SDL_UnlockTexture(ctx.texture);
 
 			//While application is running
