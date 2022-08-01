@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/01 14:26:49 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/01 14:53:54 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SDL2_CFLAGS = `$Dlibsdl2/bin/sdl2-config --cflags`
 SDL2_LDFLAGS = `$Dlibsdl2/bin/sdl2-config --libs`
 
 CFLAGS += -c -Wall -Wextra -Werror
-CFLAGS += -Wconversion -Wuninitialized
+#CFLAGS += -Wconversion -Wuninitialized
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)
 
