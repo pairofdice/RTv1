@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 14:29:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 18:03:23 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 //#include "../libsdl2/include/SDL.h"
 # include "SDL.h"
 
-# define WIN_W 999
-# define WIN_H 666
+# define WIN_W 1024
+# define WIN_H 768
 
 typedef struct s_frame_buffer
 {

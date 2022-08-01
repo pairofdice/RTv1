@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 17:20:58 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 18:03:52 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,31 @@ int main( int argc, char* args[] )
 		SDL_Event e;
 
 		//While application is running
+		int	texture_pitch;
+			int	*texture_data;
+			SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
+			ctx.frame_buffer.data = malloc(WIN_H * WIN_W * 4);
+			ft_memset( ctx.frame_buffer.data, 0,  WIN_H * WIN_W * 4);
+		printf("%d\n", texture_pitch);
+
+			// t_color c = (t_color) {255, 255, 255};
+			// int color = rgb_to_int(c);
+ 			/* int y = 0;
+			while (y < WIN_H)
+			{
+				int x = 0;
+				while (x < WIN_W)
+				{
+					img_pixel_put(&ctx.frame_buffer, x, y, 0xFFFFFF00);
+					x++;
+				}
+				y++;
+			}  */
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2, WIN_H /2, 0xFFFFFFFF);
+
+			//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
+			ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
+			SDL_UnlockTexture(ctx.texture);
 		while( !quit )
 		{
 			//Handle events on queue
@@ -60,29 +85,7 @@ int main( int argc, char* args[] )
 					quit = true;
 				}
 			}
-			int	*texture_data;
-			int	texture_pitch;
-			SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
-			ctx.frame_buffer.data = malloc(WIN_H * texture_pitch);
-
-			// t_color c = (t_color) {255, 255, 255};
-			// int color = rgb_to_int(c);
-			int y = 0;
-			while (y < WIN_H)
-			{
-				int x = 0;
-					printf("asdf\n");
-				while (x < WIN_W)
-				{
-					img_pixel_put(&ctx.frame_buffer, x, y, 0xFFFFFF);
-					x++;
-				}
-				y++;
-			}
-
-			//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
-			ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * texture_pitch);
-			SDL_UnlockTexture(ctx.texture);
+		
 
 			//Render texture to screen
 			SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );

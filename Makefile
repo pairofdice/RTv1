@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/01 14:53:54 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/01 17:39:28 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ CFLAGS += -c -Wall -Wextra -Werror
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)
 
-#LDFLAGS += -g -fsanitize=address
+LDFLAGS += -g -fsanitize=address
 LDFLAGS += $(SDL2_LDFLAGS)
 
 OBJ = $(SRC:$S%=$O%.o)
