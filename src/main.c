@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/07/28 18:45:09 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 14:45:33 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,25 @@ int main( int argc, char* args[] )
 						quit = true;
 					}
 				}
+				int	*texture_data;
+				int	texture_pitch;
 
-				//Apply the image
-				SDL_BlitSurface( img, NULL, ctx.screen_surface, NULL );
+				if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,
+						&texture_pitch) < 0)
+				{
+					//ctx.ok = rt_false;
+				}
+				img_pixel_put(&ctx.frame_buffer, 100, 100, 0xFFFFFF);
+				img_pixel_put(&ctx.frame_buffer, 100, 101, 8000000);
+				img_pixel_put(&ctx.frame_buffer, 100, 102, 8000000);
+				ft_memcpy(texture_data, ctx.frame_buffer.data,
+					ctx.frame_buffer.bits_per_pixel);
+				SDL_UnlockTexture(ctx.texture);
+				//Render texture to screen
+                SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
 			
-				//Update the surface
-				SDL_UpdateWindowSurface( ctx.window );
+				//Update screen
+                SDL_RenderPresent( ctx.renderer );
 			}
 		}
 	}
