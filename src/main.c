@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 15:18:30 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:20:55 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ int main( int argc, char* args[] )
 			}
 			int	*texture_data;
 			int	texture_pitch;
-			if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch) < 0)
-			{
-				//ctx.ok = rt_false;
-			}
+			SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
+
 			t_color c = (t_color) {255, 255, 255};
 			int color = rgb_to_int(c);
 			int x = 0;
