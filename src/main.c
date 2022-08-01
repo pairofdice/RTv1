@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 15:14:58 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:18:30 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void close(t_context *ctx)
 
 int main( int argc, char* args[] )
 {
-	bool quit = false;
 	if (argc || args)
 	{}
 	//Start up SDL and create window
@@ -48,6 +47,7 @@ int main( int argc, char* args[] )
 	{
 	
 		//Main loop flag
+		bool quit = false;
 
 		//Event handler
 		SDL_Event e;
@@ -64,9 +64,9 @@ int main( int argc, char* args[] )
 					quit = true;
 				}
 			}
-		int	*texture_data;
-		int	texture_pitch;
-		if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch) < 0)
+			int	*texture_data;
+			int	texture_pitch;
+			if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch) < 0)
 			{
 				//ctx.ok = rt_false;
 			}
