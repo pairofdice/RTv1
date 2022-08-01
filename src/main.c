@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 14:53:40 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:09:38 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-//Loads media
-bool loadMedia();
-
 //The image we will load and show on the screen
 SDL_Surface* img = NULL;
 
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
-
-	//Load splash image
-	img = SDL_LoadBMP( "hello_world.bmp" );
-	if( img == NULL )
-	{
-		printf( "Unable to load image %s! SDL Error: %s\n", "03_event_driven_programming/x.bmp", SDL_GetError() );
-		success = false;
-	}
-
-	return success;
-}
 
 void close(t_context *ctx)
 {
@@ -74,11 +52,36 @@ int main( int argc, char* args[] )
 		}
 		else
 		{			
+				int	*texture_data;
+				int	texture_pitch;
 			//Main loop flag
 			bool quit = false;
 
 			//Event handler
 			SDL_Event e;
+			if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch) < 0)
+				{
+					//ctx.ok = rt_false;
+				}
+				t_color c = (t_color) {255, 255, 255};
+				int color = rgb_to_int(c);
+				int x = 0;
+				while (x < WIN_W)
+				{
+					int y = 0;
+					while (y < WIN_H)
+					{
+
+						img_pixel_put(&ctx.frame_buffer, x, y, color);
+						y++;
+					}
+					x++;
+				}
+
+				buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
+				//ft_memcpy(texture_data, ctx.frame_buffer.data,
+				//	ctx.frame_buffer.bits_per_pixel * 8);
+				SDL_UnlockTexture(ctx.texture);
 
 			//While application is running
 			while( !quit )
@@ -92,32 +95,8 @@ int main( int argc, char* args[] )
 						quit = true;
 					}
 				}
-				int	*texture_data;
-				int	texture_pitch;
 
-				if (SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,
-						&texture_pitch) < 0)
-				{
-					//ctx.ok = rt_false;
-				}
-				int x = 0;
-				while (x < WIN_W)
-				{
-					int y = 0;
-					while (y < WIN_H)
-					{
 
-						img_pixel_put(&ctx.frame_buffer, x, y, 8000000);
-						y++;
-					}
-					x++;
-				}
-				img_pixel_put(&ctx.frame_buffer, 100, 100, 0xFFFFFF);
-				img_pixel_put(&ctx.frame_buffer, 100, 101, 8000000);
-				img_pixel_put(&ctx.frame_buffer, 100, 102, 8000000);
-				ft_memcpy(texture_data, ctx.frame_buffer.data,
-					ctx.frame_buffer.bits_per_pixel * 8);
-				SDL_UnlockTexture(ctx.texture);
 				//Render texture to screen
                 SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
 			
