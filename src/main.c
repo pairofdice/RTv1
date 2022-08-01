@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 15:11:15 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:13:47 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,21 @@ int main( int argc, char* args[] )
 	else
 	{
 	
-			int	*texture_data;
-			int	texture_pitch;
+
+		//While application is running
+		while( !quit )
+		{
+			//Handle events on queue
+			while( SDL_PollEvent( &e ) != 0 )
+			{
+				//User requests quit
+				if( e.type == SDL_QUIT )
+				{
+					quit = true;
+				}
+			}
+		int	*texture_data;
+		int	texture_pitch;
 		//Main loop flag
 		bool quit = false;
 
@@ -74,20 +87,6 @@ int main( int argc, char* args[] )
 			//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
 			ft_memcpy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel * 8);
 			SDL_UnlockTexture(ctx.texture);
-
-		//While application is running
-		while( !quit )
-		{
-			//Handle events on queue
-			while( SDL_PollEvent( &e ) != 0 )
-			{
-				//User requests quit
-				if( e.type == SDL_QUIT )
-				{
-					quit = true;
-				}
-			}
-
 
 			//Render texture to screen
 			SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
