@@ -1,0 +1,9 @@
+Tests
+	- 
+
+Make a list of objects, type of which can be sphere, plane, cube, cylinder, cone
+	- function pointers D:
+For every pixel on the screen loop through every? object in the scene and ask if this ray intersects
+	- statically allocated # of objects maybe, if over max, error out
+Movable camera
+	- ???

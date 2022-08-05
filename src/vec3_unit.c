@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   vec3_unit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:46:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:31 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/08/04 16:14:47 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/05 14:41:19 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libsdl2/include/SDL.h"
-#include <stdio.h>
+#include "vec3.h"
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-
-void	tests()
+t_vec3	vec3_unit(t_vec3 u)
 {
-	printf("ALL TESTS PASS!\n");
+	double	mag;
+	mag = vec3_mag(u);
+	return ((t_vec3){u.x / mag, u.y / mag, u.z / mag});
 }

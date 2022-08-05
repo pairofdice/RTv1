@@ -6,12 +6,12 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 18:03:52 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:42:39 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../inc/RTv1.h"
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -70,6 +70,7 @@ int main( int argc, char* args[] )
 				y++;
 			}  */
 			img_pixel_put(&ctx.frame_buffer, WIN_W / 2, WIN_H /2, 0xFFFFFFFF);
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2 + 3, WIN_H /2 - 3, 0xFFFFFFFF);
 
 			//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
 			ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);

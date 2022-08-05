@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   vec3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:46:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:31 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/05 14:41:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libsdl2/include/SDL.h"
-#include <stdio.h>
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#ifndef VEC3_H
+# define VEC3_H
 
-void	tests()
+typedef struct s_vec3
 {
-	printf("ALL TESTS PASS!\n");
-}
+	double	x;
+	double	y;
+	double	z;
+}	t_vec3;
+
+typedef t_vec3	t_color;
+typedef t_vec3	t_point;
+
+typedef struct s_ray
+{
+	t_point	orig;
+	t_vec3	dir;
+}	t_ray;
+
+int		rgb_to_int(t_color c);
+t_vec3	vec3_add(t_vec3 i, t_vec3 j);
+double	vec3_mag(t_vec3 i);
+t_vec3	vec3_scalar_mult(t_vec3 u, double x);
+
+
+
+#endif

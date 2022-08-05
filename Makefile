@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/01 17:39:28 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/04 16:15:37 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = RTv1
 
 SRC = $Smain.c \
 	$Sinit.c \
+	$Svec3.c \
 	$Spixel_put_color.c \
 	$Sft_memcpy.c \
 	$Sft_memset.c \

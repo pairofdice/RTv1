@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:46:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:31 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/04 17:40:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libsdl2/include/SDL.h"
-#include <stdio.h>
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#ifndef OBJECTS_H
+# define OBJECTS_H
 
-void	tests()
+# include "vec3.h"
+
+typedef struct s_object
 {
-	printf("ALL TESTS PASS!\n");
-}
+	t_point	o;
+	t_vec3	rot;
+	double size;
+}	t_object;
+
+
+
+
+#endif

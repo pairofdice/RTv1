@@ -6,11 +6,12 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 12:20:23 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/01 17:56:17 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:40:07 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
+#include "vec3.h"
 
 void	img_pixel_put(t_frame_buffer *fb, unsigned long x, 
 	unsigned long y, unsigned int color)

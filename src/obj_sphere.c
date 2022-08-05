@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   obj_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:46:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:31 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/08/04 17:28:03 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/05 14:40:20 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libsdl2/include/SDL.h"
-#include <stdio.h>
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#include "objects.h"
+#include "vec3.h"
 
-void	tests()
+int	intersects_sphere(t_ray ray, t_object obj)
 {
-	printf("ALL TESTS PASS!\n");
+	
 }

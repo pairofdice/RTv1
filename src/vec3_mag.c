@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   vec3_mag.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:46:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:31 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/08/04 16:14:47 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/05 14:41:45 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../libsdl2/include/SDL.h"
-#include <stdio.h>
+#include "vec3.h"
+#include <math.h>
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-
-void	tests()
+double	vec3_mag(t_vec3 u)
 {
-	printf("ALL TESTS PASS!\n");
+	return (sqrt(u.x * u.x + u.y * u.y + u.z * u.z));
 }
