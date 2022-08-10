@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+         #
+#    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/09 18:34:01 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/10 13:55:25 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,28 +53,28 @@ RMDIR = /bin/rm -fr
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(LDFLAGS) $(FRAMEWORKS) $^ -o $@
+	$(CC) $(LDFLAGS) $^ -o $@
 
 $O:
 	@mkdir $@
 
-#$(OBJ): $(SDL2_LIB) | $O
-#$(OBJ):| $O
+$(OBJ): $(SDL2_LIB) | $O
+$(OBJ):| $O
 
 $(OBJ): $O%.o: $S% | $O
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $D:
 	@mkdir $@
 
 $(DEP): | $D
 
-INCLUDES	=	-I./frameworks/SDL2.framework/Versions/A/Headers \
+#INCLUDES	=	-I./frameworks/SDL2.framework/Versions/A/Headers \
 				-I./frameworks/SDL2_ttf.framework/Versions/A/Headers \
 				-I./frameworks/SDL2_image.framework/Versions/A/Headers \
 				-I./frameworks/SDL2_mixer.framework/Headers \
 				-F./frameworks/
-FRAMEWORKS	=	-F./frameworks \
+#FRAMEWORKS	=	-F./frameworks \
 				-rpath ./frameworks \
 				-framework OpenGL -framework AppKit -framework OpenCl \
 				-framework SDL2 -framework SDL2_ttf -framework SDL2_image \
@@ -83,12 +83,12 @@ FRAMEWORKS	=	-F./frameworks \
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
-#$(SDL2_MK):
-#	cd libsdl2 && ./configure --prefix=$(abspath $Dlibsdl2) --disable-shared --disable-video-wayland
-#	$(MAKE) --directory=libsdl2
+$(SDL2_MK):
+	cd libsdl2 && ./configure --prefix=$(abspath $Dlibsdl2) --disable-shared --disable-video-wayland
+	$(MAKE) --directory=libsdl2
 
-#$(SDL2_LIB): $(SDL2_MK) | $D
-#	$(MAKE) --directory=libsdl2 install
+$(SDL2_LIB): $(SDL2_MK) | $D
+	$(MAKE) --directory=libsdl2 install
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))

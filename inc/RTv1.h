@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/09 18:22:32 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:25:56 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
-//#include "../libsdl2/include/SDL.h"
-# include "../sdl_include/SDL.h"
+# include "../libsdl2/include/SDL.h"
+#include "objects.h"
+//# include "../sdl_include/SDL.h"
 
 # define WIN_W 1024
 # define WIN_H 768
@@ -36,6 +37,8 @@ typedef struct s_context
 	// SDL_Surface		*screen_surface;
 	SDL_Texture		*texture;
 	t_frame_buffer	frame_buffer;
+	t_cam			cam;
+	t_ray			ray;
 }	t_context;
 
 void	tests(void);

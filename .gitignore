@@ -5,6 +5,7 @@ dep/
 .vscode/
 .jh/
 Makefilejh
+Makefile*
 build/
 libsdl2/build/
 hello_world.bmp

@@ -6,16 +6,16 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:31 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/10 15:41:47 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../libsdl2/include/SDL.h"
-#include <stdio.h>
+#include "RTv1.h"
+#include "objects.h"
+#include "vec3.h"
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
 
 void	tests()
 {
