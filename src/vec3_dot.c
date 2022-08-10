@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_dot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:14:47 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:41:49 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:06:02 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
 
-t_vec3	vec3_dot(t_vec3 i, double x)
+double	vec3_dot(t_vec3 u, t_vec3 v)
 {
-	return ((t_vec3){i.x * x i.y * x, i.z * x});
+	return (u.x * v.x + u.y * v.y + u.z * v.z);
 }

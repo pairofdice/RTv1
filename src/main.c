@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:39 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:48:33 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
-	
+
 		//Main loop flag
 		bool quit = false;
 
@@ -58,20 +58,78 @@ int main( int argc, char* args[] )
 
 			// t_color c = (t_color) {255, 255, 255};
 			// int color = rgb_to_int(c);
- 			/* int y = 0;
+/*
+ 			 int y = 0;
 			while (y < WIN_H)
 			{
-				int x = 0;
-				while (x < WIN_W)
+				int x = 10;
+				while (x < 40)
 				{
-					img_pixel_put(&ctx.frame_buffer, x, y, 0xFFFFFF00);
+					if (y + WIN_H/2 < WIN_H)
+					img_pixel_put(&ctx.frame_buffer, 5, y + WIN_H/2, 0xFFFFFF00);
 					x++;
 				}
 				y++;
-			}  */
-			img_pixel_put(&ctx.frame_buffer, WIN_W / 2, WIN_H /2, 0xFFFFFFFF);
-			img_pixel_put(&ctx.frame_buffer, WIN_W / 2 + 3, WIN_H /2 - 3, 0xFFFFFFFF);
+			} */
 
+			/*
+			img_pixel_put(&ctx.frame_buffer, 0, 767, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 0, 700, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 0, 600, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 0, 500, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 0, 400, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 0, 384, 0xFFFFFF00);
+
+			img_pixel_put(&ctx.frame_buffer, 100, 767, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 100, 700, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 100, 600, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 100, 500, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 100, 400, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 100, 384, 0xFFFFFF00);
+
+			img_pixel_put(&ctx.frame_buffer, 200, 767, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 200, 700, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 200, 600, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 200, 500, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 200, 400, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 200, 384, 0xFFFFFF00);
+
+			img_pixel_put(&ctx.frame_buffer, 300, 767, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 300, 700, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 300, 600, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 300, 500, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 300, 400, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 300, 384, 0xFFFFFF00);
+
+			img_pixel_put(&ctx.frame_buffer, 400, 767, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 400, 700, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 400, 600, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 400, 500, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 400, 400, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 400, 384, 0xFFFFFF00);
+
+			img_pixel_put(&ctx.frame_buffer, 511, 767, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 511, 700, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 511, 600, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 511, 500, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 511, 400, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 511, 384, 0xFFFFFF00);
+			*/
+			img_pixel_put(&ctx.frame_buffer, WIN_W/2, WIN_H/2, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 10, 10, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, WIN_W - 11, 10, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, 10, WIN_H -11, 0xFFFFFF00);
+			img_pixel_put(&ctx.frame_buffer, WIN_W - 11, WIN_H -11, 0xFFFFFF00);
+
+
+			/*
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2, WIN_H /2, 0xFFFFFFFF);
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2 + 1, WIN_H /2, 0xFFFFFFFF);
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2 + 2, WIN_H /2, 0xFFFFFFFF);
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2 + 3, WIN_H /2, 0xFFFFFFFF);
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2 + 4, WIN_H /2, 0xFFFFFFFF);
+			img_pixel_put(&ctx.frame_buffer, WIN_W / 2 + 3, WIN_H /2 - 3, 0xFFFFFFFF);
+ */
 			//buffer_copy(texture_data, ctx.frame_buffer.data, ctx.frame_buffer.bits_per_pixel);
 			ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
 			SDL_UnlockTexture(ctx.texture);
@@ -86,11 +144,11 @@ int main( int argc, char* args[] )
 					quit = true;
 				}
 			}
-		
+
 
 			//Render texture to screen
 			SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
-		
+
 			//Update screen
 			SDL_RenderPresent( ctx.renderer );
 		}

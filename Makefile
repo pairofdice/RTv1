@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
+#    By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/04 16:15:37 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/09 18:34:01 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME = RTv1
 
 SRC = $Smain.c \
 	$Sinit.c \
-	$Svec3.c \
 	$Spixel_put_color.c \
 	$Sft_memcpy.c \
 	$Sft_memset.c \
@@ -40,44 +39,56 @@ CFLAGS += -c -Wall -Wextra -Werror
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)
 
-LDFLAGS += -g -fsanitize=address
+#LDFLAGS += -g -fsanitize=address
 LDFLAGS += $(SDL2_LDFLAGS)
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
 
 RM = /bin/rm -f
-RMDIR = /bin/rmdir
+RMDIR = /bin/rm -fr
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(LDFLAGS) $^ -o $@
+	$(CC) $(LDFLAGS) $(FRAMEWORKS) $^ -o $@
 
 $O:
 	@mkdir $@
 
-$(OBJ): $(SDL2_LIB) | $O
+#$(OBJ): $(SDL2_LIB) | $O
+#$(OBJ):| $O
 
-$(OBJ): $O%.o: $S%
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ): $O%.o: $S% | $O
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $D:
 	@mkdir $@
 
 $(DEP): | $D
 
+INCLUDES	=	-I./frameworks/SDL2.framework/Versions/A/Headers \
+				-I./frameworks/SDL2_ttf.framework/Versions/A/Headers \
+				-I./frameworks/SDL2_image.framework/Versions/A/Headers \
+				-I./frameworks/SDL2_mixer.framework/Headers \
+				-F./frameworks/
+FRAMEWORKS	=	-F./frameworks \
+				-rpath ./frameworks \
+				-framework OpenGL -framework AppKit -framework OpenCl \
+				-framework SDL2 -framework SDL2_ttf -framework SDL2_image \
+				-framework SDL2_mixer
+
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
-$(SDL2_MK):
-	cd libsdl2 && ./configure --prefix=$(abspath $Dlibsdl2) --disable-shared --disable-video-wayland
-	$(MAKE) --directory=libsdl2
+#$(SDL2_MK):
+#	cd libsdl2 && ./configure --prefix=$(abspath $Dlibsdl2) --disable-shared --disable-video-wayland
+#	$(MAKE) --directory=libsdl2
 
-$(SDL2_LIB): $(SDL2_MK) | $D
-	$(MAKE) --directory=libsdl2 install
+#$(SDL2_LIB): $(SDL2_MK) | $D
+#	$(MAKE) --directory=libsdl2 install
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))

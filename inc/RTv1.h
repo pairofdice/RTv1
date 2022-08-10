@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/05 14:40:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:22:32 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 //#include "../libsdl2/include/SDL.h"
-# include "SDL.h"
+# include "../sdl_include/SDL.h"
 
 # define WIN_W 1024
 # define WIN_H 768
