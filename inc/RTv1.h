@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/10 15:25:56 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:32:07 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_context
 	t_frame_buffer	frame_buffer;
 	t_cam			cam;
 	t_ray			ray;
+	t_ray			normal;
 }	t_context;
 
 void	tests(void);
@@ -48,6 +49,9 @@ int		init(t_context *ctx);
 void	close(t_context *ctx);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, unsigned char c, size_t len);
+int		intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal);
+t_object sphere_new(double x, double y, double z, double radius);
+
 
 void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
 

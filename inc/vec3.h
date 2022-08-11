@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/10 15:08:03 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/11 17:27:30 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_vec3	vec3_cross(t_vec3 u, t_vec3 v);
 t_vec3	vec3_unit(t_vec3 u);
 t_vec3	vec3_sub(t_vec3 u, t_vec3 v);
 t_vec3	vec3_neg(t_vec3 u);
+double	vec3_dot(t_vec3 u, t_vec3 v);
+double	vec3_sqr(t_vec3 u);
 
 
 

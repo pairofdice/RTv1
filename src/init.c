@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/10 15:56:35 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:34:31 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@ int	st_error()
 
 void	init_camera(t_cam *cam)
 {
+	cam->loc = (t_point) {-5.0, 0.0, 0.0};
+	cam->coi = (t_point) {0.0, 0.0, 0.0};
+	cam->distance_to_proj = 0.1;
+	cam->aspect = (float)WIN_W/WIN_H;
+	// 1.4 radians is ~80 degrees
+	cam->projection_plane_h = tan(1.4/2) *  2 * cam->distance_to_proj;
+	cam->projection_plane_w = cam->projection_plane_h * cam->aspect;
 	cam->scene_up = vec3_unit(cam->scene_up);
 	cam->dir = vec3_unit(vec3_sub(cam->coi, cam->loc));
 	cam->n = vec3_neg(cam->dir);
 	cam->right = vec3_cross(cam->scene_up, cam->n);
 	cam->up = vec3_cross(cam->n, cam->right);
-	cam->projection_distance = 0.1; // eventually from scene file maybe?
-	cam->projection_plane_offset = vec3_sub(cam->loc, vec3_scalar_mult(cam->n,cam->projection_distance ));
-	
+	cam->projection_plane_center = vec3_scalar_mult(cam->dir, cam->distance_to_proj);
+	cam->cam_to_proj = vec3_sub(cam->loc, cam->projection_plane_center);
 }
 
 int	init(t_context *ctx)
@@ -56,28 +62,3 @@ int	init(t_context *ctx)
 	return (1);
 }
 
-/* {
-
-	bool success = true;
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
-	{
-		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
-		success = false;
-	}
-	else
-	{
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL )
-		{
-			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-			success = false;
-		}
-		else
-		{
-			//Get window surface
-			gScreenSurface = SDL_GetWindowSurface( gWindow );
-		}
-	}
-
-	return success;
-}  */
