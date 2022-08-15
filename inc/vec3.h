@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/11 17:27:30 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/15 20:29:12 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_ray
 	t_vec3	dir;
 }	t_ray;
 
-int		rgb_to_int(t_color c);
+int		rgb_to_int(int r, int g, int b);
 t_vec3	vec3_add(t_vec3 i, t_vec3 j);
 double	vec3_mag(t_vec3 i);
 t_vec3	vec3_scalar_mult(t_vec3 u, double x);

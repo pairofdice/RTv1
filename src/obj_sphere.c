@@ -6,13 +6,14 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/11 19:10:18 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/15 20:05:52 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
 #include "objects.h"
 #include <math.h>
+#include <stdio.h>
 
 t_object sphere_new(double x, double y, double z, double radius)
 {
@@ -27,22 +28,27 @@ t_object sphere_new(double x, double y, double z, double radius)
 	return (s);
 }
 
-int	intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal)
+int	intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal, int debug)
 {
 	t_vec3	ray_origin_to_sphere;
 	double	tc;
 	double	d;
 	double	tp;
 	double	distance_to_intersection;
+	t_vec3 c;
+
+	
 
 	ray_origin_to_sphere = vec3_sub(sphere->loc, ray->orig);
+
+	
 	// tc = distance along ray closest to sphere center
 	tc = vec3_dot(ray_origin_to_sphere, ray->dir);
 	// if tc is negative we're looking in the wrong direction
 	if (tc < 0)
 		return (0);
 	// d = distance from sphere center to t
-	d = sqrt(tc * tc - vec3_sqr(ray_origin_to_sphere));
+	d = sqrt(fabs(tc * tc - vec3_sqr(ray_origin_to_sphere)));
 	// if d is greater than radius of sphere there is no intersection
 	if (d > sphere->size)
 		return (0);
@@ -56,6 +62,24 @@ int	intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal)
 	tp = sqrt(sphere->size * sphere->size - d * d);
 	distance_to_intersection = tc - tp;
 	// if intersection point behind projection plane
+	if (debug == 1)
+	{
+		c = sphere->loc;
+		printf("sphere->loc is: %f %f %f - ", c.x, c.y, c.z);
+		c = ray->dir;
+		printf("ray->dir is: %f %f %f \n", c.x, c.y, c.z);
+
+		c = ray_origin_to_sphere;
+		printf("ray_origin_to_sphere is: %f %f %f \n", c.x, c.y, c.z); 
+		printf("tc is: %f \n", tc); 
+		printf("d is: %f \n", d); 
+		printf("tp is: %f \n", tp); 
+		printf("tctc is: %f \n", tc*tc); 
+		printf("vec3sqr is: %f \n", vec3_sqr(ray_origin_to_sphere)); 
+		printf("tctc - vec3sqr is: %f \n", tc*tc - vec3_sqr(ray_origin_to_sphere)); 
+
+		
+	}
 	if (distance_to_intersection < 0)
 		return (0);
 	;

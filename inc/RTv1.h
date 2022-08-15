@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/15 14:38:40 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/15 19:38:16 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		init(t_context *ctx);
 void	close(t_context *ctx);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, unsigned char c, size_t len);
-int		intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal);
+int		intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal, int debug);
 t_object sphere_new(double x, double y, double z, double radius);
 void	draw(t_context *ctx);
 

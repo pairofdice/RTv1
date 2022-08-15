@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_put_color.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 12:20:23 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/09 19:41:37 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/15 20:26:12 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	img_pixel_put(t_frame_buffer *fb, unsigned long x,
 	*(unsigned int *)dst = color;
 }
 
-int	rgb_to_int(t_color c)
+int	rgb_to_int(int r, int g, int b)
 {
-	return ((int)c.x << 16 | (int)c.y << 8 | (int)c.z);
+	return (r << 24 | g << 16 | b << 8);
 }
