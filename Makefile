@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/10 13:55:25 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/15 14:41:48 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,21 @@ NAME = RTv1
 
 SRC = $Smain.c \
 	$Sinit.c \
+	$Sdraw.c \
 	$Spixel_put_color.c \
 	$Sft_memcpy.c \
 	$Sft_memset.c \
-	$Stests.c
+	$Stests.c \
+	$Svec3_add.c \
+	$Svec3_cross.c \
+	$Svec3_dot.c \
+	$Svec3_mag.c \
+	$Svec3_neg.c \
+	$Svec3_scalar_mult.c \
+	$Svec3_sqr.c \
+	$Svec3_sub.c \
+	$Svec3_unit.c \
+	$Sobj_sphere.c \
 
 CC = clang
 

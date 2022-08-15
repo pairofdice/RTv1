@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/11 19:31:14 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:20:22 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,22 @@ void	draw(t_context *ctx)
 	int	y;
 	t_point	L;
 
+	t_vec3 c;
+
 	L =  vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w)); 
+
 	L =  vec3_sub(L, vec3_scalar_mult(ctx->cam.up, 0.5 * ctx->cam.projection_plane_h)); 
+	c = L;
+	printf("cam->L is: %f %f %f\n", c.x, c.y, c.z);
 
 	y = 0;
 	t_object	TEST_SPHERE_1;
 	t_vec3		normal;
-	TEST_SPHERE_1 = sphere_new(0,0,0,1);
+	TEST_SPHERE_1 = sphere_new(0.0, 0.0, -10.0, 1.0);
 	while (y < WIN_H)
 	{
 		x = 0;
-		while (x , WIN_W)
+		while (x < WIN_W)
 		{
 			// create a ray for this pixel. origin is the virtual pixel on the projection plane
 			// direction is location of virtual pixel minus location of camera
@@ -44,6 +49,8 @@ int	intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal);
 				img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFF00);
 			else
 				img_pixel_put(&ctx->frame_buffer, x, y, 0x00000000);
+			//if (x == 200)
+			//	img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFF00);
 				
 				
 				

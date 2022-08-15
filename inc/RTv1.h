@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/11 19:32:07 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/15 14:38:40 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, unsigned char c, size_t len);
 int		intersects_sphere(t_ray *ray, t_object *sphere, t_vec3 *normal);
 t_object sphere_new(double x, double y, double z, double radius);
+void	draw(t_context *ctx);
 
 
 void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
