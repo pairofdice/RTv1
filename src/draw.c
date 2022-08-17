@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/17 13:52:32 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:50:21 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	draw(t_context *ctx)
 	t_object	SPHERES[num_spheres];
 	t_vec3		normal;
 	t_point	L;
-	//t_point	light;
+	t_point	light;
 	t_vec3 c;
 	double	distance;
 	int	x;
 	int	y;
 	int i;
 
-	//light = vec3_new(0.0, -22.2, 11.1);
+	light = vec3_new(0.0, 22.2, 11.1);
 
 	L =  vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w)); 
 
@@ -100,11 +100,13 @@ void	draw(t_context *ctx)
 				normal = get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 				double	shading;
 				shading = 100.0;
-				//shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray) * 255;
+				shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray) * 50;
 				int color = 255;
 				color = vec3_dot(ctx->cam.n, normal) * 255;
 				//img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(shading, shading, shading));
-				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(color, color, color));
+				// img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(color, color, color));
+				
+				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(shading, shading, shading));
 			} 
 			else 
 				img_pixel_put(&ctx->frame_buffer, x, y, 0x00000000);

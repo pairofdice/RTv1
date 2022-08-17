@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/15 14:41:48 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/17 17:15:47 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,13 @@ SRC = $Smain.c \
 	$Svec3_scalar_mult.c \
 	$Svec3_sqr.c \
 	$Svec3_sub.c \
+	$Svec3_new.c \
+	$Svec3_reflect.c \
+	$Svec3_ray_at.c \
+	$Svec3_reflect.c \
 	$Svec3_unit.c \
 	$Sobj_sphere.c \
+	$Sget_shading.c \
 
 CC = clang
 
