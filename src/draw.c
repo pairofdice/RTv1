@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/16 19:34:08 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:52:32 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@
 void	draw(t_context *ctx)
 {
 	t_object	TEST_SPHERE_1;
-	t_object	SPHERES[6];
+	int num_spheres = 8;
+	t_object	SPHERES[num_spheres];
 	t_vec3		normal;
 	t_point	L;
-	t_point	light;
+	//t_point	light;
 	t_vec3 c;
 	double	distance;
 	int	x;
 	int	y;
 	int i;
 
-	light = vec3_new(0.0, -22.2, 11.1);
+	//light = vec3_new(0.0, -22.2, 11.1);
 
 	L =  vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w)); 
 
@@ -42,11 +43,13 @@ void	draw(t_context *ctx)
 	SPHERES[3] = sphere_new(0.0, 1.5, -7.0, 2.0);
 	SPHERES[4] = sphere_new(-2.0, -1.0, -5.5, 0.6);
 	SPHERES[5] = sphere_new(2.0, -1.0, -5.5, 0.6);
+	SPHERES[6] = sphere_new(-0.5, 1.65, -5.35, 0.3);
+	SPHERES[7] = sphere_new(0.5, 1.65, -5.35, 0.3);
 
 	
 	int debug;
 	debug = 0;
-	int color;
+	//int color;
 	while (y < WIN_H)
 	{
 		x = 0;
@@ -76,7 +79,7 @@ void	draw(t_context *ctx)
 			i = 0;
 			ctx->cam.closest_hit = 1.0/0.0;
 			ctx->cam.is_hit = 0;
-			while (i < 6)
+	 		while (i < num_spheres)
 			{
 				if (intersects_sphere(&ctx->ray, &SPHERES[i], &distance, debug))
 				{
@@ -88,21 +91,24 @@ void	draw(t_context *ctx)
 					}
 				}
 				i++;
-			}
+			} 
 	//*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 //	t_vec3	get_normal(t_vec3 sphere_loc, t_ray ray, double distance)
+	 		
 			if (ctx->cam.is_hit)
 			{
 				normal = get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 				double	shading;
 				shading = 100.0;
-				//shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray/* , &SPHERES,ctx->cam.closest_id */) * 255;
+				//shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray) * 255;
+				int color = 255;
 				color = vec3_dot(ctx->cam.n, normal) * 255;
 				//img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(shading, shading, shading));
 				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(color, color, color));
-			}
+			} 
 			else 
 				img_pixel_put(&ctx->frame_buffer, x, y, 0x00000000);
+			
 
 		
 
