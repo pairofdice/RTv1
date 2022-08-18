@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_sphere.c                                       :+:      :+:    :+:   */
+/*   obj_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 17:46:53 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 17:46:58 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 #include <math.h>
 #include <stdio.h>
 
-t_object sphere_new(double x, double y, double z, double radius, int r, int g, int b)
+t_object plane_new(t_vec3 plane_loc, double side, int r, int g, int b)
 {
 	t_object	s;
 	t_point		loc;
 
-	loc.x = x;
-	loc.y = y;
-	loc.z = z;
 	s.r = r;
 	s.g = g;
 	s.b = b;
-	s.loc = loc;
-	s.size = radius;
+	s.loc = plane_loc;
+	s.size = side;
 	return (s);
 }
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
@@ -37,15 +34,17 @@ t_vec3 get_normal(t_vec3 sphere_loc, t_ray ray, double distance)
 {
 	t_vec3	result;
 
+	/* 	
 	result = vec3_scalar_mult(ray.dir, distance);
 	result = vec3_add(ray.orig, result);
 	result = vec3_sub(result, sphere_loc);
-	result = vec3_unit(result);
+	result = vec3_unit(result); 
+	*/
 	return (result);
 }
 
 
-int	intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug)
+int	intersects_plane(t_ray *ray, t_object *sphere, double *distance, int debug)
 {
 	t_vec3	ray_origin_to_sphere;
 	double	tc;

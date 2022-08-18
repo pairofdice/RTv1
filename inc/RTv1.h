@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 14:42:11 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 16:44:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define WIN_W 1024
 # define WIN_H 768
-# define NUM_SPHERES 13
+# define NUM_SPHERES 12
 
 typedef struct s_frame_buffer
 {
@@ -57,7 +57,7 @@ t_object sphere_new(double x, double y, double z, double radius, int r, int g, i
 void	draw(t_context *ctx);
 t_vec3	get_normal(t_vec3 sphere_loc, t_ray ray, double distance);
 t_vec3	vec3_new(double x, double y, double z);
-double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id);
+double	get_shading_diffuse(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id);
 
 
 void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
