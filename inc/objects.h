@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/17 13:32:47 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 14:45:18 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef struct s_object
 	t_point	loc;
 	t_vec3	rot;
 	double size;
+	int		r;
+	int		g;
+	int		b;
 }	t_object;
 
 typedef struct s_cam

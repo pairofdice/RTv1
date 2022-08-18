@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/17 19:49:12 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:13:02 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	draw(t_context *ctx)
 {
-	t_object	TEST_SPHERE_1;
+	//t_object	TEST_SPHERE_1;
 	// int num_spheres = 8;
 	// t_object	SPHERES[num_spheres];
 	t_vec3		normal;
@@ -27,7 +27,7 @@ void	draw(t_context *ctx)
 	int	y;
 	int i;
 
-	light = vec3_new(-10000.0, 22.2, -100.1);
+	light = vec3_new(0.0, 0, 3.5);
 
 	L =  vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w)); 
 
@@ -36,17 +36,20 @@ void	draw(t_context *ctx)
 	printf("cam->L is: %f %f %f\n", c.x, c.y, c.z);
 
 	y = 0;
-	TEST_SPHERE_1 = sphere_new(0.0, 0.0, -10.0, 5.0);
-	ctx->SPHERES[0] = sphere_new(0.0, 0.0, -10.0, 5.0);
-	ctx->SPHERES[1] = sphere_new(-2.0, -1.0, -7.0, 2.0);
-	ctx->SPHERES[2] = sphere_new(2.0, -1.0, -7.0, 2.0);
-	ctx->SPHERES[3] = sphere_new(0.0, 1.5, -7.0, 2.0);
-	ctx->SPHERES[4] = sphere_new(-2.0, -1.0, -5.45, 0.6);
-	ctx->SPHERES[5] = sphere_new(2.0, -1.0, -5.45, 0.6);
-	ctx->SPHERES[6] = sphere_new(-0.5, 1.65, -5.35, 0.3);
-	ctx->SPHERES[7] = sphere_new(0.5, 1.65, -5.35, 0.3);
-	ctx->SPHERES[8] = sphere_new(0.0, 2.85, -5.35, 0.1);
-	ctx->SPHERES[9] = sphere_new(0.5, -1000.0, -0.0, 995.0);
+	
+	ctx->SPHERES[0] = sphere_new(0.0, 0.0, -10.0, 5.0, 		255, 223, 196);
+	ctx->SPHERES[1] = sphere_new(-2.0, -1.0, -7.0, 2.0, 	255, 255, 255);
+	ctx->SPHERES[2] = sphere_new(2.0, -1.0, -7.0, 2.0, 		255, 255, 255);
+	ctx->SPHERES[3] = sphere_new(0.0, 1.5, -7.0, 2.0, 		255, 255, 255);
+	ctx->SPHERES[4] = sphere_new(-2.0, -1.0, -5.45, 0.6, 	0, 0, 0);
+	ctx->SPHERES[5] = sphere_new(2.0, -1.0, -5.45, 0.6, 	0, 0, 0);
+	ctx->SPHERES[6] = sphere_new(-0.5, 1.65, -5.35, 0.3, 	0, 0, 0);
+	ctx->SPHERES[7] = sphere_new(0.5, 1.65, -5.35, 0.3, 	0, 0, 0);
+	ctx->SPHERES[8] = sphere_new(0.0, 2.85, -5.35, 0.1, 	255, 255, 255);
+	ctx->SPHERES[9] = sphere_new(-5.0, -3.5, -1.0, 1.0, 	255, 0, 0);
+	ctx->SPHERES[10] = sphere_new(0.0, -3.5, -1.0, 1.0, 	0, 255, 0);
+	ctx->SPHERES[11] = sphere_new(5.0, -3.5, -1.0, 1.0, 	0, 0, 255);
+	ctx->SPHERES[12] = sphere_new(0.5, -1000.0, -0.0, 995.0, 200, 200, 255);
 
 	
 	int debug;
@@ -108,7 +111,7 @@ void	draw(t_context *ctx)
 				//img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(shading, shading, shading));
 				// img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(color, color, color));
 				
-				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(shading, shading, shading));
+				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(ctx->SPHERES[ctx->cam.closest_id].r * shading, ctx->SPHERES[ctx->cam.closest_id].g *shading, ctx->SPHERES[ctx->cam.closest_id].b *shading));
 			} 
 			else 
 				img_pixel_put(&ctx->frame_buffer, x, y, 0x00000000);

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/15 16:20:02 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 14:25:58 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	st_error()
 void	init_camera(t_cam *cam)
 {
 	t_vec3 c;
-	cam->loc = (t_point) {0.0, 0.0, 0.0};
+	cam->loc = (t_point) {0.0, 0.0, 10.0};
 	cam->coi = (t_point) {0.0, 0.0, -1.0};
 	cam->scene_up = (t_point) {0.0, 1.0, 0.0};
 	cam->distance_to_proj = 0.1;

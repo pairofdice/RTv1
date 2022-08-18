@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/17 13:46:28 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 14:46:41 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <math.h>
 #include <stdio.h>
 
-t_object sphere_new(double x, double y, double z, double radius)
+t_object sphere_new(double x, double y, double z, double radius, int r, int g, int b)
 {
 	t_object	s;
 	t_point		loc;
@@ -23,6 +23,9 @@ t_object sphere_new(double x, double y, double z, double radius)
 	loc.x = x;
 	loc.y = y;
 	loc.z = z;
+	s.r = r;
+	s.g = g;
+	s.b = b;
 	s.loc = loc;
 	s.size = radius;
 	return (s);

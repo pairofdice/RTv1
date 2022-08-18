@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/15 16:00:34 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:20:49 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ int main( int argc, char* args[] )
 		while( !quit )
 		{
 			//Handle events on queue
-			while( SDL_PollEvent( &e ) != 0 )
+			if( SDL_WaitEvent( &e ) != 0 )
 			{
 				//User requests quit
-				if( e.type == SDL_QUIT )
+				if( e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
 				{
 					quit = true;
 				}
