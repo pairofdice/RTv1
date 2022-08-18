@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 17:33:06 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/18 18:15:25 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ void	draw(t_context *ctx)
 
 	y = 0;
 	
-	ctx->SPHERES[0] = sphere_new(0.0, 0.0, -10.0, 5.0, 		255, 223, 196);
-	ctx->SPHERES[1] = sphere_new(-2.0, -1.0, -7.0, 2.0, 	255, 255, 255);
-	ctx->SPHERES[2] = sphere_new(2.0, -1.0, -7.0, 2.0, 		255, 255, 255);
-	ctx->SPHERES[3] = sphere_new(0.0, 1.5, -7.0, 2.0, 		255, 255, 255);
-	ctx->SPHERES[4] = sphere_new(-2.0, -1.0, -5.45, 0.6, 	0, 0, 0);
-	ctx->SPHERES[5] = sphere_new(2.0, -1.0, -5.45, 0.6, 	0, 0, 0);
-	ctx->SPHERES[6] = sphere_new(-0.5, 1.65, -5.35, 0.3, 	0, 0, 0);
-	ctx->SPHERES[7] = sphere_new(0.5, 1.65, -5.35, 0.3, 	0, 0, 0);
-	//ctx->SPHERES[8] = sphere_new(0.0, 2.85, -5.35, 0.1, 	255, 255, 255);
-	ctx->SPHERES[8] = sphere_new(-5.0, 3.5, -1.0, 1.0, 	255, 0, 0);
-	ctx->SPHERES[9] = sphere_new(0.0, 3.5, -1.0, 1.0, 	0, 255, 0);
-	ctx->SPHERES[10] = sphere_new(5.0, 3.5, -1.0, 1.0, 	0, 0, 255);
-	ctx->SPHERES[11] = sphere_new(0.5, 1000.0, -0.0, 995.0, 200, 200, 255);
+	ctx->SPHERES[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0, 		255, 223, 196);
+	ctx->SPHERES[1] = sphere_new((t_vec3){-2.0, -1.0, -7.0}, 2.0, 	255, 255, 255);
+	ctx->SPHERES[2] = sphere_new((t_vec3){2.0, -1.0, -7.0}, 2.0, 		255, 255, 255);
+	ctx->SPHERES[3] = sphere_new((t_vec3){0.0, 1.5, -7.0}, 2.0, 		255, 255, 255);
+	ctx->SPHERES[4] = sphere_new((t_vec3){-2.0, -1.0, -5.45}, 0.6, 	0, 0, 0);
+	ctx->SPHERES[5] = sphere_new((t_vec3){2.0, -1.0, -5.45}, 0.6, 	0, 0, 0);
+	ctx->SPHERES[6] = sphere_new((t_vec3){-0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
+	ctx->SPHERES[7] = sphere_new((t_vec3){0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
+	//ctx->SPHERES[8] = sphere_ne(t_vec3){w(0.0, 2.85, -5.35, 0.1, 	255, 255, 255);
+	ctx->SPHERES[8] = sphere_new((t_vec3){-5.0, 3.5, -1.0}, 1.0, 	255, 0, 0);
+	ctx->SPHERES[9] = sphere_new((t_vec3){0.0, 3.5, -1.0}, 1.0, 	0, 255, 0);
+	ctx->SPHERES[10] = sphere_new((t_vec3){5.0, 3.5, -1.0}, 1.0, 	0, 0, 255);
+	ctx->SPHERES[11] = sphere_new((t_vec3){0.5, 1000.0, -0.0}, 995.0, 200, 200, 255);
 
 	
 	int debug;
