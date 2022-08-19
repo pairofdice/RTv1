@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/19 15:16:28 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:51:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ void	draw(t_context *ctx)
 	ctx->OBJECTS[4] = sphere_new((t_vec3){-2.0, -1.0, -5.45}, 0.6, 	0, 0, 0);
 	ctx->OBJECTS[5] = sphere_new((t_vec3){2.0, -1.0, -5.45}, 0.6, 	0, 0, 0);
 	ctx->OBJECTS[6] = sphere_new((t_vec3){-0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
+	//printf("Segfault A?\n");
 	ctx->OBJECTS[7] = sphere_new((t_vec3){0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
 	ctx->OBJECTS[8] = sphere_new((t_vec3){-5.0, 3.5, -1.0}, 1.0	,	255, 0, 0);
 	ctx->OBJECTS[9] = sphere_new((t_vec3){0.0, 3.5, -1.0}, 1.0	,	0, 255, 0);
-	ctx->OBJECTS[10] =sphere_new((t_vec3){5.0, 3.5, -1.0}, 1.0	,	0, 0, 255);
-	ctx->OBJECTS[11] = plane_new((t_vec3){0.5, 1000.0, -0.0},	200, 200, 255);
+	ctx->OBJECTS[10] = sphere_new((t_vec3){5.0, 3.5, -1.0},  1.0	,	0, 0, 255);
+	ctx->OBJECTS[11] = plane_new((t_vec3){0.0, 10.0, -0.0}, (t_vec3){0.1, -1.5, 0.0},	200, 200, 255);
+	ctx->OBJECTS[12] = plane_new((t_vec3){0.0, 0.0, 0.0}, (t_vec3){1.0, 1.0, 1.0},	200, 200, 255);
+	//printf("Segfault B?\n");
 
 	
 	int debug;
@@ -85,13 +88,30 @@ void	draw(t_context *ctx)
 			ctx->cam.is_hit = 0;
 	 		while (i < NUM_OBJECTS)
 			{
-				if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, debug))
-				{
-					ctx->cam.is_hit = 1;
-					if (distance < ctx->cam.closest_hit)
+				if (ctx->OBJECTS[ctx->cam.closest_id].type == SPHERE)
+				{			
+					if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, debug))
 					{
-						ctx->cam.closest_hit = distance;
-						ctx->cam.closest_id = i;
+						ctx->cam.is_hit = 1;
+						if (distance < ctx->cam.closest_hit)
+						{
+							ctx->cam.closest_hit = distance;
+							ctx->cam.closest_id = i;
+						}
+					}
+				}
+				else if (ctx->OBJECTS[ctx->cam.closest_id].type == PLANE)
+				{			
+					if (intersects_plane(&ctx->ray, &ctx->OBJECTS[i], &distance, debug))
+					{
+						//img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFFFF  );
+						
+						ctx->cam.is_hit = 1;
+						if (distance < ctx->cam.closest_hit)
+						{
+							ctx->cam.closest_hit = distance;
+							ctx->cam.closest_id = i;
+						}
 					}
 				}
 				i++;
@@ -105,9 +125,12 @@ void	draw(t_context *ctx)
 					normal = get_sphere_normal(ctx->OBJECTS[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 				else if (ctx->OBJECTS[ctx->cam.closest_id].type == PLANE)
 					normal = get_plane_normal(ctx->OBJECTS[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
+				//printf("Segfault C?\n");
 				double	shading;
 				// shading = 100.0;
+				//printf("Segfault D?\n");
 				shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);
+				//printf("Segfault E?\n");
 				//shading = get_shading_specular
 				int r;
 				int g;
@@ -128,8 +151,8 @@ void	draw(t_context *ctx)
 				// color = vec3_dot(ctx->cam.n, normal) * 255;
 				//img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(shading, shading, shading));
 				// img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(color, color, color));
+				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(r, g, b)  );
 				
-				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(r, g, b));
 			} 
 			else 
 				img_pixel_put(&ctx->frame_buffer, x, y, 0x00000000);

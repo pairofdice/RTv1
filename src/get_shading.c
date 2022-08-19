@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/19 15:02:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:48:27 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,19 @@ double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, 
 	// t_vec3 temp;
 	t_vec3	to_light;
 	double distance;
+	//t_ray test;
+
 	
 	double	dot;
 	int i;
 
 	to_light = vec3_sub(light, normal.orig);
+	//test.orig = normal.orig;
+	//test.dir =  vec3_unit(to_light);
 	i = 0;
 	distance = 1.0/0.0;
+	//printf("Segfault DA?\n");
+
 	while (i < NUM_OBJECTS)
 	{
 		if (i == id)
@@ -44,14 +50,14 @@ double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, 
 					return (0);
 			}
 		}
-		if (ctx->OBJECTS[i].type == PLANE)
+/* 		if (ctx->OBJECTS[i].type == PLANE)	
 		{
 			if (intersects_plane(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance, 0))
 			{
 				if (distance < vec3_mag(to_light))
 					return (0);
 			}
-		}
+		}  */
 		
 		i++;
 	}
@@ -63,5 +69,6 @@ double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, 
 	if (dot < 0)
 		dot = 0;
 	dot = dot / (vec3_mag(to_light) * vec3_mag(to_light));
+	//printf("Segfault DB?%d\n", NUM_OBJECTS);
 	return (dot);
 }

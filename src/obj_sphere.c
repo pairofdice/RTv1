@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/19 15:06:47 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/19 15:54:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_object sphere_new(t_vec3 loc, double radius, int r, int g, int b)
 	s.b = b;
 	s.loc = loc;
 	s.size = radius;
+	s.type = SPHERE;
 	return (s);
 }
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
