@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 16:13:43 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/19 15:02:25 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,8 @@
 //#include "objects.h"
 #include "RTv1.h"
 
-/* double	get_shading_specular(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id)
-{
-	t_vec3	to_light;
 
-	to_light = vec3_sub(light, normal.orig);
-} */
-double	get_shading_diffuse(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id)
+double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id)
 {
 	// t_vec3 temp;
 	t_vec3	to_light;
@@ -34,18 +29,30 @@ double	get_shading_diffuse(t_ray normal, t_point light, t_ray incoming, t_contex
 	to_light = vec3_sub(light, normal.orig);
 	i = 0;
 	distance = 1.0/0.0;
-	while (i < NUM_SPHERES)
+	while (i < NUM_OBJECTS)
 	{
 		if (i == id)
 		{
 			i++;
 			continue ;
 		}
-		if (intersects_sphere(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->SPHERES[i], &distance, 0))
+		if (ctx->OBJECTS[i].type == SPHERE)
 		{
-			if (distance < vec3_mag(to_light))
-				return (0);
+			if (intersects_sphere(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance, 0))
+			{
+				if (distance < vec3_mag(to_light))
+					return (0);
+			}
 		}
+		if (ctx->OBJECTS[i].type == PLANE)
+		{
+			if (intersects_plane(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance, 0))
+			{
+				if (distance < vec3_mag(to_light))
+					return (0);
+			}
+		}
+		
 		i++;
 	}
 

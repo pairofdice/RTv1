@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 16:44:36 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/19 15:15:53 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define WIN_W 1024
 # define WIN_H 768
-# define NUM_SPHERES 12
+# define NUM_OBJECTS 12
 
 typedef struct s_frame_buffer
 {
@@ -42,7 +42,7 @@ typedef struct s_context
 	t_ray			ray;
 	t_ray			normal;
 	
-	t_object		SPHERES[NUM_SPHERES];
+	t_object		OBJECTS[NUM_OBJECTS];
 }	t_context;
 
 void	tests(void);
@@ -53,11 +53,14 @@ void	close(t_context *ctx);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, unsigned char c, size_t len);
 int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug);
-t_object sphere_new(double x, double y, double z, double radius, int r, int g, int b);
+int		intersects_plane(t_ray *ray, t_object *sphere, double *distance, int debug);
+t_object	sphere_new(t_vec3 sphere_loc, double radius, int r, int g, int b);
+t_object	plane_new(t_vec3 plane_loc, int r, int g, int b);
 void	draw(t_context *ctx);
-t_vec3	get_normal(t_vec3 sphere_loc, t_ray ray, double distance);
+t_vec3	get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
+t_vec3	get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
 t_vec3	vec3_new(double x, double y, double z);
-double	get_shading_diffuse(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id);
+double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id);
 
 
 void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);

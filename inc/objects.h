@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 14:45:18 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/19 14:56:57 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define OBJECTS_H
 
 # include "vec3.h"
+# define SPHERE 1
+# define PLANE 2
 
 typedef struct s_object
 {
@@ -24,6 +26,7 @@ typedef struct s_object
 	int		r;
 	int		g;
 	int		b;
+	int		type;
 }	t_object;
 
 typedef struct s_cam

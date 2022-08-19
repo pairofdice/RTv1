@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 17:33:06 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/19 15:16:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,18 @@ void	draw(t_context *ctx)
 
 	y = 0;
 	
-	ctx->SPHERES[0] = sphere_new(0.0, 0.0, -10.0, 5.0, 		255, 223, 196);
-	ctx->SPHERES[1] = sphere_new(-2.0, -1.0, -7.0, 2.0, 	255, 255, 255);
-	ctx->SPHERES[2] = sphere_new(2.0, -1.0, -7.0, 2.0, 		255, 255, 255);
-	ctx->SPHERES[3] = sphere_new(0.0, 1.5, -7.0, 2.0, 		255, 255, 255);
-	ctx->SPHERES[4] = sphere_new(-2.0, -1.0, -5.45, 0.6, 	0, 0, 0);
-	ctx->SPHERES[5] = sphere_new(2.0, -1.0, -5.45, 0.6, 	0, 0, 0);
-	ctx->SPHERES[6] = sphere_new(-0.5, 1.65, -5.35, 0.3, 	0, 0, 0);
-	ctx->SPHERES[7] = sphere_new(0.5, 1.65, -5.35, 0.3, 	0, 0, 0);
-	//ctx->SPHERES[8] = sphere_new(0.0, 2.85, -5.35, 0.1, 	255, 255, 255);
-	ctx->SPHERES[8] = sphere_new(-5.0, 3.5, -1.0, 1.0, 	255, 0, 0);
-	ctx->SPHERES[9] = sphere_new(0.0, 3.5, -1.0, 1.0, 	0, 255, 0);
-	ctx->SPHERES[10] = sphere_new(5.0, 3.5, -1.0, 1.0, 	0, 0, 255);
-	ctx->SPHERES[11] = sphere_new(0.5, 1000.0, -0.0, 995.0, 200, 200, 255);
+	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0	, 	255, 223, 196);
+	ctx->OBJECTS[1] = sphere_new((t_vec3){-2.0, -1.0, -7.0}, 2.0, 	255, 255, 255);
+	ctx->OBJECTS[2] = sphere_new((t_vec3){2.0, -1.0, -7.0}, 2.0	, 	255, 255, 255);
+	ctx->OBJECTS[3] = sphere_new((t_vec3){0.0, 1.5, -7.0}, 2.0	, 	255, 255, 255);
+	ctx->OBJECTS[4] = sphere_new((t_vec3){-2.0, -1.0, -5.45}, 0.6, 	0, 0, 0);
+	ctx->OBJECTS[5] = sphere_new((t_vec3){2.0, -1.0, -5.45}, 0.6, 	0, 0, 0);
+	ctx->OBJECTS[6] = sphere_new((t_vec3){-0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
+	ctx->OBJECTS[7] = sphere_new((t_vec3){0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
+	ctx->OBJECTS[8] = sphere_new((t_vec3){-5.0, 3.5, -1.0}, 1.0	,	255, 0, 0);
+	ctx->OBJECTS[9] = sphere_new((t_vec3){0.0, 3.5, -1.0}, 1.0	,	0, 255, 0);
+	ctx->OBJECTS[10] =sphere_new((t_vec3){5.0, 3.5, -1.0}, 1.0	,	0, 0, 255);
+	ctx->OBJECTS[11] = plane_new((t_vec3){0.5, 1000.0, -0.0},	200, 200, 255);
 
 	
 	int debug;
@@ -84,9 +83,9 @@ void	draw(t_context *ctx)
 			i = 0;
 			ctx->cam.closest_hit = 1.0/0.0;
 			ctx->cam.is_hit = 0;
-	 		while (i < NUM_SPHERES)
+	 		while (i < NUM_OBJECTS)
 			{
-				if (intersects_sphere(&ctx->ray, &ctx->SPHERES[i], &distance, debug))
+				if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, debug))
 				{
 					ctx->cam.is_hit = 1;
 					if (distance < ctx->cam.closest_hit)
@@ -102,23 +101,26 @@ void	draw(t_context *ctx)
 	 		
 			if (ctx->cam.is_hit)
 			{
-				normal = get_normal(ctx->SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
+				if (ctx->OBJECTS[ctx->cam.closest_id].type == SPHERE)
+					normal = get_sphere_normal(ctx->OBJECTS[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
+				else if (ctx->OBJECTS[ctx->cam.closest_id].type == PLANE)
+					normal = get_plane_normal(ctx->OBJECTS[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 				double	shading;
 				// shading = 100.0;
-				shading = get_shading_diffuse((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);
+				shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);
 				//shading = get_shading_specular
 				int r;
 				int g;
 				int b;
-				r = ctx->SPHERES[ctx->cam.closest_id].r * shading * 35;
+				r = ctx->OBJECTS[ctx->cam.closest_id].r * shading * 35;
 				r += shading * 6000.0;
 				if (r >= 255)
 					r = 255;
-				g = ctx->SPHERES[ctx->cam.closest_id].g * shading * 35 ;
+				g = ctx->OBJECTS[ctx->cam.closest_id].g * shading * 35 ;
 				g += shading * 6000.0;
 				if (g >= 255)
 					g = 255;
-				b = ctx->SPHERES[ctx->cam.closest_id].b * shading * 35 ;
+				b = ctx->OBJECTS[ctx->cam.closest_id].b * shading * 35 ;
 				b += shading * 6000.0;
 				if (b >= 255)
 					b = 255;
