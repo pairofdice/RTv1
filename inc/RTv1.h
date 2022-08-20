@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/19 17:26:12 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 16:06:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
-# include "../libsdl2/include/SDL.h"
+# include "../sdl_include/SDL.h"
 #include "objects.h"
 //# include "../sdl_include/SDL.h"
 
 # define WIN_W 1024
 # define WIN_H 768
-# define NUM_OBJECTS 13
+# define NUM_OBJECTS 12
 
 typedef struct s_frame_buffer
 {
@@ -41,7 +41,7 @@ typedef struct s_context
 	t_cam			cam;
 	t_ray			ray;
 	t_ray			normal;
-	
+
 	t_object		OBJECTS[NUM_OBJECTS];
 }	t_context;
 
@@ -60,7 +60,7 @@ void	draw(t_context *ctx);
 t_vec3	get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
 t_vec3	get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
 t_vec3	vec3_new(double x, double y, double z);
-double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id);
+double	get_shading(t_ray normal, t_point light, t_ray ray, t_context *ctx, int id);
 
 
 void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
