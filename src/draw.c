@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 15:05:24 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 16:07:05 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw(t_context *ctx)
 	int	y;
 	int i;
 
-	light = vec3_new(0.0, -2.0, 2.5);
+	light = vec3_new(0.0, -10.0, -2.5);
 
 	L =  vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w));
 
@@ -49,9 +49,10 @@ void	draw(t_context *ctx)
 	ctx->OBJECTS[8] = sphere_new((t_vec3){-5.0, 3.5, -1.0}, 1.0	,	255, 0, 0);
 	ctx->OBJECTS[9] = sphere_new((t_vec3){0.0, 3.5, -1.0}, 1.0	,	0, 255, 0);
 	ctx->OBJECTS[10] = sphere_new((t_vec3){5.0, 3.5, -1.0},  1.0	,	0, 0, 255);
-	ctx->OBJECTS[11] = plane_new((t_vec3){0.0, 5.0, -0.0}, (t_vec3){0.1, -1.5, 0.0},	200, 200, 255);
-	ctx->OBJECTS[12] = plane_new((t_vec3){0.0, 0.0, 0.0}, (t_vec3){1.0, 1.0, 1.0},	200, 200, 255);
-	ctx->OBJECTS[13] = plane_new((t_vec3){0.0, -5.0, -0.0}, (t_vec3){0.1, -1.5, 0.0},	200, 200, 255);
+	//ctx->OBJECTS[11] = plane_new((t_vec3){0.0, 5.0, -0.0}, (t_vec3){0.1, -1.5, 0.0},	200, 200, 255);
+	//ctx->OBJECTS[12] = plane_new((t_vec3){0.0, 0.0, 0.0}, (t_vec3){1.0, 1.0, 1.0},	200, 200, 255);
+	//ctx->OBJECTS[13] = plane_new((t_vec3){0.0, -5.0, -0.0}, (t_vec3){0.1, -1.5, 0.0},	200, 200, 255);
+	ctx->OBJECTS[11] = plane_new((t_vec3){0.0, -4.0, -0.0}, (t_vec3){1.0, 0.0, 0.0},	200, 200, 255);
 	//printf("Segfault B?\n");
 
 
@@ -139,7 +140,7 @@ void	draw(t_context *ctx)
 				double	shading;
 				// shading = 100.0;
 				//printf("Segfault D?\n");
-				shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx, ctx->cam.closest_id);
+				shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);
 				//printf("Segfault E?\n");
 				//shading = get_shading_specular
 				int r;

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 14:47:59 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 16:02:41 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_vec3 get_plane_normal(t_object plane, t_ray ray, double *distance)
 	if (distance)
 	{}
 	if (vec3_dot(plane.rot, ray.dir) < 0)
-		return (plane.rot);
 	return (vec3_neg(plane.rot));
+		return (plane.rot);
 }
 
 
