@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/19 18:04:05 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 14:08:22 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 	s.g = g;
 	s.b = b;
 	s.loc = plane_loc;
-	s.rot = rot;
+	s.rot = vec3_unit(rot);
 	s.type = PLANE;
 	return (s);
 }
@@ -54,7 +54,7 @@ int	intersects_plane(t_ray *ray, t_object plane, double *distance, int debug)
 	pn_dot_rdir = vec3_dot(plane.rot, vec3_unit(ray->dir));
 	if (fabs(pn_dot_rdir) < 1e-8)
 		return (0);
-	*distance = (pn_dot_pc - pn_dot_rloc) / pn_dot_rdir; 
+	*distance = (pn_dot_pc - pn_dot_rloc) / pn_dot_rdir;
 	return (1);
 }
 /*
