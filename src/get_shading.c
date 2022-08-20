@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 13:59:16 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 14:40:13 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "RTv1.h"
 
 
-double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, int id)
+double	get_shading(t_ray normal, t_point light, t_context *ctx, int id)
 {
 	// t_vec3 temp;
 	t_vec3	to_light;
@@ -62,9 +62,6 @@ double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, 
 		i++;
 	}
 
-	//temp = vec3_reflect(vec3_unit(incoming.dir), normal);
-	if (incoming.orig.x == 0)
-	{}
 	dot = vec3_dot(normal.dir, vec3_unit(to_light));
 	if (dot < 0)
 		dot = 0;

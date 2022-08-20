@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 14:16:18 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:05:24 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	draw(t_context *ctx)
 			ctx->cam.closest_id = 0;
 	 		while (i < NUM_OBJECTS)
 			{
-				if (ctx->OBJECTS[ctx->cam.closest_id].type == SPHERE)
+				// printf("Do we get into checking plane?\n");
+				if (ctx->OBJECTS[i].type == SPHERE)
 				{
 					if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, debug))
 					{
@@ -102,11 +103,13 @@ void	draw(t_context *ctx)
 						}
 					}
 				}
-				else if (ctx->OBJECTS[ctx->cam.closest_id].type == PLANE)
+				else if (ctx->OBJECTS[i].type == PLANE)
 				{
+
 					if (intersects_plane(&ctx->ray, &ctx->OBJECTS[i], &distance, debug))
 					{
 						//img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFFFF  );
+						//printf("Do we get into checking plane?\n");
 
 						ctx->cam.is_hit = 1;
 						if (distance < ctx->cam.closest_hit)
@@ -124,6 +127,7 @@ void	draw(t_context *ctx)
 				//printf("Segfault C?\n");
 			if (ctx->cam.is_hit)
 			{
+				// img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFFFF/* rgb_to_int(r, g, b) */  );
 				if (ctx->OBJECTS[ctx->cam.closest_id].type == SPHERE)
 				{
 					normal = get_sphere_normal(ctx->OBJECTS[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
@@ -135,7 +139,7 @@ void	draw(t_context *ctx)
 				double	shading;
 				// shading = 100.0;
 				//printf("Segfault D?\n");
-				shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);
+				shading = get_shading((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx, ctx->cam.closest_id);
 				//printf("Segfault E?\n");
 				//shading = get_shading_specular
 				int r;
@@ -157,7 +161,9 @@ void	draw(t_context *ctx)
 				// color = vec3_dot(ctx->cam.n, normal) * 255;
 				//img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(shading, shading, shading));
 				// img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(color, color, color));
-				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(r, g, b)  );
+
+				img_pixel_put(&ctx->frame_buffer, x, y,rgb_to_int(r, g, b)  );
+
 
 			}
 			else

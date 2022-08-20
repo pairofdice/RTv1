@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 14:08:22 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 14:47:59 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 
 t_vec3 get_plane_normal(t_object plane, t_ray ray, double *distance)
 {
-	(void) distance;
+	if (distance)
+	{}
 	if (vec3_dot(plane.rot, ray.dir) < 0)
 		return (plane.rot);
 	return (vec3_neg(plane.rot));
@@ -42,20 +43,36 @@ t_vec3 get_plane_normal(t_object plane, t_ray ray, double *distance)
 
 int	intersects_plane(t_ray *ray, t_object plane, double *distance, int debug)
 {
-	double	pn_dot_pc;
+	/* double	pn_dot_pc;
 	double	pn_dot_rloc;
 	double	pn_dot_rdir;
 
 
-	if (debug)
-	{}
-	pn_dot_pc = vec3_dot(plane.rot, plane.loc);
-	pn_dot_rloc = vec3_dot(plane.rot, ray->orig);
 	pn_dot_rdir = vec3_dot(plane.rot, vec3_unit(ray->dir));
 	if (fabs(pn_dot_rdir) < 1e-8)
 		return (0);
+	pn_dot_pc = vec3_dot(plane.rot, plane.loc);
+	pn_dot_rloc = vec3_dot(plane.rot, ray->orig);
 	*distance = (pn_dot_pc - pn_dot_rloc) / pn_dot_rdir;
-	return (1);
+	return (1); */
+
+	if (debug)
+	{}
+	t_vec3	ray_obj;
+	float	numerator;
+	float	denominator;
+
+	//vec3_unit(plane.rot);
+	ray_obj = vec3_sub(ray->orig, plane.loc);
+	numerator = vec3_dot(ray_obj, plane.rot);
+	denominator = vec3_dot(ray->dir, plane.rot);
+	if ((denominator < 0 && numerator > 0)
+		|| (denominator > 0 && numerator < 0))
+	{
+		*distance = -numerator / denominator;
+		return (1);
+	}
+	return (0);
 }
 /*
 Po = plane origin
