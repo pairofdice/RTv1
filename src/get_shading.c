@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_shading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/19 17:48:27 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 13:59:16 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // get_shading(normal, light, &SPHERES,ctx->cam.closest_id);
- 
+
 //#include "vec3.h"
 //#include "objects.h"
 #include "RTv1.h"
@@ -24,7 +24,7 @@ double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, 
 	double distance;
 	//t_ray test;
 
-	
+
 	double	dot;
 	int i;
 
@@ -50,15 +50,15 @@ double	get_shading(t_ray normal, t_point light, t_ray incoming, t_context *ctx, 
 					return (0);
 			}
 		}
-/* 		if (ctx->OBJECTS[i].type == PLANE)	
+ 		if (ctx->OBJECTS[i].type == PLANE)
 		{
 			if (intersects_plane(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance, 0))
 			{
 				if (distance < vec3_mag(to_light))
 					return (0);
 			}
-		}  */
-		
+		}
+
 		i++;
 	}
 

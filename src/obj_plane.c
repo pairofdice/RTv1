@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
-#include "objects.h"
+#include "../inc/vec3.h"
+#include "../inc/objects.h"
 //#include <math.h>
+#include <math.h>
 #include <stdio.h>
 
 t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
@@ -41,30 +42,30 @@ t_vec3 get_plane_normal(t_object plane, t_ray ray, double *distance)
 
 int	intersects_plane(t_ray *ray, t_object plane, double *distance, int debug)
 {
-	double	N_dot_cam_to_plane;
-	double	N_dot_raydir;
+	double	pn_dot_pc;
+	double	pn_dot_rloc;
+	double	pn_dot_rdir;
+
 
 	if (debug)
 	{}
-
-	plane.rot = get_plane_normal(plane, *ray, distance);
-	plane.rot = vec3_unit(plane.rot);
-	ray->dir = vec3_unit(ray->dir);
-	
-	N_dot_raydir = vec3_dot(plane.rot, ray->dir);
-	if (N_dot_raydir < 0.001)
+	pn_dot_pc = vec3_dot(plane.rot, plane.loc);
+	pn_dot_rloc = vec3_dot(plane.rot, ray->orig);
+	pn_dot_rdir = vec3_dot(plane.rot, vec3_unit(ray->dir));
+	if (fabs(pn_dot_rdir) < 1e-8)
 		return (0);
-	N_dot_cam_to_plane = vec3_dot(plane.rot, vec3_sub(ray->orig, plane.loc));
-	if (N_dot_cam_to_plane < 0.001)
-		return (0);
-	
-	
-	*distance = - N_dot_raydir / N_dot_cam_to_plane;
-	printf("plane intersect? \n");
-
+	*distance = (pn_dot_pc - pn_dot_rloc) / pn_dot_rdir; 
 	return (1);
 }
-
+/*
+Po = plane origin
+Lo = Line origin
+n - the planes normal ray
+Po = single point on the plane
+L = the vector that represents the ray I am shooting
+Lo = a point on the line
+d = dot(Po-Lo,N)/dot(L,N)
+*/
 /*
 t_bool	intersect_plane(t_v3 ray_dir, t_v3 ray_start, t_object *obj, t_t2 *res)
 {
