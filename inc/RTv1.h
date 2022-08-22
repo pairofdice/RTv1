@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 16:06:17 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 19:37:35 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define WIN_W 1024
 # define WIN_H 768
-# define NUM_OBJECTS 12
+# define NUM_OBJECTS 16
 
 typedef struct s_frame_buffer
 {
@@ -53,7 +53,7 @@ void	close(t_context *ctx);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, unsigned char c, size_t len);
 int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug);
-int		intersects_plane(t_ray *ray, t_object *sphere, double *distance, int debug);
+int		intersects_plane(t_ray *ray, t_object *plane, double *distance, int debug);
 t_object	sphere_new(t_vec3 sphere_loc, double radius, int r, int g, int b);
 t_object	plane_new(t_vec3 plane_loc, t_vec3 plane_rot, int r, int g, int b);
 void	draw(t_context *ctx);

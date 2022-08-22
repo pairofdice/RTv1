@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 16:07:56 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 16:42:16 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ double	get_shading(t_ray normal, t_point light, t_ray ray, t_context *ctx, int i
 	}
 
 	dot = vec3_dot(normal.dir, vec3_unit(to_light));
-	dot *= vec3_dot(ray.dir, normal.dir);
+	 vec3_dot(vec3_neg(ray.dir), normal.dir);
 	if (dot < 0)
 		dot = 0;
 	dot = dot / (vec3_mag(to_light) * vec3_mag(to_light));

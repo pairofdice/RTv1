@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 16:07:05 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 20:16:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw(t_context *ctx)
 	int	y;
 	int i;
 
-	light = vec3_new(0.0, -10.0, -2.5);
+	light = vec3_new(0.1, -8.0, 5.5);
 
 	L =  vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w));
 
@@ -37,7 +37,7 @@ void	draw(t_context *ctx)
 
 	y = 0;
 
-	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0	, 	255, 223, 196);
+ 	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0	, 	255, 223, 196);
 	ctx->OBJECTS[1] = sphere_new((t_vec3){-2.0, -1.0, -7.0}, 2.0, 	255, 255, 255);
 	ctx->OBJECTS[2] = sphere_new((t_vec3){2.0, -1.0, -7.0}, 2.0	, 	255, 255, 255);
 	ctx->OBJECTS[3] = sphere_new((t_vec3){0.0, 1.5, -7.0}, 2.0	, 	255, 255, 255);
@@ -46,13 +46,17 @@ void	draw(t_context *ctx)
 	ctx->OBJECTS[6] = sphere_new((t_vec3){-0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
 	//printf("Segfault A?\n");
 	ctx->OBJECTS[7] = sphere_new((t_vec3){0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
-	ctx->OBJECTS[8] = sphere_new((t_vec3){-5.0, 3.5, -1.0}, 1.0	,	255, 0, 0);
-	ctx->OBJECTS[9] = sphere_new((t_vec3){0.0, 3.5, -1.0}, 1.0	,	0, 255, 0);
-	ctx->OBJECTS[10] = sphere_new((t_vec3){5.0, 3.5, -1.0},  1.0	,	0, 0, 255);
-	//ctx->OBJECTS[11] = plane_new((t_vec3){0.0, 5.0, -0.0}, (t_vec3){0.1, -1.5, 0.0},	200, 200, 255);
-	//ctx->OBJECTS[12] = plane_new((t_vec3){0.0, 0.0, 0.0}, (t_vec3){1.0, 1.0, 1.0},	200, 200, 255);
-	//ctx->OBJECTS[13] = plane_new((t_vec3){0.0, -5.0, -0.0}, (t_vec3){0.1, -1.5, 0.0},	200, 200, 255);
-	ctx->OBJECTS[11] = plane_new((t_vec3){0.0, -4.0, -0.0}, (t_vec3){1.0, 0.0, 0.0},	200, 200, 255);
+	ctx->OBJECTS[8] = sphere_new((t_vec3){-10.0, 4.0, -7.0}, 1.0	,	255, 0, 0);
+	ctx->OBJECTS[9] = sphere_new((t_vec3){0.0, 4.0, -3.0}, 1.0	,	0, 255, 0);
+	ctx->OBJECTS[10] = sphere_new((t_vec3){10.0, 4.0, -7.0},  1.0	,	0, 0, 255);
+	ctx->OBJECTS[11] = plane_new((t_vec3){0.0, 5.0, 0.0}, (t_vec3){0.0, -1.5, 0.0},	200, 200, 255);
+	ctx->OBJECTS[12] = plane_new((t_vec3){11.0, 0.0, 0.0}, (t_vec3){-1.0, 0.0, 0.0},	255, 0, 0);
+	ctx->OBJECTS[13] = plane_new((t_vec3){-11.0, 0.0, 0.0}, (t_vec3){-1.0, 0.0, 0.0},	0, 0, 255);
+	ctx->OBJECTS[14] = plane_new((t_vec3){.0, 0.0, -25.0}, (t_vec3){0.0, 0.0, 1.0},	255, 100, 0);
+	ctx->OBJECTS[15] = plane_new((t_vec3){.0, -9.0, 0.0}, (t_vec3){1.0, 0.0, 0.0},	0, 255, 0);
+	//ctx->OBJECTS[12] = plane_new((t_vec3){0.0, 0.0, 0.0}, (t_vec3){0.0, 0.0, 1.0},	200, 200, 255);
+	//ctx->OBJECTS[13] = plane_new((t_vec3){0.0, -5.0, -0.0}, (t_vec3){0.0, -1.5, 0.0},	200, 200, 255);
+	//ctx->OBJECTS[0] = plane_new((t_vec3){0.0, 10.0, 0.0}, (t_vec3){1.0, 0.0, 0.0},	200, 200, 255);
 	//printf("Segfault B?\n");
 
 
@@ -146,15 +150,15 @@ void	draw(t_context *ctx)
 				int r;
 				int g;
 				int b;
-				r = ctx->OBJECTS[ctx->cam.closest_id].r * shading * 35;
+				r = ctx->OBJECTS[ctx->cam.closest_id].r * shading * 105;
 				r += shading * 6000.0;
 				if (r >= 255)
 					r = 255;
-				g = ctx->OBJECTS[ctx->cam.closest_id].g * shading * 35 ;
+				g = ctx->OBJECTS[ctx->cam.closest_id].g * shading * 105 ;
 				g += shading * 6000.0;
 				if (g >= 255)
 					g = 255;
-				b = ctx->OBJECTS[ctx->cam.closest_id].b * shading * 35 ;
+				b = ctx->OBJECTS[ctx->cam.closest_id].b * shading * 105 ;
 				b += shading * 6000.0;
 				if (b >= 255)
 					b = 255;

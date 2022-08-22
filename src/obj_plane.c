@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 16:02:41 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/20 20:08:29 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 	s.loc = plane_loc;
 	s.rot = vec3_unit(rot);
 	s.type = PLANE;
+	s.size = 1;
 	return (s);
 }
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
@@ -36,12 +37,25 @@ t_vec3 get_plane_normal(t_object plane, t_ray ray, double *distance)
 	if (distance)
 	{}
 	if (vec3_dot(plane.rot, ray.dir) < 0)
-	return (vec3_neg(plane.rot));
 		return (plane.rot);
+	return (vec3_neg(plane.rot));
 }
 
-
-int	intersects_plane(t_ray *ray, t_object plane, double *distance, int debug)
+/*
+Ray and plane intersection
+N • (P - T) = 0
+N • P - N • T = 0
+and
+P = E.p + t * E.d
+so
+N • (E.p + t * E.d) - N • T = 0
+N • ( E.p + t * E.d) = N • T
+N • E.p + t * (N • E.d) = N • T
+t * (N • E.d) = N • T - N • E.p
+t = (N • T - N • E.p) /  (N • E.d) 
+t = (N • (T - E.p)) /  (N • E.d)
+*/
+int	intersects_plane(t_ray *ray, t_object *plane, double *distance, int debug)
 {
 	/* double	pn_dot_pc;
 	double	pn_dot_rloc;
@@ -55,7 +69,7 @@ int	intersects_plane(t_ray *ray, t_object plane, double *distance, int debug)
 	pn_dot_rloc = vec3_dot(plane.rot, ray->orig);
 	*distance = (pn_dot_pc - pn_dot_rloc) / pn_dot_rdir;
 	return (1); */
-
+//plane.rot = vec3_neg(plane.rot);
 	if (debug)
 	{}
 	t_vec3	ray_obj;
@@ -63,9 +77,11 @@ int	intersects_plane(t_ray *ray, t_object plane, double *distance, int debug)
 	float	denominator;
 
 	//vec3_unit(plane.rot);
-	ray_obj = vec3_sub(ray->orig, plane.loc);
-	numerator = vec3_dot(ray_obj, plane.rot);
-	denominator = vec3_dot(ray->dir, plane.rot);
+	ray_obj = vec3_sub(ray->orig, plane->loc);
+	numerator = vec3_dot(ray_obj, plane->rot);
+	denominator = vec3_dot(ray->dir, plane->rot);
+	if (fabs(denominator) < 1e-6)
+		return (0);
 	if ((denominator < 0 && numerator > 0)
 		|| (denominator > 0 && numerator < 0))
 	{
