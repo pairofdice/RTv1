@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/23 14:50:54 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/23 15:52:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,37 @@ void	draw(t_context *ctx)
 	ctx->OBJECTS[11] = plane_new((t_vec3){0.0, 5.0, 0.0}, (t_vec3){0.0, -1.5, 0.0},	200, 200, 255);
 	ctx->OBJECTS[12] = plane_new((t_vec3){11.0, 0.0, 0.0}, (t_vec3){-1.0, 0.0, 0.0},	255, 0, 0);
 	ctx->OBJECTS[13] = plane_new((t_vec3){-11.0, 0.0, 0.0}, (t_vec3){1.0, 0.0, 0.0},	0, 0, 255);
-	ctx->OBJECTS[14] = plane_new((t_vec3){0.0, 0.0, -17.0}, (t_vec3){0.0, 0.0, -1.0},	255, 111, 33);
+	ctx->OBJECTS[14] = plane_new((t_vec3){0.0, 0.0, -17.0}, (t_vec3){0.0, 0.0, 1.0},	255, 111, 33);
 	ctx->OBJECTS[15] = plane_new((t_vec3){0.0, -9.0, 0.0}, (t_vec3){0.0, 1.0, 0.0},	0, 255, 0);
-	//ctx->OBJECTS[12] = plane_new((t_vec3){0.0, 0.0, 0.0}, (t_vec3){0.0, 0.0, 1.0},	200, 200, 255);
-	//ctx->OBJECTS[13] = plane_new((t_vec3){0.0, -5.0, -0.0}, (t_vec3){0.0, -1.5, 0.0},	200, 200, 255);
-	//ctx->OBJECTS[0] = plane_new((t_vec3){0.0, 10.0, 0.0}, (t_vec3){1.0, 0.0, 0.0},	200, 200, 255);
-	//printf("Segfault B?\n");
 
+	//int debug;
 
-	int debug;
-	debug = 0;
-	//int color;
+	c = ctx->OBJECTS[11].rot;
+	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
+	c = ctx->OBJECTS[12].rot;
+	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
+	c = ctx->OBJECTS[13].rot;
+	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
+	c = ctx->OBJECTS[14].rot;
+	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
+	c = ctx->OBJECTS[15].rot;
+	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
+	i = 0;
+	while (i < NUM_OBJECTS)
+	{
+		// printf("Do we get into checking plane?\n");
+		if (ctx->OBJECTS[i].type == PLANE)
+		{
+			ctx->OBJECTS[i].rot = get_plane_normal(ctx->OBJECTS[i], vec3_sub(ctx->OBJECTS[i].loc, ctx->cam.loc));
+		}
+		i++;
+	}
 	while (y < WIN_H)
 	{
 		x = 0;
 		while (x < WIN_W)
 		{
-				debug = 0;
+/* 				debug = 0;
 				if ((x == WIN_W/2 && y == 100) ||
 				(x == WIN_W - 100 && y == WIN_H/2) ||
 				(x  == WIN_W/2 && y == WIN_H - 100)||
@@ -81,7 +95,7 @@ void	draw(t_context *ctx)
 					//c = ctx->ray.dir;
 					//printf("ray->dir is: %f %f %f\n", c.x, c.y, c.z);
 
-				}
+				} */
 			// create a ray for this pixel. origin is the virtual pixel on the projection plane
 			// direction is location of virtual pixel minus location of camera
 			ctx->ray.orig = vec3_add(L, vec3_scalar_mult(ctx->cam.right, x * ctx->cam.projection_plane_w/WIN_W));
@@ -99,7 +113,7 @@ void	draw(t_context *ctx)
 				// printf("Do we get into checking plane?\n");
 				if (ctx->OBJECTS[i].type == SPHERE)
 				{
-					if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, debug))
+					if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, 0))
 					{
 						ctx->cam.is_hit = 1;
 						if (distance < ctx->cam.closest_hit)
@@ -111,7 +125,6 @@ void	draw(t_context *ctx)
 				}
 				else if (ctx->OBJECTS[i].type == PLANE)
 				{
-
 					if (intersects_plane(&ctx->ray, &ctx->OBJECTS[i], &distance))
 					{
 						//img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFFFF  );
@@ -140,19 +153,19 @@ void	draw(t_context *ctx)
 				}
 				else if (ctx->OBJECTS[ctx->cam.closest_id].type == PLANE)
 				{
-					//normal = get_plane_normal(ctx->OBJECTS[ctx->cam.closest_id], ctx->ray);
-					if (vec3_dot(ctx->OBJECTS[ctx->cam.closest_id].rot, ctx->ray.dir ) < 0)
+					normal = ctx->OBJECTS[ctx->cam.closest_id].rot;
+				/* 	if (vec3_dot(ctx->OBJECTS[ctx->cam.closest_id].rot, ctx->ray.dir ) < 0)
 						normal = ctx->OBJECTS[ctx->cam.closest_id].rot;
 					else 
-						normal = vec3_neg( ctx->OBJECTS[ctx->cam.closest_id].rot); 
+						normal = vec3_neg( ctx->OBJECTS[ctx->cam.closest_id].rot);  */
 				}
 				double	light_level;
 
 				light_level = get_light_level((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);
 
 				t_color c;
-				c = debug_shading(normal);
-				//c = shade(ctx->OBJECTS[ctx->cam.closest_id], light_level);
+				//c = debug_shading(normal);
+				c = shade(ctx->OBJECTS[ctx->cam.closest_id], light_level);
 				img_pixel_put(&ctx->frame_buffer, x, y,rgb_to_int(c.x, c.y, c.z));
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/23 14:48:05 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/23 15:51:34 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 	s.g = g;
 	s.b = b;
 	s.loc = plane_loc;
-	s.rot = vec3_unit(rot);
+	s.rot = rot;
 	s.type = PLANE;
 	s.size = 1;
 	c = s.rot;
@@ -34,15 +34,11 @@ t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 	return (s);
 }
 
-t_vec3 get_plane_normal(t_object plane, t_ray ray)
+t_vec3 get_plane_normal(t_object plane, t_vec3 cam_to_plane)
 {
-	t_vec3	normal;
-	
-	if (vec3_dot(plane.rot, ray.dir) > 0)
-		normal = plane.rot;
-	else
-		normal = vec3_neg(plane.rot);
-	return (normal);
+	if (vec3_dot(plane.rot, cam_to_plane) > 0)
+		return(plane.rot);
+	return(vec3_neg(plane.rot));
 }
 
 /*
@@ -69,7 +65,7 @@ int	intersects_plane(t_ray *ray, t_object *plane, double *distance)
 	double	normal_dot_raydir;
 	double	normal_dot_tr;
 	t_vec3	tr;
-
+	
 	normal_dot_raydir = vec3_dot(plane->rot, ray->dir);
 	if (normal_dot_raydir < EPSILON)
 		return (0);
