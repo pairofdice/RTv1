@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 20:08:29 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/23 14:48:05 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 {
 	t_object	s;
+	t_vec3 c;
+
 
 	s.r = r;
 	s.g = g;
@@ -27,97 +29,54 @@ t_object plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 	s.rot = vec3_unit(rot);
 	s.type = PLANE;
 	s.size = 1;
+	c = s.rot;
+	printf("In plane_new, normal is: %f %f %f \n ", c.x, c.y, c.z);
 	return (s);
 }
-// get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
-//*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
-t_vec3 get_plane_normal(t_object plane, t_ray ray, double *distance)
+t_vec3 get_plane_normal(t_object plane, t_ray ray)
 {
-	if (distance)
-	{}
-	if (vec3_dot(plane.rot, ray.dir) < 0)
-		return (plane.rot);
-	return (vec3_neg(plane.rot));
+	t_vec3	normal;
+	
+	if (vec3_dot(plane.rot, ray.dir) > 0)
+		normal = plane.rot;
+	else
+		normal = vec3_neg(plane.rot);
+	return (normal);
 }
 
 /*
 Ray and plane intersection
+T = Taso, plane.loc
+N = Plane normal, plane.rot
+P = A point on the plane
+R = ray with a start position, R.p, and a direction, R.d.
+
 N • (P - T) = 0
 N • P - N • T = 0
 and
-P = E.p + t * E.d
+P = R.p + t * R.d
 so
-N • (E.p + t * E.d) - N • T = 0
-N • ( E.p + t * E.d) = N • T
-N • E.p + t * (N • E.d) = N • T
-t * (N • E.d) = N • T - N • E.p
-t = (N • T - N • E.p) /  (N • E.d) 
-t = (N • (T - E.p)) /  (N • E.d)
+N • (R.p + t * R.d) - N • T = 0
+N • (R.p + t * R.d) = N • T
+N • R.p + t * (N • R.d) = N • T
+t * (N • R.d) = N • T - N • R.p
+t = (N • T - N • R.p) /  (N • R.d) 
+t = (N • (T - R.p)) /  (N • R.d)
 */
-int	intersects_plane(t_ray *ray, t_object *plane, double *distance, int debug)
+int	intersects_plane(t_ray *ray, t_object *plane, double *distance)
 {
-	/* double	pn_dot_pc;
-	double	pn_dot_rloc;
-	double	pn_dot_rdir;
+	double	normal_dot_raydir;
+	double	normal_dot_tr;
+	t_vec3	tr;
 
-
-	pn_dot_rdir = vec3_dot(plane.rot, vec3_unit(ray->dir));
-	if (fabs(pn_dot_rdir) < 1e-8)
+	normal_dot_raydir = vec3_dot(plane->rot, ray->dir);
+	if (normal_dot_raydir < EPSILON)
 		return (0);
-	pn_dot_pc = vec3_dot(plane.rot, plane.loc);
-	pn_dot_rloc = vec3_dot(plane.rot, ray->orig);
-	*distance = (pn_dot_pc - pn_dot_rloc) / pn_dot_rdir;
-	return (1); */
-//plane.rot = vec3_neg(plane.rot);
-	if (debug)
-	{}
-	t_vec3	ray_obj;
-	float	numerator;
-	float	denominator;
-
-	//vec3_unit(plane.rot);
-	ray_obj = vec3_sub(ray->orig, plane->loc);
-	numerator = vec3_dot(ray_obj, plane->rot);
-	denominator = vec3_dot(ray->dir, plane->rot);
-	if (fabs(denominator) < 1e-6)
+	tr = vec3_sub(plane->loc, ray->orig);
+	normal_dot_tr = vec3_dot(plane->rot, tr);
+	if (normal_dot_tr < EPSILON)
 		return (0);
-	if ((denominator < 0 && numerator > 0)
-		|| (denominator > 0 && numerator < 0))
-	{
-		*distance = -numerator / denominator;
-		return (1);
-	}
-	return (0);
+	*distance = normal_dot_tr / normal_dot_raydir;
+	return (1);
 }
-/*
-Po = plane origin
-Lo = Line origin
-n - the planes normal ray
-Po = single point on the plane
-L = the vector that represents the ray I am shooting
-Lo = a point on the line
-d = dot(Po-Lo,N)/dot(L,N)
-*/
-/*
-t_bool	intersect_plane(t_v3 ray_dir, t_v3 ray_start, t_object *obj, t_t2 *res)
-{
-	t_v3	ray_obj;
-	float	numerator;
-	float	denominator;
-
-	vec_normalize(&obj->dir);
-	ray_obj = vec_sub(ray_start, obj->pos);
-	numerator = vec_dot(ray_obj, obj->dir);
-	denominator = vec_dot(ray_dir, obj->dir);
-	if ((denominator < 0 && numerator > 0)
-		|| (denominator > 0 && numerator < 0))
-	{
-		res->t0 = -numerator / denominator;
-		res->t1 = -1;
-		return (rt_true);
-	}
-	return (rt_false);
-}
-
-*/

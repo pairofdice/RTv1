@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_shading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/20 16:42:16 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/23 14:03:24 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,36 @@
 //#include "objects.h"
 #include "RTv1.h"
 
+t_color debug_shading(t_vec3 normal)
+{
+	t_color	c;
 
-double	get_shading(t_ray normal, t_point light, t_ray ray, t_context *ctx, int id)
+	c.x = normal.x * 100 + 127;
+	c.y = normal.y * 100 + 127;
+	c.z = normal.z * 100 + 127;
+	return (c);
+}
+
+t_color	shade(t_object obj, double shading)
+{
+	t_color	c;
+
+	c.x = obj.r *  shading *  100;
+	c.x += shading * 5000.0;
+	if (c.x  >= 255)
+		c.x  = 255;  
+	c.y =   obj.g *  shading *  100;
+	c.y += shading * 5000.0;
+	if (c.y >= 255)
+		c.y = 255;  
+	c.z = obj.b *  shading * 100 ;
+	c.z += shading * 5000.0;
+	if (c.z >= 255)
+		c.z = 255;
+	return (c);
+}
+
+double	get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, int id)
 {
 	// t_vec3 temp;
 	t_vec3	to_light;
@@ -52,7 +80,7 @@ double	get_shading(t_ray normal, t_point light, t_ray ray, t_context *ctx, int i
 		}
  		if (ctx->OBJECTS[i].type == PLANE)
 		{
-			if (intersects_plane(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance, 0))
+			if (intersects_plane(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance))
 			{
 				if (distance < vec3_mag(to_light))
 					return (0);

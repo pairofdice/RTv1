@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/19 14:56:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:23:55 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "vec3.h"
 # define SPHERE 1
 # define PLANE 2
+# define EPSILON 0.000001
 
 typedef struct s_object
 {
