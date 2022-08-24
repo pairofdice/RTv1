@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/23 14:29:49 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:08:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void	init_camera(t_cam *cam, t_point loc)
 int	init(t_context *ctx)
 {
 	t_cam	cam;
-
-	init_camera(&cam,  (t_point) {0.0, 0.0, 10.0});
+ 	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0	, 	255, 223, 196);
+//
+	init_camera(&cam,  (t_point) {0.0, 0.0, 5.0});
+	ctx->ambient = light_new((t_point) {0, 0, 0}, (t_color) {155, 155, 255}, 20);
 	ctx->cam = cam;
 	//The window we'll be rendering to
 	ctx->window = NULL;

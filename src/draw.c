@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/24 18:09:24 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/24 19:58:44 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 void	draw(t_context *ctx)
 {
-	t_vec3		normal;
+	t_vec3	normal;
 	t_point	L;
 	t_point	light;
-	t_vec3 c;
+	t_vec3	c;
 	double	distance;
-	int	x;
-	int	y;
-	int i;
+	int		x;
+	int		y;
+	int		i;
 
-	light = vec3_new(0.1, -7.0, 3.5);
+	light = vec3_new(0.1, -4.0, 2.0);
 
 	L =  vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w));
 
@@ -43,13 +43,13 @@ void	draw(t_context *ctx)
 	ctx->OBJECTS[6] = sphere_new((t_vec3){-0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
 
 	ctx->OBJECTS[7] = sphere_new((t_vec3){0.5, 1.65, -5.35}, 0.3, 	0, 0, 0);
-	ctx->OBJECTS[8] = sphere_new((t_vec3){-10.0, 4.0, -7.0}, 1.0	,	255, 0, 0);
+	ctx->OBJECTS[8] = sphere_new((t_vec3){-10.0, 4.0, -7.0}, 1.0,	255, 0, 0);
 	ctx->OBJECTS[9] = sphere_new((t_vec3){0.0, 4.0, -3.0}, 1.0	,	0, 255, 0);
-	ctx->OBJECTS[10] = sphere_new((t_vec3){10.0, 4.0, -7.0},  1.0	,	0, 0, 255);
+	ctx->OBJECTS[10] = sphere_new((t_vec3){10.0, 4.0, -7.0},  1.0,	0, 0, 255);
 	ctx->OBJECTS[11] = plane_new((t_vec3){0.0, 5.0, 0.0}, (t_vec3){0.0, -1.5, 0.0},	200, 200, 255);
 	ctx->OBJECTS[12] = plane_new((t_vec3){11.0, 0.0, 0.0}, (t_vec3){-1.0, 0.0, 0.0},	255, 0, 0);
 	ctx->OBJECTS[13] = plane_new((t_vec3){-11.0, 0.0, 0.0}, (t_vec3){1.0, 0.0, 0.0},	0, 0, 255);
-	ctx->OBJECTS[14] = plane_new((t_vec3){0.0, 0.0, -17.0}, (t_vec3){0.0, 0.0, 1.0},	255, 111, 33);
+	ctx->OBJECTS[14] = plane_new((t_vec3){0.0, 0.0, -24.0}, (t_vec3){0.0, 0.0, 1.0},	255, 111, 33);
 	ctx->OBJECTS[15] = plane_new((t_vec3){0.0, -9.0, 0.0}, (t_vec3){0.0, 1.0, 0.0},	0, 255, 0);
 
 	//int debug;
@@ -126,7 +126,7 @@ void	draw(t_context *ctx)
 				double	light_level;
 				light_level = get_light_level((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);				t_color c;
 				// c = debug_shading(normal);
-				c = shade(ctx->OBJECTS[ctx->cam.closest_id], light_level);
+				c = shade(ctx->OBJECTS[ctx->cam.closest_id], light_level, &ctx->ambient);
 				img_pixel_put(&ctx->frame_buffer, x, y,rgb_to_int(c.x, c.y, c.z));
 			}
 			else

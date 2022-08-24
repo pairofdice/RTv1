@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/23 14:03:24 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:06:37 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,28 @@ t_color debug_shading(t_vec3 normal)
 	return (c);
 }
 
-t_color	shade(t_object obj, double shading)
+t_color	shade(t_object obj, double shading, t_light *ambient)
 {
 	t_color	c;
 
-	c.x = obj.r *  shading *  100;
-	c.x += shading * 5000.0;
+	shading += AMBIENT;
+	if (ambient->color.x < 100)
+	{}
+	c.x = obj.r *  shading *  100 ;
+	c.x += shading * 1000.0;
+	c.x = pow(c.x, 1/GAMMA) * 15;
 	if (c.x  >= 255)
 		c.x  = 255;  
 	c.y =   obj.g *  shading *  100;
-	c.y += shading * 5000.0;
+	c.y += shading * 1000.0;
+	c.y = pow(c.y, 1/GAMMA) * 15;
+
 	if (c.y >= 255)
 		c.y = 255;  
 	c.z = obj.b *  shading * 100 ;
-	c.z += shading * 5000.0;
+	c.z += shading * 1000.0;
+	c.z = pow(c.z, 1/GAMMA) * 15;
+
 	if (c.z >= 255)
 		c.z = 255;
 	return (c);
