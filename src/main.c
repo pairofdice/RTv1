@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/18 16:23:42 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:42:53 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,90 @@ int main( int argc, char* args[] )
 				{
 					quit = true;
 				}
+				if (e.type == SDL_WINDOWEVENT)
+				{
+					if (e.window.event == SDL_WINDOWEVENT_EXPOSED)
+					{
+						// TODO
+						// printf("Exposed!\n");
+					}
+				}
 				if (e.type == SDL_KEYDOWN)
 				{	
 					if(e.key.keysym.sym == SDLK_ESCAPE)
 					{
 						quit = true;
 					}
-					if(e.key.keysym.sym == SDLK_q)
+					if(e.key.keysym.sym == SDLK_w)
 					{
-						ctx.cam.loc.y += 0.1;
+						printf("W!\n");
+						t_point loc = ctx.cam.loc;
+						t_vec3 dir = ctx.cam.dir;
+						loc = vec3_add(loc, dir);
+						init_camera(&ctx.cam, loc);
+						SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
+						ctx.frame_buffer.data = malloc(WIN_H * WIN_W * 4);
+						ft_memset( ctx.frame_buffer.data, 0,  WIN_H * WIN_W * 4);
+
+						draw(&ctx);
+						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
+						SDL_UnlockTexture(ctx.texture);
+						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
+						SDL_RenderPresent( ctx.renderer );
+						
+					}
+					if(e.key.keysym.sym == SDLK_a)
+					{
+						printf("A!\n");
+						t_point loc = ctx.cam.loc;
+						t_vec3 dir = vec3_neg(ctx.cam.right);
+						loc = vec3_add(loc, dir);
+						init_camera(&ctx.cam, loc);
+						SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
+						ctx.frame_buffer.data = malloc(WIN_H * WIN_W * 4);
+						ft_memset( ctx.frame_buffer.data, 0,  WIN_H * WIN_W * 4);
+
+						draw(&ctx);
+						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
+						SDL_UnlockTexture(ctx.texture);
+						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
+						SDL_RenderPresent( ctx.renderer );
+						
+					}
+					if(e.key.keysym.sym == SDLK_s)
+					{
+						printf("Q!\n");
+						t_point loc = ctx.cam.loc;
+						t_vec3 dir = vec3_neg(ctx.cam.dir);
+						loc = vec3_add(loc, dir);
+						init_camera(&ctx.cam, loc);
+						SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
+						ctx.frame_buffer.data = malloc(WIN_H * WIN_W * 4);
+						ft_memset( ctx.frame_buffer.data, 0,  WIN_H * WIN_W * 4);
+
+						draw(&ctx);
+						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
+						SDL_UnlockTexture(ctx.texture);
+						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
+						SDL_RenderPresent( ctx.renderer );
+						
+					}
+					if(e.key.keysym.sym == SDLK_d)
+					{
+						printf("Q!\n");
+						t_point loc = ctx.cam.loc;
+						t_vec3 dir = ctx.cam.right;
+						loc = vec3_add(loc, dir);
+						init_camera(&ctx.cam, loc);
+						SDL_LockTexture(ctx.texture, NULL, (void **)&texture_data,	&texture_pitch);
+						ctx.frame_buffer.data = malloc(WIN_H * WIN_W * 4);
+						ft_memset( ctx.frame_buffer.data, 0,  WIN_H * WIN_W * 4);
+
+						draw(&ctx);
+						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
+						SDL_UnlockTexture(ctx.texture);
+						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
+						SDL_RenderPresent( ctx.renderer );
 						
 					}
 				}

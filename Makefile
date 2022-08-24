@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/17 17:15:47 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/19 15:53:47 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = $Smain.c \
 	$Svec3_reflect.c \
 	$Svec3_unit.c \
 	$Sobj_sphere.c \
+	$Sobj_plane.c \
 	$Sget_shading.c \
 
 CC = clang
@@ -55,7 +56,7 @@ CFLAGS += -c -Wall -Wextra -Werror
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)
 
-#LDFLAGS += -g -fsanitize=address
+LDFLAGS += -g -fsanitize=address
 LDFLAGS += $(SDL2_LDFLAGS)
 
 OBJ = $(SRC:$S%=$O%.o)
