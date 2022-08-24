@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/23 15:50:02 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/24 14:06:35 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_object	plane_new(t_vec3 plane_loc, t_vec3 plane_rot, int r, int g, int b);
 void	draw(t_context *ctx);
 t_vec3	get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
 // t_vec3	get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
-t_vec3	get_plane_normal(t_object plane, t_vec3 cam_to_plane);
+t_vec3	get_plane_normal(t_object plane, t_ray cam_to_plane);
 
 t_vec3	vec3_new(double x, double y, double z);
 double	get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, int id);

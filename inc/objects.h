@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/22 18:23:55 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:27:19 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 # define OBJECTS_H
 
 # include "vec3.h"
-# define SPHERE 1
-# define PLANE 2
 # define EPSILON 0.000001
+
+enum {
+	SPHERE,
+	PLANE,
+};
 
 typedef struct s_object
 {
@@ -29,6 +32,13 @@ typedef struct s_object
 	int		b;
 	int		type;
 }	t_object;
+
+typedef struct s_light
+{
+	t_point	loc;
+	t_color	color;
+	double	intensity;
+}	t_light;
 
 typedef struct s_cam
 {

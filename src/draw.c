@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/23 15:52:17 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:57:58 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 void	draw(t_context *ctx)
 {
-	//t_object	TEST_SPHERE_1;
-	// int num_spheres = 8;
-	// t_object	SPHERES[num_spheres];
 	t_vec3		normal;
 	t_point	L;
 	t_point	light;
@@ -57,7 +54,7 @@ void	draw(t_context *ctx)
 
 	//int debug;
 
-	c = ctx->OBJECTS[11].rot;
+/* 	c = ctx->OBJECTS[11].rot;
 	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
 	c = ctx->OBJECTS[12].rot;
 	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
@@ -66,36 +63,14 @@ void	draw(t_context *ctx)
 	c = ctx->OBJECTS[14].rot;
 	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
 	c = ctx->OBJECTS[15].rot;
-	printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
-	i = 0;
-	while (i < NUM_OBJECTS)
-	{
-		// printf("Do we get into checking plane?\n");
-		if (ctx->OBJECTS[i].type == PLANE)
-		{
-			ctx->OBJECTS[i].rot = get_plane_normal(ctx->OBJECTS[i], vec3_sub(ctx->OBJECTS[i].loc, ctx->cam.loc));
-		}
-		i++;
-	}
+	printf("normal is: %f %f %f \n ", c.x, c.y, c.z); */
+	
 	while (y < WIN_H)
 	{
 		x = 0;
 		while (x < WIN_W)
 		{
-/* 				debug = 0;
-				if ((x == WIN_W/2 && y == 100) ||
-				(x == WIN_W - 100 && y == WIN_H/2) ||
-				(x  == WIN_W/2 && y == WIN_H - 100)||
-				(x == 100 && y == WIN_H/2)
-				)
-				{
-					debug = 1;
-					c = ctx->OBJECTS[ctx->cam.closest_id].rot;
-					printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
-					//c = ctx->ray.dir;
-					//printf("ray->dir is: %f %f %f\n", c.x, c.y, c.z);
 
-				} */
 			// create a ray for this pixel. origin is the virtual pixel on the projection plane
 			// direction is location of virtual pixel minus location of camera
 			ctx->ray.orig = vec3_add(L, vec3_scalar_mult(ctx->cam.right, x * ctx->cam.projection_plane_w/WIN_W));
@@ -127,8 +102,8 @@ void	draw(t_context *ctx)
 				{
 					if (intersects_plane(&ctx->ray, &ctx->OBJECTS[i], &distance))
 					{
-						//img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFFFF  );
-						//printf("Do we get into checking plane?\n");
+					
+
 
 						ctx->cam.is_hit = 1;
 						if (distance < ctx->cam.closest_hit)
@@ -143,33 +118,40 @@ void	draw(t_context *ctx)
 	//*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 //	t_vec3	get_normal(t_vec3 sphere_loc, t_ray ray, double distance)
 
-				//printf("Segfault C?\n");
 			if (ctx->cam.is_hit)
 			{
-				// img_pixel_put(&ctx->frame_buffer, x, y, 0xFFFFFFFF/* rgb_to_int(r, g, b) */  );
+
 				if (ctx->OBJECTS[ctx->cam.closest_id].type == SPHERE)
-				{
 					normal = get_sphere_normal(ctx->OBJECTS[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
-				}
 				else if (ctx->OBJECTS[ctx->cam.closest_id].type == PLANE)
-				{
-					normal = ctx->OBJECTS[ctx->cam.closest_id].rot;
-				/* 	if (vec3_dot(ctx->OBJECTS[ctx->cam.closest_id].rot, ctx->ray.dir ) < 0)
-						normal = ctx->OBJECTS[ctx->cam.closest_id].rot;
-					else 
-						normal = vec3_neg( ctx->OBJECTS[ctx->cam.closest_id].rot);  */
-				}
+					normal = get_plane_normal(ctx->OBJECTS[ctx->cam.closest_id], ctx->ray);
 				double	light_level;
-
-				light_level = get_light_level((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);
-
-				t_color c;
-				//c = debug_shading(normal);
+				light_level = get_light_level((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);				t_color c;
+				// c = debug_shading(normal);
 				c = shade(ctx->OBJECTS[ctx->cam.closest_id], light_level);
 				img_pixel_put(&ctx->frame_buffer, x, y,rgb_to_int(c.x, c.y, c.z));
 			}
 			else
 				img_pixel_put(&ctx->frame_buffer, x, y, 0x00000000);
+
+
+
+			
+
+/* 			if ((x == WIN_W/2 && y == 100) ||
+				(x == WIN_W - 100 && y == WIN_H/2) ||
+				(x  == WIN_W/2 && y == WIN_H - 100)||
+				(x == 100 && y == WIN_H/2)
+				)
+				{
+					
+					printf("After plane intersect.\n");
+					c = ctx->OBJECTS[ctx->cam.closest_id].rot;
+					printf("normal is: %f %f %f \n ", c.x, c.y, c.z);
+					//c = ctx->ray.dir;
+					//printf("ray->dir is: %f %f %f\n", c.x, c.y, c.z);
+
+				}  */
 			x++;
 		}
 		y++;
