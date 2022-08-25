@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/25 15:16:03 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:05:44 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,13 @@ void	draw(t_context *ctx)
 			i = 0;
 			
 			ctx->hit = hit_record_new();
-	 		while (i < NUM_OBJECTS)
+			// intersects(t_context *ctx, double distance)
+			distance = 1.0/0.0;
+			intersects(ctx, distance);
+	 		/* while (i < NUM_OBJECTS)
 			{
 				// printf("Do we get into checking plane?\n");
+				
 				if (ctx->OBJECTS[i].type == SPHERE)
 				{
 					if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, 0))
@@ -111,7 +115,7 @@ void	draw(t_context *ctx)
 					}
 				}
 				i++;
-			}
+			} */
 	//*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 //	t_vec3	get_normal(t_vec3 sphere_loc, t_ray ray, double distance)
 
@@ -155,7 +159,7 @@ void	draw(t_context *ctx)
 
 void	write_buffer(t_context *ctx, int *texture_data, int *texture_pitch)
 {
-	SDL_LockTexture(ctx->texture, NULL, (void **)texture_data,	texture_pitch);
+	SDL_LockTexture(ctx->texture, NULL, (void *)&texture_data,	texture_pitch);
 	ctx->frame_buffer.data = malloc(WIN_H * WIN_W * 4);
 	ft_memset( ctx->frame_buffer.data, 0,  WIN_H * WIN_W * 4);
 	draw(ctx);

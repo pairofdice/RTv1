@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/25 14:43:49 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:03:23 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ typedef struct s_hit_record
 	t_point	loc;
 	t_vec3	normal;
 	int		is_hit;
+	double	max_distance;
 	double	closest_distance;
-	int	closest_id;
+	int		closest_id;
 } t_hit_record;
 
 typedef struct s_frame_buffer
@@ -75,17 +76,19 @@ void		draw(t_context *ctx);
 void		write_buffer(t_context *ctx, int *texture_data, int *texture_pitch);
 
 
-t_vec3		get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
-// t_vec3	get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
-t_vec3		get_plane_normal(t_object plane, t_ray cam_to_plane);
-t_vec3		vec3_new(double x, double y, double z);
-double		get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, int id);
-t_color		debug_shading(t_vec3 normal);
-t_color		shade(t_object obj, double shading, t_light *ambient);
-void		init_camera(t_cam *cam, t_point loc);
-void		img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
-t_light		light_new(t_point loc, t_color color, double intensity);
+t_vec3			get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
+// t_vec3		get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
+t_vec3			get_plane_normal(t_object plane, t_ray cam_to_plane);
+t_vec3			vec3_new(double x, double y, double z);
+double			get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, int id);
+t_color			debug_shading(t_vec3 normal);
+t_color			shade(t_object obj, double shading, t_light *ambient);
+void			init_camera(t_cam *cam, t_point loc);
+void			img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
+t_light			light_new(t_point loc, t_color color, double intensity);
 t_hit_record	hit_record_new();
+void			intersects(t_context *ctx, double distance);
+
 
 
 
