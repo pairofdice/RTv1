@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/24 20:06:37 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:15:40 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,8 @@ double	get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, i
 	int i;
 
 	to_light = vec3_sub(light, normal.orig);
-	//test.orig = normal.orig;
-	//test.dir =  vec3_unit(to_light);
 	i = 0;
-	distance = 1.0/0.0;
-	//printf("Segfault DA?\n");
+	distance =vec3_mag(to_light);
 
 	while (i < NUM_OBJECTS)
 	{

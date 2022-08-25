@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/25 14:32:42 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:14:39 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 enum {
 	SPHERE,
 	PLANE,
+	NOT_LIGHT,
+	LIGHT,
 };
 
 typedef struct s_object

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/25 17:05:44 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:14:08 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,40 +84,7 @@ void	draw(t_context *ctx)
 			ctx->hit = hit_record_new();
 			// intersects(t_context *ctx, double distance)
 			distance = 1.0/0.0;
-			intersects(ctx, distance);
-	 		/* while (i < NUM_OBJECTS)
-			{
-				// printf("Do we get into checking plane?\n");
-				
-				if (ctx->OBJECTS[i].type == SPHERE)
-				{
-					if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, 0))
-					{
-						ctx->hit.is_hit = 1;
-						if (distance < ctx->hit.closest_distance)
-						{
-							ctx->hit.closest_distance = distance;
-							ctx->hit.closest_id = i;
-						}
-					}
-				}
-				else if (ctx->OBJECTS[i].type == PLANE)
-				{
-					if (intersects_plane(&ctx->ray, &ctx->OBJECTS[i], &distance))
-					{
-					
-						ctx->hit.is_hit = 1;
-						if (distance < ctx->hit.closest_distance)
-						{
-							ctx->hit.closest_distance = distance;
-							ctx->hit.closest_id = i;
-						}
-					}
-				}
-				i++;
-			} */
-	//*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
-//	t_vec3	get_normal(t_vec3 sphere_loc, t_ray ray, double distance)
+			intersects(ctx, distance, NOT_LIGHT);
 
 			if (ctx->hit.is_hit)
 			{

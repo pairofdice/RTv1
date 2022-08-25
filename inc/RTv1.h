@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/25 17:03:23 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:13:55 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void			init_camera(t_cam *cam, t_point loc);
 void			img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
 t_light			light_new(t_point loc, t_color color, double intensity);
 t_hit_record	hit_record_new();
-void			intersects(t_context *ctx, double distance);
+void			intersects(t_context *ctx, double distance, int light);
 
 
 
