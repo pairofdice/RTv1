@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/24 17:42:53 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:15:41 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ int main( int argc, char* args[] )
 						draw(&ctx);
 						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
 						SDL_UnlockTexture(ctx.texture);
-						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
-						SDL_RenderPresent( ctx.renderer );
+
 						
 					}
 					if(e.key.keysym.sym == SDLK_a)
@@ -111,8 +110,7 @@ int main( int argc, char* args[] )
 						draw(&ctx);
 						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
 						SDL_UnlockTexture(ctx.texture);
-						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
-						SDL_RenderPresent( ctx.renderer );
+
 						
 					}
 					if(e.key.keysym.sym == SDLK_s)
@@ -129,8 +127,7 @@ int main( int argc, char* args[] )
 						draw(&ctx);
 						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
 						SDL_UnlockTexture(ctx.texture);
-						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
-						SDL_RenderPresent( ctx.renderer );
+
 						
 					}
 					if(e.key.keysym.sym == SDLK_d)
@@ -147,8 +144,7 @@ int main( int argc, char* args[] )
 						draw(&ctx);
 						ft_memcpy(texture_data, ctx.frame_buffer.data, WIN_H * WIN_W * 4);
 						SDL_UnlockTexture(ctx.texture);
-						SDL_RenderCopy( ctx.renderer, ctx.texture, NULL, NULL );
-						SDL_RenderPresent( ctx.renderer );
+
 						
 					}
 				}

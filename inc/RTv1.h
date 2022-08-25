@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/25 14:19:26 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:43:49 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ int			intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debu
 int			intersects_plane(t_ray *ray, t_object *plane, double *distance);
 t_object	sphere_new(t_vec3 sphere_loc, double radius, int r, int g, int b);
 t_object	plane_new(t_vec3 plane_loc, t_vec3 plane_rot, int r, int g, int b);
+
+
 void		draw(t_context *ctx);
+void		write_buffer(t_context *ctx, int *texture_data, int *texture_pitch);
+
+
 t_vec3		get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
 // t_vec3	get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
 t_vec3		get_plane_normal(t_object plane, t_ray cam_to_plane);

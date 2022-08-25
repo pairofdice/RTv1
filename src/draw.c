@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/24 19:58:44 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 15:16:03 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ void	draw(t_context *ctx)
 			ctx->ray.dir = vec3_unit(ctx->ray.dir);
 			// check collision
 			i = 0;
-			ctx->cam.closest_hit = 1.0/0.0;
-			ctx->cam.is_hit = 0;
-			ctx->cam.closest_id = 0;
+			
+			ctx->hit = hit_record_new();
 	 		while (i < NUM_OBJECTS)
 			{
 				// printf("Do we get into checking plane?\n");
@@ -90,11 +89,11 @@ void	draw(t_context *ctx)
 				{
 					if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, 0))
 					{
-						ctx->cam.is_hit = 1;
-						if (distance < ctx->cam.closest_hit)
+						ctx->hit.is_hit = 1;
+						if (distance < ctx->hit.closest_distance)
 						{
-							ctx->cam.closest_hit = distance;
-							ctx->cam.closest_id = i;
+							ctx->hit.closest_distance = distance;
+							ctx->hit.closest_id = i;
 						}
 					}
 				}
@@ -103,11 +102,11 @@ void	draw(t_context *ctx)
 					if (intersects_plane(&ctx->ray, &ctx->OBJECTS[i], &distance))
 					{
 					
-						ctx->cam.is_hit = 1;
-						if (distance < ctx->cam.closest_hit)
+						ctx->hit.is_hit = 1;
+						if (distance < ctx->hit.closest_distance)
 						{
-							ctx->cam.closest_hit = distance;
-							ctx->cam.closest_id = i;
+							ctx->hit.closest_distance = distance;
+							ctx->hit.closest_id = i;
 						}
 					}
 				}
@@ -116,25 +115,23 @@ void	draw(t_context *ctx)
 	//*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 //	t_vec3	get_normal(t_vec3 sphere_loc, t_ray ray, double distance)
 
-			if (ctx->cam.is_hit)
+			if (ctx->hit.is_hit)
 			{
 
-				if (ctx->OBJECTS[ctx->cam.closest_id].type == SPHERE)
-					normal = get_sphere_normal(ctx->OBJECTS[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
-				else if (ctx->OBJECTS[ctx->cam.closest_id].type == PLANE)
-					normal = get_plane_normal(ctx->OBJECTS[ctx->cam.closest_id], ctx->ray);
+				if (ctx->OBJECTS[ctx->hit.closest_id].type == SPHERE)
+					normal = get_sphere_normal(ctx->OBJECTS[ctx->hit.closest_id].loc, ctx->ray, ctx->hit.closest_distance);
+				else if (ctx->OBJECTS[ctx->hit.closest_id].type == PLANE)
+					normal = get_plane_normal(ctx->OBJECTS[ctx->hit.closest_id], ctx->ray);
 				double	light_level;
-				light_level = get_light_level((t_ray){ vec3_ray_at(ctx->ray, ctx->cam.closest_hit), normal }, light, ctx->ray, ctx, ctx->cam.closest_id);				t_color c;
+				light_level = get_light_level((t_ray){ vec3_ray_at(ctx->ray, ctx->hit.closest_distance), normal }, light, ctx->ray, ctx, ctx->hit.closest_id);				t_color c;
 				// c = debug_shading(normal);
-				c = shade(ctx->OBJECTS[ctx->cam.closest_id], light_level, &ctx->ambient);
+				c = shade(ctx->OBJECTS[ctx->hit.closest_id], light_level, &ctx->ambient);
 				img_pixel_put(&ctx->frame_buffer, x, y,rgb_to_int(c.x, c.y, c.z));
 			}
 			else
 				img_pixel_put(&ctx->frame_buffer, x, y, 0x00000000);
 
 
-
-			
 
 /* 			if ((x == WIN_W/2 && y == 100) ||
 				(x == WIN_W - 100 && y == WIN_H/2) ||
@@ -154,4 +151,14 @@ void	draw(t_context *ctx)
 		}
 		y++;
 	}
+}
+
+void	write_buffer(t_context *ctx, int *texture_data, int *texture_pitch)
+{
+	SDL_LockTexture(ctx->texture, NULL, (void **)texture_data,	texture_pitch);
+	ctx->frame_buffer.data = malloc(WIN_H * WIN_W * 4);
+	ft_memset( ctx->frame_buffer.data, 0,  WIN_H * WIN_W * 4);
+	draw(ctx);
+	ft_memcpy(texture_data, ctx->frame_buffer.data, WIN_H * WIN_W * 4);
+	SDL_UnlockTexture(ctx->texture);
 }

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/24 18:08:09 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:32:42 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ typedef struct s_cam
 	double	projection_plane_h;
 	double	projection_plane_w;
 	double	aspect;
-	double	closest_hit;
-	int		is_hit;
-	int		closest_id;
+	//double	closest_hit;
+	//int		is_hit;
+	//int		closest_id;
 } t_cam;
 
 
