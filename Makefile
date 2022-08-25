@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/24 18:59:26 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/25 14:18:09 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC = $Smain.c \
 	$Sobj_plane.c \
 	$Sget_shading.c \
 	$Slight_new.c \
+	$Shit_record_new.c \
 
 CC = clang
 

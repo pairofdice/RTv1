@@ -7,3 +7,5 @@ For every pixel on the screen loop through every? object in the scene and ask if
 	- statically allocated # of objects maybe, if over max, error out
 Movable camera
 	- ???
+lerp 
+	blendedValue = (1 − 𝑡) ⋅ startValue + 𝑡 ⋅ endValue

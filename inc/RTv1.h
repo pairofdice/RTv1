@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/24 20:05:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:19:26 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # define NUM_OBJECTS 16
 # define GAMMA 2.2
 # define AMBIENT 0.0001
+
+typedef struct s_hit_record
+{
+	t_point	loc;
+	t_vec3	normal;
+	int		is_hit;
+	double	closest_distance;
+	int	closest_id;
+} t_hit_record;
+
 typedef struct s_frame_buffer
 {
 	//void	*img;
@@ -45,6 +55,7 @@ typedef struct s_context
 	t_ray			normal;
 
 	t_object		OBJECTS[NUM_OBJECTS];
+	t_hit_record	hit;
 }	t_context;
 
 void	tests(void);
@@ -69,6 +80,8 @@ t_color		shade(t_object obj, double shading, t_light *ambient);
 void		init_camera(t_cam *cam, t_point loc);
 void		img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
 t_light		light_new(t_point loc, t_color color, double intensity);
+t_hit_record	hit_record_new();
+
 
 
 #endif
