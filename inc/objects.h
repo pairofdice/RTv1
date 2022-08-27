@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 17:14:47 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/27 10:58:45 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ enum
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	CONE,
 	NOT_LIGHT,
 	LIGHT,
 };
@@ -42,13 +43,6 @@ typedef struct s_light
 	t_color color;
 	double intensity;
 } t_light;
-
-typedef struct s_abc
-{
-	double a;
-	double b;
-	double c;
-} t_abc;
 
 typedef struct s_cam
 {

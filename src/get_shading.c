@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 17:34:51 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/27 11:11:34 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,14 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, i
 		if (ctx->OBJECTS[i].type == CYLINDER)
 		{
 			if (intersects_cylinder(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance))
+			{
+				if (distance < vec3_mag(to_light))
+					return (0);
+			}
+		}
+		if (ctx->OBJECTS[i].type == CONE)
+		{
+			if (intersects_cone(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->OBJECTS[i], &distance))
 			{
 				if (distance < vec3_mag(to_light))
 					return (0);

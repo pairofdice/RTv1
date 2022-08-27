@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 19:39:20 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:51:52 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #define WIN_W 1001
 #define WIN_H 643
-#define NUM_OBJECTS 18
+#define NUM_OBJECTS 23
 #define GAMMA 2.2
 #define AMBIENT 0.0001
 #define RENDER 1u
@@ -88,7 +88,10 @@ t_light light_new(t_point loc, t_color color, double intensity);
 t_hit_record hit_record_new();
 void intersects(t_context *ctx, double distance, int light);
 t_object cylinder_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b);
+t_object cone_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b);
 int intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance);
 t_vec3 get_cylinder_normal(t_object cylinder, t_ray ray, double distance);
+t_vec3 get_cone_normal(t_object cone, t_ray ray, double distance);
+int intersects_cone(t_ray *ray, t_object *cone, double *distance);
 
 #endif

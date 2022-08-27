@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:16:59 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 17:36:20 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/27 11:11:53 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ void intersects(t_context *ctx, double distance, int light)
 		{
 			//  intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance, int debug)
 			if (intersects_cylinder(&ctx->ray, &ctx->OBJECTS[i], &distance))
+				update_hit_record(&ctx->hit, &distance, i);
+		}
+		else if (ctx->OBJECTS[i].type == CONE)
+		{
+			//  intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance, int debug)
+			if (intersects_cone(&ctx->ray, &ctx->OBJECTS[i], &distance))
 				update_hit_record(&ctx->hit, &distance, i);
 		}
 		i++;

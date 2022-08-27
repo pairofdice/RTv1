@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 19:45:02 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/27 13:51:45 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void draw(t_context *ctx)
 	ctx->OBJECTS[15] = plane_new((t_vec3){0.0, -9.0, 0.0}, (t_vec3){0.0, 1.0, 0.0}, 0, 255, 0);
 	ctx->OBJECTS[16] = cylinder_new((t_vec3){-2.0, 0.0, -5.0}, (t_vec3){1.5, 0.5, 0.4}, 0.3, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 150, 100);
 	ctx->OBJECTS[17] = cylinder_new((t_vec3){2.5, 0.0, -6.0}, (t_vec3){0.0, 1.0, 0.0}, 0.4, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 0, 0);
+	ctx->OBJECTS[18] = cone_new((t_vec3){0.0, 0.0, -10.0}, (t_vec3){1.0, 0.0, 0.0}, 0.2, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 255, 0);
+	ctx->OBJECTS[19] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){0.0, 1.0, 0.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 0, 244);
+	ctx->OBJECTS[20] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){1.0, .0, 0.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 55, 230, 244);
+	ctx->OBJECTS[21] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){0.0, 1.0, 1.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 55, 230, 44);
+	ctx->OBJECTS[22] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){0.0, -1.0, 1.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 155, 130, 244);
 
 	// int debug;
 
@@ -93,6 +98,8 @@ void draw(t_context *ctx)
 					normal = get_plane_normal(ctx->OBJECTS[ctx->hit.closest_id], ctx->ray);
 				else if (ctx->OBJECTS[ctx->hit.closest_id].type == CYLINDER)
 					normal = get_cylinder_normal(ctx->OBJECTS[ctx->hit.closest_id], ctx->ray, ctx->hit.closest_distance);
+				else if (ctx->OBJECTS[ctx->hit.closest_id].type == CONE)
+					normal = get_cone_normal(ctx->OBJECTS[ctx->hit.closest_id], ctx->ray, ctx->hit.closest_distance);
 				//	normal = ctx->OBJECTS[ctx->hit.closest_id].rot;
 				// get_cylinder_normal(t_object cylinder, t_ray ray, double distance)
 				// normal = get_cylinder_normal(ctx->OBJECTS[ctx->hit.closest_id].loc, ctx->ray, ctx->hit.closest_distance);
@@ -133,9 +140,9 @@ void write_buffer(t_context *ctx, int *texture_data, int *texture_pitch, int ren
 
 	if (render == RENDER)
 	{
-		ft_memset(ctx->frame_buffer.data, 0, WIN_H * WIN_W * 4);
-		draw(ctx);
 	}
+	ft_memset(ctx->frame_buffer.data, 0, WIN_H * WIN_W * 4);
+	draw(ctx);
 
 	ft_memcpy(texture_data, ctx->frame_buffer.data, WIN_H * WIN_W * 4);
 	SDL_UnlockTexture(ctx->texture);
