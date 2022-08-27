@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   intersects.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:16:59 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/25 17:16:53 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/26 17:36:20 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
 
-void	update_hit_record(t_hit_record *hit, double *distance, int i)
+void update_hit_record(t_hit_record *hit, double *distance, int i)
 {
 	hit->is_hit = 1;
 	if (*distance < hit->closest_distance)
@@ -22,7 +22,7 @@ void	update_hit_record(t_hit_record *hit, double *distance, int i)
 	}
 }
 
-void	intersects(t_context *ctx, double distance, int light)
+void intersects(t_context *ctx, double distance, int light)
 {
 	int i;
 
@@ -33,11 +33,20 @@ void	intersects(t_context *ctx, double distance, int light)
 		if (ctx->OBJECTS[i].type == SPHERE)
 		{
 			if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, 0))
-				update_hit_record(&ctx->hit, &distance, i);
+				if (light)
+				{
+				}
+			update_hit_record(&ctx->hit, &distance, i);
 		}
 		else if (ctx->OBJECTS[i].type == PLANE)
 		{
 			if (intersects_plane(&ctx->ray, &ctx->OBJECTS[i], &distance))
+				update_hit_record(&ctx->hit, &distance, i);
+		}
+		else if (ctx->OBJECTS[i].type == CYLINDER)
+		{
+			//  intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance, int debug)
+			if (intersects_cylinder(&ctx->ray, &ctx->OBJECTS[i], &distance))
 				update_hit_record(&ctx->hit, &distance, i);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/22 16:47:09 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/26 19:08:41 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,90 +15,81 @@
 #include <math.h>
 #include <stdio.h>
 
-t_object cylinder_new(t_vec3 loc, double radius, int r, int g, int b)
+static double calc_b2_4ac(t_abc abc)
 {
-	t_object	s;
+	return (abc.b * abc.b - 4 * abc.a * abc.c);
+}
+
+t_abc static calc_abc(t_vec3 raydir, t_vec3 cyldir, t_vec3 raycyl, double radius)
+{
+	t_abc abc;
+
+	abc.a = 1 - vec3_dot(raydir, cyldir) * vec3_dot(raydir, cyldir);
+	abc.b = 2 * (vec3_dot(raydir, raycyl) - vec3_dot(raydir, cyldir) * vec3_dot(raycyl, cyldir));
+	abc.c = vec3_dot(raycyl, raycyl) - vec3_dot(raycyl, cyldir) * vec3_dot(raycyl, cyldir) - radius * radius;
+	return (abc);
+}
+
+double quadratic(t_abc abc, double b2_4ac)
+{
+	double result_m;
+	double result_p;
+	double denominator;
+
+	if (b2_4ac < 0)
+		b2_4ac *= -1;
+	denominator = -abc.b - sqrt(b2_4ac);
+	result_m = denominator / (2 * abc.a);
+	denominator = -abc.b + sqrt(b2_4ac);
+	result_p = denominator / (2 * abc.a);
+	if (result_p < result_m)
+		return (result_p);
+	return (result_m);
+}
+
+t_object cylinder_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b)
+{
+	t_object s;
 
 	s.r = r;
 	s.g = g;
 	s.b = b;
 	s.loc = loc;
 	s.size = radius;
-	s.type = SPHERE;
+	s.rot = vec3_unit(rot);
+	s.type = CYLINDER;
 	return (s);
 }
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 //*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
-t_vec3 get_cylinder_normal(t_vec3 sphere_loc, t_ray ray, double distance)
+t_vec3 get_cylinder_normal(t_object cylinder, t_ray ray, double distance)
 {
-	t_vec3	result;
+	t_vec3 result;
+	t_vec3 hit_loc;
+	t_vec3 hypotenuse;
+	t_vec3 hit_along_cyldir;
 
-	result = vec3_scalar_mult(ray.dir, distance);
-	result = vec3_add(ray.orig, result);
-	result = vec3_sub(result, sphere_loc);
-	result = vec3_unit(result);
+	hit_loc = vec3_ray_at(ray, distance);
+	hypotenuse = vec3_sub(hit_loc, cylinder.loc);
+	hit_along_cyldir = vec3_ray_at((t_ray){cylinder.loc, cylinder.rot}, vec3_dot(hypotenuse, cylinder.rot));
+	result = vec3_sub(hit_loc, hit_along_cyldir);
 	return (result);
 }
 
-
-int	intersects_cylinder(t_ray *ray, t_object *sphere, double *distance, int debug)
+int intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance)
 {
-	t_vec3	ray_origin_to_sphere;
-	double	tc;
-	double	d;
-	double	tp;
-	double	distance_to_intersection;
-	t_vec3 c;
+	t_vec3 w;
+	t_abc abc;
+	double b2_4ac;
 
-	
-
-	ray_origin_to_sphere = vec3_sub(sphere->loc, ray->orig);
-
-	
-	// tc = distance along ray closest to sphere center
-	tc = vec3_dot(ray_origin_to_sphere, ray->dir);
-	// if tc is negative we're looking in the wrong direction
-	if (tc < 0)
+	w = vec3_sub(ray->orig, cylinder->loc);
+	abc = calc_abc(ray->dir, cylinder->rot, w, cylinder->size);
+	b2_4ac = calc_b2_4ac(abc);
+	if (b2_4ac <= 0)
 		return (0);
-	// d = distance from sphere center to t
-	d = sqrt(fabs(tc * tc - vec3_sqr(ray_origin_to_sphere)));
-	// if d is greater than radius of sphere there is no intersection
-	if (d > sphere->size)
+	*distance = quadratic(abc, b2_4ac);
+	if (*distance < 0)
 		return (0);
-	// we now know sphere radius and closest point to sphere center along
-	// our ray, so one again pythagoras gives us the closest intersection
-	
-	// so, once again
-	// tc = distance to closest point perpendicular to sphere center from ray origin
-	// d = distance to ray from sphere center
-	// tp = distance from d to sphere surface
-	tp = sqrt(sphere->size * sphere->size - d * d);
-	distance_to_intersection = tc - tp;
-	// if intersection point behind projection plane
-	if (debug == 1)
-	{
-		c = sphere->loc;
-		printf("sphere->loc is: %f %f %f - ", c.x, c.y, c.z);
-		c = ray->dir;
-		printf("ray->dir is: %f %f %f \n", c.x, c.y, c.z);
-
-		c = ray_origin_to_sphere;
-		printf("ray_origin_to_sphere is: %f %f %f \n", c.x, c.y, c.z); 
-		printf("tc is: %f \n", tc);
-		printf("d is: %f \n", d);
-		printf("tp is: %f \n", tp);
-		printf("tctc is: %f \n", tc*tc);
-		printf("vec3sqr is: %f \n", vec3_sqr(ray_origin_to_sphere));
-		printf("tctc - vec3sqr is: %f \n", tc*tc - vec3_sqr(ray_origin_to_sphere));
-	}
-	if (distance_to_intersection < 0)
-		return (0);
-	*distance = distance_to_intersection;
-	// sphere surface normal at intersection point, maybe shouldn't be here
-	// *normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
-
 	return (1);
-	
-	
 }
