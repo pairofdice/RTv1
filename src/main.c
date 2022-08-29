@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 19:37:24 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:25:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,22 @@ void close(t_context *ctx)
 	SDL_Quit();
 }
 
-int main(int argc, char *args[])
+int main(int argc, char *argv[])
 {
-	tests();
-	if (argc || args)
-	{
-	}
-	// Start up SDL and create window
 	t_context ctx;
+
+	tests();
+	// Start up SDL and create window
+
+	if (handle_args(argc, argv, &ctx))
+		load_map(fd, ctx);
+
 	if (!init(&ctx))
 	{
 		printf("Failed to initialize!\n");
 	}
 	else
 	{
-
 		// Main loop flag
 		bool quit = false;
 		// Event handler
@@ -111,7 +112,7 @@ int main(int argc, char *args[])
 			// Render texture to screen
 			SDL_RenderCopy(ctx.renderer, ctx.texture, NULL, NULL);
 			// Update screen
-			SDL_RenderPresent(ctx.renderer);
+			//SDL_RenderPresent(ctx.renderer);
 		}
 	}
 	// Free resources and close SDL

@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:29:53 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:02:43 by jsaarine         ###   ########.fr       */
+/*   Created: 2021/11/10 17:38:09 by jsaarine          #+#    #+#             */
+/*   Updated: 2021/11/22 17:37:30 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	unsigned char	*d;
+#include <stdlib.h>
 
-	d = dst;
-	if (!dst && !src)
-		return (NULL);
-	while (n--)
-		*d++ = *(unsigned char *)src++;
-	return (dst);
+void	ft_strdel(char **as)
+{
+	if (!as)
+		return ;
+	free(*as);
+	*as = NULL;
 }

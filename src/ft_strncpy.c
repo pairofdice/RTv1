@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:29:53 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:02:43 by jsaarine         ###   ########.fr       */
+/*   Created: 2021/11/08 16:47:29 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/28 15:05:21 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	unsigned char	*d;
+	size_t	src_len;
 
-	d = dst;
-	if (!dst && !src)
-		return (NULL);
-	while (n--)
-		*d++ = *(unsigned char *)src++;
+	src_len = ft_strlen(src);
+	if (src_len >= len)
+		return (ft_memcpy(dst, src, len));
+	ft_memcpy(dst, src, len);
+	ft_memset(dst + src_len, 0, len - src_len);
 	return (dst);
 }

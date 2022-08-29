@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:29:53 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:02:43 by jsaarine         ###   ########.fr       */
+/*   Created: 2021/11/08 14:00:22 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/28 15:03:25 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+size_t	ft_strlen(const char *s)
 {
-	unsigned char	*d;
+	size_t	len;
 
-	d = dst;
-	if (!dst && !src)
-		return (NULL);
-	while (n--)
-		*d++ = *(unsigned char *)src++;
-	return (dst);
+	len = 0;
+	while (*s)
+	{
+		++s;
+		++len;
+	}
+	return (len);
 }

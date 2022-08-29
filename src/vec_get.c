@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   vec_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:29:53 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:02:43 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/03/26 10:23:37 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/04/17 23:46:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	unsigned char	*d;
+#include "libft.h"
 
-	d = dst;
-	if (!dst && !src)
+void	*vec_get(t_vec *src, size_t index)
+{
+	unsigned char	*ptr;
+
+	if (index >= src->len)
 		return (NULL);
-	while (n--)
-		*d++ = *(unsigned char *)src++;
-	return (dst);
+	if (index >= src->len || !src || !src->memory)
+		return (NULL);
+	ptr = &src->memory[src->elem_size * index];
+	return (ptr);
 }

@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   vec_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 12:29:53 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:02:43 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/01/12 20:03:31 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/03/26 17:30:13 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+#include "libft.h"
+/*
+	takes in a vector and a pointer to an element to be pushed to the
+	end of the vector.
+ */
+int	vec_push(t_vec *vec, void *elem)
 {
-	unsigned char	*d;
-
-	d = dst;
-	if (!dst && !src)
-		return (NULL);
-	while (n--)
-		*d++ = *(unsigned char *)src++;
-	return (dst);
+	if (!vec || !elem)
+		return (-1);
+	if ((vec->len * vec->elem_size) == vec->alloc_size)
+		if (vec_resize(vec, vec->len * 2) == -1)
+			return (-1);
+	ft_memcpy(&vec->memory[vec->len * vec->elem_size], elem, vec->elem_size);
+	vec->len++;
+	return (1);
 }
