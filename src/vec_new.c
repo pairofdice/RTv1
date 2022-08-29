@@ -6,12 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:03:42 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/03/23 14:52:00 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:23:24 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "../inc/RTv1.h"
 
 /*
 	take a pointer to a t_vec and allocate len * elem_size bytes

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   vec_resize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:03:27 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/02/13 22:42:34 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:37:39 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/RTv1.h"
+
 /*
 	take in a target_size parameter and either shrink (destructively)
 	or grow the vector to the target size, copying the old contents

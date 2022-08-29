@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:03:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:24:31 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../inc/RTv1.h"
 
 size_t	ft_strlen(const char *s)
 {

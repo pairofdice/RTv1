@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   vec_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:03:31 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/03/26 17:30:13 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:23:26 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/RTv1.h"
+
 /*
 	takes in a vector and a pointer to an element to be pushed to the
 	end of the vector.

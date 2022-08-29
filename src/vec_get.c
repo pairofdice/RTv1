@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   vec_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 10:23:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/04/17 23:46:00 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:23:20 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/RTv1.h"
+
 
 void	*vec_get(t_vec *src, size_t index)
 {

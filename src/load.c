@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:28:59 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:35:20 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../inc/RTv1.h"
 
 int	handle_args(int argc, char **argv, t_context *ctx)
 {
@@ -25,6 +27,7 @@ int	handle_args(int argc, char **argv, t_context *ctx)
 		 // FIX ? ft_putstr("Usage: ./RTv1 <scene>\n");
 		exit(1);
 	}
+	load_scene(fd, ctx);
 	close(fd);
 	return (1);
 }
@@ -42,13 +45,16 @@ static void	free_array(void **array)
 
 static void	process_line( char ***words, t_vec *linevec)
 {
+	t_object obj;
+
+
 	// LOOP OVER WORDS HERE
 	ft_atoi(*(*words));
-	vec_push(linevec, p);
+	vec_push(linevec, &obj);
 	(*words)++;
 }
 
-int	load_map(int fd, t_context *ctx)
+int	load_scene(int fd, t_context *ctx)
 {
 	char	*line;
 	char	**words;

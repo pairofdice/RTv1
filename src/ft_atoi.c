@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_free.c                                         :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 20:03:48 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/29 16:23:18 by jsaarine         ###   ########.fr       */
+/*   Created: 2021/11/06 20:41:20 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/29 16:27:06 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
 
-
-/*
-	frees the allocated resources in src and zeroes its fields.
- */
-void	vec_free(t_vec *src)
+int	ft_atoi(const char *str)
 {
-	if (!src || src->alloc_size == 0)
-		return ;
-	free(src->memory);
-	src->memory = NULL;
-	src->elem_size = 0;
-	src->alloc_size = 0;
-	src->len = 0;
+	int	pos;
+	int	result;
+
+	result = 0;
+	pos = 1;
+	while (ft_iswhitespace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			pos *= -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		result *= 10;
+		result += *str - '0';
+		str++;
+	}
+	return (result * pos);
 }

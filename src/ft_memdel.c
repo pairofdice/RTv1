@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_free.c                                         :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 20:03:48 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/29 16:23:18 by jsaarine         ###   ########.fr       */
+/*   Created: 2021/11/10 16:40:53 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/08/29 16:27:52 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
 
-
-/*
-	frees the allocated resources in src and zeroes its fields.
- */
-void	vec_free(t_vec *src)
+void	ft_memdel(void **ap)
 {
-	if (!src || src->alloc_size == 0)
+	if (!ap)
 		return ;
-	free(src->memory);
-	src->memory = NULL;
-	src->elem_size = 0;
-	src->alloc_size = 0;
-	src->len = 0;
+	free(*ap);
+	*ap = NULL;
 }

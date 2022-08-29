@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/25 17:02:36 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/29 19:49:09 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,11 @@ SRC = $Smain.c \
 	$Sinit.c \
 	$Sdraw.c \
 	$Spixel_put_color.c \
-	$Sft_memcpy.c \
-	$Sft_memset.c \
+	$Sget_shading.c \
+	$Slight_new.c \
+	$Shit_record_new.c \
+	$Sintersects.c \
+	$Squadratic.c \
 	$Stests.c \
 	$Svec3_add.c \
 	$Svec3_cross.c \
@@ -28,16 +31,14 @@ SRC = $Smain.c \
 	$Svec3_sqr.c \
 	$Svec3_sub.c \
 	$Svec3_new.c \
-	$Svec3_reflect.c \
 	$Svec3_ray_at.c \
-	$Svec3_reflect.c \
 	$Svec3_unit.c \
 	$Sobj_sphere.c \
 	$Sobj_plane.c \
-	$Sget_shading.c \
-	$Slight_new.c \
-	$Shit_record_new.c \
-	$Sintersects.c \
+	$Sobj_cone.c \
+	$Sobj_cylinder.c \
+	$Sft_memcpy.c \
+	$Sft_memset.c \
 
 CC = clang
 

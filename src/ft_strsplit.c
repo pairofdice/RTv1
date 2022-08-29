@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 12:52:27 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:22:23 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:20:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../inc/RTv1.h"
 
 static char	**ft_free_words(char **words, int i)
 {

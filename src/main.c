@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/29 15:25:17 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:51:18 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void close(t_context *ctx)
+void close_rtv1(t_context *ctx)
 {
 	// Destroy window
 	SDL_DestroyWindow(ctx->window);
@@ -24,15 +24,16 @@ void close(t_context *ctx)
 	SDL_Quit();
 }
 
-int main(int argc, char *argv[])
+int main(/* int argc, char *argv[] */)
 {
 	t_context ctx;
 
 	tests();
 	// Start up SDL and create window
 
+/* 
 	if (handle_args(argc, argv, &ctx))
-		load_map(fd, ctx);
+	{} */
 
 	if (!init(&ctx))
 	{
@@ -112,10 +113,10 @@ int main(int argc, char *argv[])
 			// Render texture to screen
 			SDL_RenderCopy(ctx.renderer, ctx.texture, NULL, NULL);
 			// Update screen
-			//SDL_RenderPresent(ctx.renderer);
+			SDL_RenderPresent(ctx.renderer);
 		}
 	}
 	// Free resources and close SDL
-	close(&ctx);
+	close_rtv1(&ctx);
 	return 0;
 }

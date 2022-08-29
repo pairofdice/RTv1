@@ -3,26 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/28 15:27:02 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:09:57 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 #define RTV1_H
-#include "objects.h"
-// # include "../libsdl2/include/SDL.h"
-#include "../sdl_include/SDL.h"
 
-#define WIN_W 1001
-#define WIN_H 643
+#include <unistd.h>
+#include <fcntl.h>
+# include <stdlib.h>
+#include "objects.h"
+# include "../libsdl2/include/SDL.h"
+// #include "../sdl_include/SDL.h"
+
+#define WIN_W 1601
+#define WIN_H 1043
 #define NUM_OBJECTS 23
 #define GAMMA 2.2
 #define AMBIENT 0.0001
-#define RENDER 1u
-#define NO_RENDER 0u
+#define RENDER 1
+#define NO_RENDER 0
+#define BUFF_SIZE 110
+# define MAX_FD 8192
+
 
 typedef struct s_hit_record
 {
@@ -72,7 +79,7 @@ typedef struct s_context
 void tests(void);
 
 int		init(t_context *ctx);
-void	close(t_context *ctx);
+void	close_rtv1(t_context *ctx);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, unsigned char c, size_t len);
 int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug);
@@ -101,5 +108,17 @@ int		intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance);
 t_vec3	get_cylinder_normal(t_object cylinder, t_ray ray, double distance);
 t_vec3	get_cone_normal(t_object cone, t_ray ray, double distance);
 int		intersects_cone(t_ray *ray, t_object *cone, double *distance);
+int	handle_args(int argc, char **argv, t_context *ctx);
+int	load_scene(int fd, t_context *ctx);
+void	ft_strdel(char **as);
+int	vec_push(t_vec *vec, void *elem);
+char	**ft_strsplit(char const *s, char c); 
+size_t	ft_strlen(const char *s);
+int	vec_new(t_vec *src, size_t init_len, size_t elem_size);
+void	ft_memdel(void **ap);
+int	ft_atoi(const char *str);
+int	get_next_line(const int fd, char **line);
+
+
 
 #endif
