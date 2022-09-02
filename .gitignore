@@ -1,4 +1,6 @@
 RTv1
+*.swp
+MF_SRC
 obj/
 .DS_Store
 dep/

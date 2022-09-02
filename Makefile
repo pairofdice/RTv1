@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/29 19:49:09 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/08/31 18:19:56 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,15 @@ SRC = $Smain.c \
 	$Sobj_plane.c \
 	$Sobj_cone.c \
 	$Sobj_cylinder.c \
-	$Sft_memcpy.c \
-	$Sft_memset.c \
+	$Sload.c \
+#	$Sft_memcpy.c \
+#	$Sft_memset.c \
 
 CC = clang
 
 S = src/
 O = obj/
-I = inc/ dep/libsdl2/include/
+I = inc/ dep/libsdl2/include/ libft/
 D = dep/
 
 OBJ = $(SRC:$S%=$O%.o)
@@ -54,6 +55,9 @@ SDL2_MK = libsdl2/Makefile
 SDL2_LIB = $Dlibsdl2/lib/libSDL2.a
 SDL2_CFLAGS = `$Dlibsdl2/bin/sdl2-config --cflags`
 SDL2_LDFLAGS = `$Dlibsdl2/bin/sdl2-config --libs`
+
+LIBFT = libft/
+LIBA = libft/libft.a
 
 CFLAGS += -c -Wall -Wextra -Werror
 #CFLAGS += -Wconversion -Wuninitialized
@@ -73,8 +77,8 @@ RMDIR = /bin/rm -fr
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(LDFLAGS) $^ -o $@
+$(NAME): $(OBJ) $(LIBA)
+	$(CC) $(LDFLAGS) $(LIBA) $^ -o $@
 
 $O:
 	@mkdir $@
@@ -82,7 +86,7 @@ $O:
 $(OBJ): $(SDL2_LIB) | $O
 $(OBJ):| $O
 
-$(OBJ): $O%.o: $S% | $O
+$(OBJ): $O%.o: $S% $(LIBA) | $O
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $D:
@@ -111,6 +115,9 @@ $(SDL2_MK):
 $(SDL2_LIB): $(SDL2_MK) | $D
 	$(MAKE) --directory=libsdl2 install
 
+$(LIBA):
+	make -C $(LIBFT)
+
 cleanobj:
 	$(RM) $(wildcard $(OBJ))
 
@@ -124,9 +131,11 @@ cleandepdir: cleandep
 	$(RMDIR) $D
 
 clean: cleanobjdir cleandepdir
+	make -C $(LIBFT) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	make -C $(LIBFT) fclean
 
 re: fclean all
 

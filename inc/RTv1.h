@@ -6,13 +6,14 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/29 17:09:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:18:19 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 #define RTV1_H
 
+#include "libft.h"
 #include <unistd.h>
 #include <fcntl.h>
 # include <stdlib.h>
@@ -27,8 +28,8 @@
 #define AMBIENT 0.0001
 #define RENDER 1
 #define NO_RENDER 0
-#define BUFF_SIZE 110
-# define MAX_FD 8192
+// #define BUFF_SIZE 110
+//# define MAX_FD 8192
 
 
 typedef struct s_hit_record
@@ -52,14 +53,6 @@ typedef struct s_frame_buffer
 
 } t_frame_buffer;
 
-typedef struct s_vec
-{
-	void			*memory;
-	size_t			elem_size;
-	size_t			alloc_size;
-	size_t			len;
-}	t_vec;
-
 typedef struct s_context
 {
 	SDL_Window		*window;
@@ -80,8 +73,7 @@ void tests(void);
 
 int		init(t_context *ctx);
 void	close_rtv1(t_context *ctx);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	*ft_memset(void *b, unsigned char c, size_t len);
+
 int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug);
 int		intersects_plane(t_ray *ray, t_object *plane, double *distance);
 t_object	sphere_new(t_vec3 sphere_loc, double radius, int r, int g, int b);
@@ -110,14 +102,8 @@ t_vec3	get_cone_normal(t_object cone, t_ray ray, double distance);
 int		intersects_cone(t_ray *ray, t_object *cone, double *distance);
 int	handle_args(int argc, char **argv, t_context *ctx);
 int	load_scene(int fd, t_context *ctx);
-void	ft_strdel(char **as);
-int	vec_push(t_vec *vec, void *elem);
-char	**ft_strsplit(char const *s, char c); 
-size_t	ft_strlen(const char *s);
-int	vec_new(t_vec *src, size_t init_len, size_t elem_size);
-void	ft_memdel(void **ap);
-int	ft_atoi(const char *str);
-int	get_next_line(const int fd, char **line);
+
+
 
 
 

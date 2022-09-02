@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/29 19:51:18 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:32:04 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ void close_rtv1(t_context *ctx)
 	SDL_Quit();
 }
 
-int main(/* int argc, char *argv[] */)
+int main(int argc, char **argv)
 {
 	t_context ctx;
 
-	tests();
+	//tests();
 	// Start up SDL and create window
 
-/* 
-	if (handle_args(argc, argv, &ctx))
-	{} */
+
+	handle_args(argc, argv, &ctx);
 
 	if (!init(&ctx))
 	{
