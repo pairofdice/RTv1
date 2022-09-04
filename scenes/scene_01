@@ -1,9 +1,21 @@
-light { location: 0.0 2.0 -1.0, brightness: 100.0, }
+{ light
+	location: 0.0 2.0 -1.0,
+	brightness: 100.0,
+}
 
-object { type: cone }
+{ cone
+	location: 0.0 2.0 -1.0,
+}
 
-object { type: plane }
+{ plane
+	location: 0.0 2.0 -1.0,
+}
 
-object { type: cylinder }
+{ cylinder
+	location: 0.0 2.0 -1.0,
+}
 
-light { location: 0.0 2.0 -1.0, brightness: 100.0, }
+{ light
+	location: 0.0 2.0 -1.0,
+	brightness: 100.0,
+}

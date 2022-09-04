@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/27 10:58:45 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/04 15:52:16 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ enum
 	CONE,
 	NOT_LIGHT,
 	LIGHT,
+	NOTHING,
+	PROCESSING,
 };
 
 typedef struct s_object
@@ -34,6 +36,7 @@ typedef struct s_object
 	int r;
 	int g;
 	int b;
+	double	brightness;
 	int type;
 } t_object;
 

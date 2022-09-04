@@ -6,11 +6,19 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/08/31 18:19:56 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/04 16:36:04 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RTv1
+
+
+CC = clang
+
+S = src/
+O = obj/
+I = inc/ dep/libsdl2/include/ libft/
+D = dep/
 
 SRC = $Smain.c \
 	$Sinit.c \
@@ -40,13 +48,6 @@ SRC = $Smain.c \
 	$Sload.c \
 #	$Sft_memcpy.c \
 #	$Sft_memset.c \
-
-CC = clang
-
-S = src/
-O = obj/
-I = inc/ dep/libsdl2/include/ libft/
-D = dep/
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)

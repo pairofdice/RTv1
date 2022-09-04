@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 14:28:44 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:05:19 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int init(t_context *ctx)
 	t_cam cam;
 	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0, 255, 223, 196);
 	//
+	ctx->parse_state = NOTHING;
+	ctx->parse_obj.type = NOTHING;
 	init_camera(&cam, (t_point){0.0, 0.0, 5.0});
 	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){155, 155, 255}, 20);
 	ctx->cam = cam;

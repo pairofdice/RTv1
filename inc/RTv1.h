@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/31 18:18:19 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/04 19:05:24 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #define AMBIENT 0.0001
 #define RENDER 1
 #define NO_RENDER 0
+
 // #define BUFF_SIZE 110
 //# define MAX_FD 8192
 
@@ -67,6 +68,8 @@ typedef struct s_context
 	t_object		OBJECTS[NUM_OBJECTS];
 	t_hit_record	hit;
 	t_vec			scene;
+	int				parse_state;
+	t_object		parse_obj;
 } t_context;
 
 void tests(void);
