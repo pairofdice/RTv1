@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/09/04 16:36:04 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/05 16:19:44 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC = $Smain.c \
 	$Sobj_cone.c \
 	$Sobj_cylinder.c \
 	$Sload.c \
+	$Sparse.c \
 #	$Sft_memcpy.c \
 #	$Sft_memset.c \
 
@@ -60,7 +61,7 @@ SDL2_LDFLAGS = `$Dlibsdl2/bin/sdl2-config --libs`
 LIBFT = libft/
 LIBA = libft/libft.a
 
-CFLAGS += -c -Wall -Wextra -Werror
+CFLAGS += -c -Wall -Wextra #-Werror
 #CFLAGS += -Wconversion -Wuninitialized
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)

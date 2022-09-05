@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/04 15:52:16 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/05 19:27:22 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "vec3.h"
 #define EPSILON 0.000001
 
-enum
+enum 
 {
 	SPHERE,
 	PLANE,

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/31 18:32:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/05 15:31:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ int main(int argc, char **argv)
 	// Start up SDL and create window
 
 
-	handle_args(argc, argv, &ctx);
 
+	
 	if (!init(&ctx))
 	{
 		printf("Failed to initialize!\n");
 	}
 	else
 	{
+		//handle_args(int argc, char **argv, t_context *ctx)
+		handle_args(argc, argv, &ctx);
 		// Main loop flag
 		bool quit = false;
 		// Event handler
@@ -63,6 +65,7 @@ int main(int argc, char **argv)
 				if (e.type == SDL_WINDOWEVENT)
 				{
 					if (e.window.event == SDL_WINDOWEVENT_EXPOSED)
+						//printf("Exposed!\n");
 						write_buffer(&ctx, texture_data, &texture_pitch, NO_RENDER);
 				}
 				if (e.type == SDL_KEYDOWN)

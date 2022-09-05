@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/04 19:05:19 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/05 16:08:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int init(t_context *ctx)
 	//
 	ctx->parse_state = NOTHING;
 	ctx->parse_obj.type = NOTHING;
+	printf("id in init? %d \n", ctx->parse_obj.type);
 	init_camera(&cam, (t_point){0.0, 0.0, 5.0});
 	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){155, 155, 255}, 20);
 	ctx->cam = cam;
@@ -70,6 +71,7 @@ int init(t_context *ctx)
 	ctx->renderer = SDL_CreateRenderer(ctx->window, -1, 0);
 	ctx->texture = SDL_CreateTexture(ctx->renderer, SDL_PIXELFORMAT_RGBA8888,
 									 SDL_TEXTUREACCESS_STREAMING, WIN_W, WIN_H);
-
+	
+	//handle_args(int argc, char **argv, t_context *ctx)
 	return (1);
 }

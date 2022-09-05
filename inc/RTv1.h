@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/04 19:05:24 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:58:40 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ t_vec3	get_cone_normal(t_object cone, t_ray ray, double distance);
 int		intersects_cone(t_ray *ray, t_object *cone, double *distance);
 int	handle_args(int argc, char **argv, t_context *ctx);
 int	load_scene(int fd, t_context *ctx);
+void	check_type(char **str, t_context *ctx);
+char *skip_whitespace(char *str);
 
 
 
