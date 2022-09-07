@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/05 15:31:28 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:13:04 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void close_rtv1(t_context *ctx)
+void close_rtv1(t_context *ctx) 
 {
 	// Destroy window
 	SDL_DestroyWindow(ctx->window);

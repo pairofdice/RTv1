@@ -6,6 +6,7 @@ obj/
 dep/
 .vscode/
 .jh/
+*.o
 Makefilejh
 jh_gitignore
 Makefile*

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/05 16:08:17 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:46:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void init_camera(t_cam *cam, t_point loc)
 {
 	// t_vec3 c;
 	cam->loc = loc;
-	cam->coi = (t_point){0.0, 0.0, 0.0};
+	cam->coi = (t_point){0.0, 0.0, 1.0};
 	cam->scene_up = (t_point){0.0, 1.0, 0.0};
 	cam->distance_to_proj = 0.1;
 	cam->aspect = (float)WIN_W / WIN_H;
@@ -57,7 +57,7 @@ int init(t_context *ctx)
 	ctx->parse_state = NOTHING;
 	ctx->parse_obj.type = NOTHING;
 	printf("id in init? %d \n", ctx->parse_obj.type);
-	init_camera(&cam, (t_point){0.0, 0.0, 5.0});
+	init_camera(&cam, (t_point){0.0, 0.0, 0.0});
 	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){155, 155, 255}, 20);
 	ctx->cam = cam;
 	// The window we'll be rendering to

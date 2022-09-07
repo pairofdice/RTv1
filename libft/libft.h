@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 17:17:40 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/04/17 23:45:20 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:38:06 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int		ft_wordcount(char const *s, char c, int wordcount);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 int		ft_abs(int a);
+unsigned int	ft_nbrlen(long int n);
 
 int		vec_new(t_vec *src, size_t init_len, size_t elem_size);
 void	vec_free(t_vec *src);

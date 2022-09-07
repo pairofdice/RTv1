@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 20:41:20 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/07 18:17:41 by jsaarine         ###   ########.fr       */
+/*   Created: 2022/09/07 14:37:23 by jsaarine          #+#    #+#             */
+/*   Updated: 2022/09/07 14:37:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_atoi(const char *str)
+unsigned int	ft_nbrlen(long int n)
 {
-	int	pos;
-	int	result;
-
-	result = 0;
-	pos = 1;
-	while (*str && ft_iswhitespace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	if (n < 0)
 	{
-		if (*str == '-')
-			pos *= -1;
-		str++;
+		if (n == -2147483648)
+			return (11);
+		n *= -1;
+		return (ft_nbrlen(n) + 1);
 	}
-	while (*str && ft_isdigit(*str))
-	{
-		result *= 10;
-		result += *str - '0';
-		str++;
-	}
-	return (result * pos);
+	if (n < 10)
+		return (1);
+	return (ft_nbrlen(n / 10) + 1);
 }

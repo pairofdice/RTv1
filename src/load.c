@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/05 19:50:18 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:56:50 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,73 +53,106 @@ static void	process_object(char **words)
 	printf("Object has been processed\n");
 }
 
+float ft_atof(char *str)
+{
+	float	result;
+	int		fraction;
+	int		fraction_len;
+	float n_z;
+
+	n_z = -0.0;
+	if (!str)
+		return 0.0;
+	result = ft_atoi(str);
+	str = ft_strchr(str, '.');
+	if (!str)
+		return 0.0;
+	str++;
+	fraction = ft_atoi(str);
+	fraction_len = ft_nbrlen(fraction);
+ 	if ((float)result == n_z || result < 0)
+		result -= (float)fraction/pow(10, fraction_len);
+	else 
+		result += (float)fraction/pow(10, fraction_len);
+	return (result);
+}
+
+int	check_triple_length(char **strs)
+{
+	int	c;
+
+	c = 0;
+	while (strs[c] != 0)
+		c++;
+	if (c != 3)
+		return (0);
+	return (1);
+}
+
 static void	process_light()
 {
 	printf("Light has been processed\n");
 }
 
-t_point read_triple(char **strs)
+t_point read_triple(t_context *ctx, char **strs)
 {
 	t_point p;
 
-	p.x = 0.1;
-	p.y = 2.3;
-	p.z = 4.5;
-	//(*strs)++;
-			(strs)++;
-			printf("\t %s ", *strs);
-			(strs)++;
-			printf("\t %s ", *strs);
-			(strs)++;
-			printf("\t %s ", *strs);
+	int	valid;
+
+	valid = 0;
+
+	if (!check_triple_length(++strs))
+		close_rtv1(ctx); 
+	if (strs[0])
+	p.x = ft_atof(strs[0]);
+	p.y = ft_atof(strs[1]);
+	p.z = ft_atof(strs[2]);
+	return (p);
 }
 
 
 
- static void	process_line(t_context *ctx, char ***words, t_vec *obj_vec)
+static void	process_line(t_context *ctx, char ***words, t_vec *obj_vec)
 {
 	t_object	obj;
 	int			i;
+	t_point		color;
 
 	i = 0;
-	if (ctx->parse_state == PROCESSING && ctx->parse_obj.type == NOTHING)
+/* 	if (ctx->parse_state == PROCESSING && ctx->parse_obj.type == NOTHING)
 	{
 		// figure out what we're processing and set state
 		printf("Processing: -%s-\n", **words);
-		// (*words)++;
-		//check_type(**words, ctx);
 		return ;
-	}
+	} */
 	// printf("+%s+", **words);
 	**words =   ft_strtrim(**words);
 	printf("\n %s ", **words);
 
 	if (/* *words &&  */ft_strncmp(**words, "location", 8) == 0)
-	{
-			ctx->parse_obj.loc = read_triple(*words);
-			/* (*words)++;
-			printf("\t %s ", **words);
-			(*words)++;
-			printf("\t %s ", **words);
-			(*words)++;
-			printf("\t %s ", **words); */
-			//printf("WE HAVE A LOCATION!_%s_ \n", **words);
-	}
+			ctx->parse_obj.loc = read_triple(ctx, *words);
 	if (/* *words &&  */ft_strncmp(**words, "color", 5) == 0)
 	{
-//		ctx->parse_obj.loc = read_triple(**words);
-			(*words)++;
-			printf("\t %s ", **words);
-			(*words)++;
-			printf("\t %s ", **words);
-			(*words)++;
-			printf("\t %s \t", **words);
+		
+		color = read_triple(ctx, *words);
+		printf("__%s ", **words);
+		(*words)++;
+		printf("__%s ", **words);
+		(*words)++;
+		printf("__%s ", **words);
+		(*words)++;
+		printf("__%s ", **words);
+
+			printf("\t %f ", color.x);
+			printf("\t %f ", color.y);
+			printf("\t %f ", color.z);
 			//printf("WE HAVE A LOCATION!_%s_ \n", **words);
 	}
 	printf(" \tType id: %d", ctx->parse_obj.type);
-	//ft_atoi(*(*words));
-	vec_push(obj_vec, &obj);
-	//(*words)++;
+
+	if (***words =='}')
+		vec_push(obj_vec, &obj);
 }
 
 int	load_scene(int fd, t_context *ctx)
@@ -139,12 +172,8 @@ int	load_scene(int fd, t_context *ctx)
 		{
 			if (ctx->parse_state == NOTHING && **temp == '{')
 			{
-				// printf("Hi\n");
 				ctx->parse_state = PROCESSING;
-				//printf("Checking temp? -%s-%s-", *temp, *(++temp));
-				//--temp;
 				check_type(temp, ctx);
-				
 				vec_new(&obj_vec, ft_strlen(line) / 2 + 1, sizeof(t_object));
 			}
 			else if (**temp == '}')

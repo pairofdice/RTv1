@@ -3,29 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 15:29:14 by jsaarine          #+#    #+#             */
-/*   Updated: 2021/11/20 16:39:40 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:37:08 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static unsigned int	ft_nbrlen(long int n)
-{
-	if (n < 0)
-	{
-		if (n == -2147483648)
-			return (11);
-		n *= -1;
-		return (ft_nbrlen(n) + 1);
-	}
-	if (n < 10)
-		return (1);
-	return (ft_nbrlen(n / 10) + 1);
-}
 
 static void	ft_set_nb(long int *nb, int *neg)
 {

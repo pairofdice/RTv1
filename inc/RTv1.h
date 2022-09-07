@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/05 17:58:40 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:41:23 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 #define WIN_W 1601
 #define WIN_H 1043
-#define NUM_OBJECTS 23
+#define NUM_OBJECTS 1
 #define GAMMA 2.2
 #define AMBIENT 0.0001
 #define RENDER 1
@@ -74,6 +74,7 @@ typedef struct s_context
 
 void tests(void);
 
+void close_rtv1(t_context *ctx);
 int		init(t_context *ctx);
 void	close_rtv1(t_context *ctx);
 

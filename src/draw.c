@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/27 13:51:45 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:46:44 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void draw(t_context *ctx)
 	int y;
 	// int i;
 
-	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0, 255, 223, 196);
+/* 	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0, 255, 223, 196);
 	ctx->OBJECTS[1] = sphere_new((t_vec3){-2.0, -1.0, -7.0}, 2.0, 255, 255, 255);
 	ctx->OBJECTS[2] = sphere_new((t_vec3){2.0, -1.0, -7.0}, 2.0, 255, 255, 255);
 	ctx->OBJECTS[3] = sphere_new((t_vec3){0.0, 1.5, -7.0}, 2.0, 255, 255, 255);
@@ -40,14 +40,10 @@ void draw(t_context *ctx)
 	ctx->OBJECTS[12] = plane_new((t_vec3){11.0, 0.0, 0.0}, (t_vec3){-1.0, 0.0, 0.0}, 255, 0, 0);
 	ctx->OBJECTS[13] = plane_new((t_vec3){-11.0, 0.0, 0.0}, (t_vec3){1.0, 0.0, 0.0}, 0, 0, 255);
 	ctx->OBJECTS[14] = plane_new((t_vec3){0.0, 0.0, -24.0}, (t_vec3){0.0, 0.0, 1.0}, 255, 111, 33);
-	ctx->OBJECTS[15] = plane_new((t_vec3){0.0, -9.0, 0.0}, (t_vec3){0.0, 1.0, 0.0}, 0, 255, 0);
-	ctx->OBJECTS[16] = cylinder_new((t_vec3){-2.0, 0.0, -5.0}, (t_vec3){1.5, 0.5, 0.4}, 0.3, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 150, 100);
-	ctx->OBJECTS[17] = cylinder_new((t_vec3){2.5, 0.0, -6.0}, (t_vec3){0.0, 1.0, 0.0}, 0.4, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 0, 0);
-	ctx->OBJECTS[18] = cone_new((t_vec3){0.0, 0.0, -10.0}, (t_vec3){1.0, 0.0, 0.0}, 0.2, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 255, 0);
-	ctx->OBJECTS[19] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){0.0, 1.0, 0.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 0, 244);
-	ctx->OBJECTS[20] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){1.0, .0, 0.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 55, 230, 244);
-	ctx->OBJECTS[21] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){0.0, 1.0, 1.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 55, 230, 44);
-	ctx->OBJECTS[22] = cone_new((t_vec3){4.0, 0.0, -5.0}, (t_vec3){0.0, -1.0, 1.0}, 0.05, /* (t_vec3){0.0, 1.0, 0.0}, */ 155, 130, 244);
+	ctx->OBJECTS[15] = plane_new((t_vec3){0.0, -9.0, 0.0}, (t_vec3){0.0, 1.0, 0.0}, 0, 255, 0);*/
+
+	
+	ctx->OBJECTS[0] = cone_new((t_vec3){0.0, 8.0, 0.0}, (t_vec3){0.0, 0.0, 1.0}, 0.2, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 255, 0);
 
 	// int debug;
 
@@ -62,7 +58,7 @@ void draw(t_context *ctx)
 		c = ctx->OBJECTS[15].rot;
 		printf("normal is: %f %f %f \n ", c.x, c.y, c.z); */
 
-	light = vec3_new(0.0, 2.0, -1.0);
+	light = vec3_new(6.0, 2.0, -1.0);
 	L = vec3_sub(ctx->cam.projection_plane_center, vec3_scalar_mult(ctx->cam.right, 0.5 * ctx->cam.projection_plane_w));
 	L = vec3_sub(L, vec3_scalar_mult(ctx->cam.up, 0.5 * ctx->cam.projection_plane_h));
 	c = L;
