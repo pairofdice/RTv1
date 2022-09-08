@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/07 18:56:50 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:18:38 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	free_array(void **array)
 	*array = NULL;
 }
 
-static void	process_object(char **words)
+/* static void	process_object(char **words)
 {
 	while (*words != 0)
 	{
@@ -52,29 +52,31 @@ static void	process_object(char **words)
 	}
 	printf("Object has been processed\n");
 }
-
+ */
 float ft_atof(char *str)
 {
 	float	result;
 	int		fraction;
 	int		fraction_len;
-	float n_z;
+	float neg;
 
-	n_z = -0.0;
+	neg = 1.0;
 	if (!str)
 		return 0.0;
-	result = ft_atoi(str);
+	if (*str == '-')
+	{
+		neg = -1.0;
+	}
+		printf("\nnegative!\n");
+	result = ft_abs(ft_atoi(str));
 	str = ft_strchr(str, '.');
 	if (!str)
 		return 0.0;
 	str++;
-	fraction = ft_atoi(str);
+	fraction = ft_abs(ft_atoi(str));
 	fraction_len = ft_nbrlen(fraction);
- 	if ((float)result == n_z || result < 0)
-		result -= (float)fraction/pow(10, fraction_len);
-	else 
-		result += (float)fraction/pow(10, fraction_len);
-	return (result);
+	result += (float)fraction/pow(10, fraction_len);
+	return (result * neg);
 }
 
 int	check_triple_length(char **strs)
@@ -89,10 +91,10 @@ int	check_triple_length(char **strs)
 	return (1);
 }
 
-static void	process_light()
+/* static void	process_light()
 {
 	printf("Light has been processed\n");
-}
+} */
 
 t_point read_triple(t_context *ctx, char **strs)
 {
@@ -113,46 +115,31 @@ t_point read_triple(t_context *ctx, char **strs)
 
 
 
-static void	process_line(t_context *ctx, char ***words, t_vec *obj_vec)
+static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 {
-	t_object	obj;
+	// t_object	obj;
 	int			i;
-	t_point		color;
+	// t_point		color;
 
 	i = 0;
-/* 	if (ctx->parse_state == PROCESSING && ctx->parse_obj.type == NOTHING)
-	{
-		// figure out what we're processing and set state
-		printf("Processing: -%s-\n", **words);
+	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
-	} */
-	// printf("+%s+", **words);
 	**words =   ft_strtrim(**words);
-	printf("\n %s ", **words);
+	// printf("\n %s ", **words);
 
-	if (/* *words &&  */ft_strncmp(**words, "location", 8) == 0)
-			ctx->parse_obj.loc = read_triple(ctx, *words);
-	if (/* *words &&  */ft_strncmp(**words, "color", 5) == 0)
+	if (ft_strncmp(**words, "loc", 3) == 0)
+		ctx->obj.loc = read_triple(ctx, *words);
+	if (ft_strncmp(**words, "color", 5) == 0)
+		ctx->obj.color = read_triple(ctx, *words);
+	if (ft_strncmp(**words, "size", 4) == 0)
 	{
+		(*words)++;
+		printf("%s", **words);
+		ctx->obj.size = ft_atof(**words);
+		printf(" - %f", ctx->obj.size);
 		
-		color = read_triple(ctx, *words);
-		printf("__%s ", **words);
-		(*words)++;
-		printf("__%s ", **words);
-		(*words)++;
-		printf("__%s ", **words);
-		(*words)++;
-		printf("__%s ", **words);
-
-			printf("\t %f ", color.x);
-			printf("\t %f ", color.y);
-			printf("\t %f ", color.z);
-			//printf("WE HAVE A LOCATION!_%s_ \n", **words);
 	}
-	printf(" \tType id: %d", ctx->parse_obj.type);
-
-	if (***words =='}')
-		vec_push(obj_vec, &obj);
+	//printf(" \tType id: %d", ctx->parse_obj.type);
 }
 
 int	load_scene(int fd, t_context *ctx)
@@ -160,10 +147,10 @@ int	load_scene(int fd, t_context *ctx)
 	char	*line;
 	char	**words;
 	char	**temp;
-	t_vec	obj_vec;
+	//t_vec	obj_vec;
 
 	printf("...\n");
-	vec_new(&ctx->scene, BUFF_SIZE * 2, sizeof(t_vec));
+	vec_new(&ctx->scene, BUFF_SIZE * 2, sizeof(t_object));
 	while (get_next_line(fd, &line))
 	{
 		words = ft_strsplit(line, ' ');
@@ -174,19 +161,18 @@ int	load_scene(int fd, t_context *ctx)
 			{
 				ctx->parse_state = PROCESSING;
 				check_type(temp, ctx);
-				vec_new(&obj_vec, ft_strlen(line) / 2 + 1, sizeof(t_object));
+				//vec_new(&obj_vec, ft_strlen(line) / 2 + 1, sizeof(t_object));
 			}
 			else if (**temp == '}')
 			{
 				// printf("Hello\n");
 				ctx->parse_state = NOTHING;
-				if (obj_vec.len > 0)
-					vec_push(&ctx->scene, &obj_vec);
+				//push_obj(ctx);
+				vec_push(&ctx->scene, &ctx->obj);
 			}
 			else if (ctx->parse_state == PROCESSING)
 			{
-				// printf("Moi\n");
-				process_line(ctx, &words, &obj_vec);
+				process_line(ctx, &words/* , &obj_vec  */);
 			}
 		}
 		free_array((void *)&temp);

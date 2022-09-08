@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/26 14:30:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:59:04 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_object sphere_new(t_vec3 loc, double radius, int r, int g, int b)
 {
 	t_object s;
 
-	s.r = r;
-	s.g = g;
-	s.b = b;
+	s.color.x = r;
+	s.color.y = g;
+	s.color.z = b;
 	s.loc = loc;
 	s.size = radius;
 	s.type = SPHERE;
@@ -51,7 +51,9 @@ int intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug)
 	// t_vec3 c;
 
 	ray_origin_to_sphere = vec3_sub(sphere->loc, ray->orig);
-
+	
+	// printf("AAAAAAAAA %f\n", sphere->r);
+	// printf("AAAAAAAAA %f\n", sphere->size);
 	// tc = distance along ray closest to sphere center
 	tc = vec3_dot(ray_origin_to_sphere, ray->dir);
 	// if tc is negative we're looking in the wrong direction
@@ -60,8 +62,10 @@ int intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug)
 	// d = distance from sphere center to t
 	d = sqrt(fabs(tc * tc - vec3_sqr(ray_origin_to_sphere)));
 	// if d is greater than radius of sphere there is no intersection
-	if (d > sphere->size)
+	// printf("FINE?\n");
+ 	if (d > sphere->size)
 		return (0);
+		
 	// we now know sphere radius and closest point to sphere center along
 	// our ray, so one again pythagoras gives us the closest intersection
 
@@ -94,5 +98,6 @@ int intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug)
 	// sphere surface normal at intersection point, maybe shouldn't be here
 	// *normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
+	//printf("No longer fine!\n");
 	return (1);
 }

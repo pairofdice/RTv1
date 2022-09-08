@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/05 19:27:22 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:49:30 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ typedef struct s_object
 	t_point loc;
 	t_vec3 rot;
 	double size;
-	int r;
+/* 	int r;
 	int g;
-	int b;
+	int b; */
+	t_color color;
 	double	brightness;
 	int type;
 } t_object;

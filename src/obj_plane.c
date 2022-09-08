@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/24 18:10:08 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:51:41 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 	// fix rgb with maybe union, maybe struct, maybe 0xFFFFFF00(hex) colors
 	t_object	s;
 
-	s.r = r;
-	s.g = g;
-	s.b = b;
+
+	s.color.x = r;
+	s.color.y = g;
+	s.color.z = b;
 	s.loc = plane_loc;
 	s.rot = vec3_unit(rot);
 	s.type = PLANE;

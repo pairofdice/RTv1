@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/27 12:11:50 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:51:50 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_object cylinder_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b
 {
 	t_object s;
 
-	s.r = r;
-	s.g = g;
-	s.b = b;
+	s.color.x = r;
+	s.color.y = g;
+	s.color.z = b;
 	s.loc = loc;
 	s.size = radius;
 	s.rot = vec3_unit(rot);

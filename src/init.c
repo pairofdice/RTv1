@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/07 17:46:28 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:07:52 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void init_camera(t_cam *cam, t_point loc)
 {
 	// t_vec3 c;
 	cam->loc = loc;
-	cam->coi = (t_point){0.0, 0.0, 1.0};
+	cam->coi = (t_point){0.0, 0.0, -1.0};
 	cam->scene_up = (t_point){0.0, 1.0, 0.0};
 	cam->distance_to_proj = 0.1;
 	cam->aspect = (float)WIN_W / WIN_H;
@@ -49,15 +49,39 @@ void init_camera(t_cam *cam, t_point loc)
 	// c = cam->cam_to_proj;
 }
 
+t_vec3 new_vec3()
+{
+	t_vec3 v;
+
+	v.x = 0.0;
+	v.y = 0.0;
+	v.z = 0.0;
+}
+
+t_object default_object()
+{
+	t_object o;
+
+	o.type = NOTHING;
+	o.loc = new_vec3();
+	o.rot = new_vec3();
+	o.color = new_vec3();
+	o.brightness = 100.0;
+	o.size = 1.0;
+	return (o);
+}
+
 int init(t_context *ctx)
 {
 	t_cam cam;
-	ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0, 255, 223, 196);
+	//ctx->OBJECTS[0] = sphere_new((t_vec3){0.0, 0.0, -10.0}, 5.0, 255, 223, 196);
 	//
 	ctx->parse_state = NOTHING;
-	ctx->parse_obj.type = NOTHING;
-	printf("id in init? %d \n", ctx->parse_obj.type);
-	init_camera(&cam, (t_point){0.0, 0.0, 0.0});
+	//ctx->parse_obj.type = NOTHING;
+	ctx->obj = default_object();
+	ctx->hit = hit_record_new();
+	printf("id in init? %d \n", ctx->obj.type);
+	init_camera(&cam, (t_point){0.0, 0.0, 2.0});
 	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){155, 155, 255}, 20);
 	ctx->cam = cam;
 	// The window we'll be rendering to

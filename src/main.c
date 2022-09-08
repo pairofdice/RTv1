@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/07 14:13:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:43:34 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@ void close_rtv1(t_context *ctx)
 	SDL_Quit();
 }
 
+void test_load(t_context * ctx)
+{
+	size_t i;
+	t_object o;
+
+	printf("\n--- ctx->scene contents:\n");
+	i = 0;
+	while (i < ctx->scene.len)
+	{
+		o = *(t_object *) vec_get(&ctx->scene, i);
+		printf("obj type: %d\n", o.type);
+		printf("obj loc:  %f %f %f\n", o.loc.x, o.loc.y, o.loc.z);
+		printf("obj color:  %f %f %f\n", o.color.x, o.color.y, o.color.z);
+
+		i++;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_context ctx;
@@ -37,11 +55,13 @@ int main(int argc, char **argv)
 	if (!init(&ctx))
 	{
 		printf("Failed to initialize!\n");
+		close_rtv1(&ctx);
 	}
 	else
 	{
 		//handle_args(int argc, char **argv, t_context *ctx)
 		handle_args(argc, argv, &ctx);
+		test_load(&ctx);
 		// Main loop flag
 		bool quit = false;
 		// Event handler

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:16:59 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/29 15:43:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:43:43 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ void update_hit_record(t_hit_record *hit, double *distance, int i)
 
 void intersects(t_context *ctx, double distance, int light)
 {
-	int i;
+/* 	int i;
 
 	i = 0;
 	ctx->hit = hit_record_new();
 	while (i < NUM_OBJECTS)
 	{
+		
 		if (ctx->OBJECTS[i].type == SPHERE)
 		{
 			if (intersects_sphere(&ctx->ray, &ctx->OBJECTS[i], &distance, 0))
@@ -57,4 +58,48 @@ void intersects(t_context *ctx, double distance, int light)
 		}
 		i++;
 	}
+
+ */
+	int i;
+
+	i = 0;
+	ctx->hit = hit_record_new();
+	while (i < ctx->scene.len)
+	{
+	
+		ctx->obj = *(t_object *)vec_get(&ctx->scene, i);
+		if (ctx->obj.type == SPHERE)
+		{
+ 			
+			if (intersects_sphere(&ctx->ray, &ctx->obj, &distance, 0))
+			{
+				
+				if (light)
+				{
+				}
+				update_hit_record(&ctx->hit, &distance, i); 
+			}
+			
+		}
+ 		
+		else if (ctx->obj.type == PLANE)
+		{
+			if (intersects_plane(&ctx->ray, &ctx->obj, &distance))
+				update_hit_record(&ctx->hit, &distance, i);
+		}
+		else if (ctx->obj.type == CYLINDER)
+		{
+			//  intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance, int debug)
+			if (intersects_cylinder(&ctx->ray, &ctx->obj, &distance))
+				update_hit_record(&ctx->hit, &distance, i);
+		}
+		else if (ctx->obj.type == CONE)
+		{
+			//  intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance, int debug)
+			if (intersects_cone(&ctx->ray, &ctx->obj, &distance))
+				update_hit_record(&ctx->hit, &distance, i);
+		} 
+		i++;
+	}
+			//	printf("HELL\n");
 }

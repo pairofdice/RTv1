@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/07 17:41:23 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:14:22 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ typedef struct s_context
 	t_ray			ray;
 	t_light			ambient;
 	t_ray			normal;
-	t_object		OBJECTS[NUM_OBJECTS];
+	// t_object		OBJECTS[NUM_OBJECTS];
 	t_hit_record	hit;
 	t_vec			scene;
 	int				parse_state;
-	t_object		parse_obj;
+	t_object		obj;
 } t_context;
 
 void tests(void);
@@ -78,10 +78,6 @@ void close_rtv1(t_context *ctx);
 int		init(t_context *ctx);
 void	close_rtv1(t_context *ctx);
 
-int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug);
-int		intersects_plane(t_ray *ray, t_object *plane, double *distance);
-t_object	sphere_new(t_vec3 sphere_loc, double radius, int r, int g, int b);
-t_object	plane_new(t_vec3 plane_loc, t_vec3 plane_rot, int r, int g, int b);
 
 void	draw(t_context *ctx);
 void	write_buffer(t_context *ctx, int *texture_data, int *texture_pitch, int render);
@@ -90,7 +86,7 @@ t_vec3	get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
 // t_vec3		get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
 t_vec3	get_plane_normal(t_object plane, t_ray cam_to_plane);
 t_vec3	vec3_new(double x, double y, double z);
-double	get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, int id);
+double	get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, size_t id);
 t_color	debug_shading(t_vec3 normal);
 t_color	shade(t_object obj, double shading, t_light *ambient);
 void	init_camera(t_cam *cam, t_point loc);
@@ -98,16 +94,20 @@ void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigne
 t_light	light_new(t_point loc, t_color color, double intensity);
 t_hit_record	hit_record_new();
 void	intersects(t_context *ctx, double distance, int light);
+t_object	sphere_new(t_vec3 sphere_loc, double radius, int r, int g, int b);
+t_object	plane_new(t_vec3 plane_loc, t_vec3 plane_rot, int r, int g, int b);
 t_object	cylinder_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b);
 t_object	cone_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b);
+int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug);
+int		intersects_plane(t_ray *ray, t_object *plane, double *distance);
 int		intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance);
+int		intersects_cone(t_ray *ray, t_object *cone, double *distance);
 t_vec3	get_cylinder_normal(t_object cylinder, t_ray ray, double distance);
 t_vec3	get_cone_normal(t_object cone, t_ray ray, double distance);
-int		intersects_cone(t_ray *ray, t_object *cone, double *distance);
 int	handle_args(int argc, char **argv, t_context *ctx);
 int	load_scene(int fd, t_context *ctx);
 void	check_type(char **str, t_context *ctx);
-char *skip_whitespace(char *str);
+//char *skip_whitespace(char *str);
 
 
 

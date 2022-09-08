@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/07 17:46:44 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/08 18:40:18 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void draw(t_context *ctx)
 {
+	//t_object o;
 	t_vec3 normal;
 	t_point L;
 	t_point light;
@@ -43,7 +44,7 @@ void draw(t_context *ctx)
 	ctx->OBJECTS[15] = plane_new((t_vec3){0.0, -9.0, 0.0}, (t_vec3){0.0, 1.0, 0.0}, 0, 255, 0);*/
 
 	
-	ctx->OBJECTS[0] = cone_new((t_vec3){0.0, 8.0, 0.0}, (t_vec3){0.0, 0.0, 1.0}, 0.2, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 255, 0);
+	//ctx->OBJECTS[0] = cone_new((t_vec3){0.0, 8.0, 0.0}, (t_vec3){0.0, 0.0, 1.0}, 0.2, /* (t_vec3){0.0, 1.0, 0.0}, */ 255, 255, 0);
 
 	// int debug;
 
@@ -81,21 +82,25 @@ void draw(t_context *ctx)
 			// check collision
 			// i = 0;
 
-			ctx->hit = hit_record_new();
+			
 			// intersects(t_context *ctx, double distance)
 			distance = 1.0 / 0.0;
 			intersects(ctx, distance, NOT_LIGHT);
 
-			if (ctx->hit.is_hit)
+			if (ctx->hit.is_hit && ctx->hit.closest_id >= 0)
 			{
-				if (ctx->OBJECTS[ctx->hit.closest_id].type == SPHERE)
-					normal = get_sphere_normal(ctx->OBJECTS[ctx->hit.closest_id].loc, ctx->ray, ctx->hit.closest_distance);
-				else if (ctx->OBJECTS[ctx->hit.closest_id].type == PLANE)
-					normal = get_plane_normal(ctx->OBJECTS[ctx->hit.closest_id], ctx->ray);
-				else if (ctx->OBJECTS[ctx->hit.closest_id].type == CYLINDER)
-					normal = get_cylinder_normal(ctx->OBJECTS[ctx->hit.closest_id], ctx->ray, ctx->hit.closest_distance);
-				else if (ctx->OBJECTS[ctx->hit.closest_id].type == CONE)
-					normal = get_cone_normal(ctx->OBJECTS[ctx->hit.closest_id], ctx->ray, ctx->hit.closest_distance);
+				//printf("Scene len %d\n", ctx->scene.len, ctx->hit.closest_id);
+			//printf("Scene len %d\n", ctx->scene.len);
+				ctx->obj = *(t_object *)vec_get(&ctx->scene, ctx->hit.closest_id);
+				if (ctx->obj.type /* ctx->OBJECTS[ctx->hit.closest_id].type */ == SPHERE)
+					normal = get_sphere_normal(ctx->obj.loc, ctx->ray, ctx->hit.closest_distance);
+ 				
+				else if (ctx->obj.type == PLANE)
+					normal = get_plane_normal(ctx->obj, ctx->ray);
+				else if (ctx->obj.type == CYLINDER)
+					normal = get_cylinder_normal(ctx->obj, ctx->ray, ctx->hit.closest_distance);
+				else if (ctx->obj.type == CONE)
+					normal = get_cone_normal(ctx->obj, ctx->ray, ctx->hit.closest_distance); 
 				//	normal = ctx->OBJECTS[ctx->hit.closest_id].rot;
 				// get_cylinder_normal(t_object cylinder, t_ray ray, double distance)
 				// normal = get_cylinder_normal(ctx->OBJECTS[ctx->hit.closest_id].loc, ctx->ray, ctx->hit.closest_distance);
@@ -103,7 +108,7 @@ void draw(t_context *ctx)
 				light_level = get_light_level((t_ray){vec3_ray_at(ctx->ray, ctx->hit.closest_distance), normal}, light, ctx->ray, ctx, ctx->hit.closest_id);
 				t_color c;
 				// c = debug_shading(normal);
-				c = shade(ctx->OBJECTS[ctx->hit.closest_id], light_level, &ctx->ambient);
+				c = shade(ctx->obj, light_level, &ctx->ambient);
 				img_pixel_put(&ctx->frame_buffer, x, y, rgb_to_int(c.x, c.y, c.z));
 			}
 			else
