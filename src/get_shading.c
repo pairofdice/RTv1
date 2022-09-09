@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 18:50:37 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:29:42 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 	t_vec3 to_light;
 	double distance;
 	// t_ray test;
+	t_object o;
 
 	double dot;
 	size_t i;
@@ -68,6 +69,8 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 	i = 0;
 	distance = vec3_mag(to_light);
 
+	if (fabs(ctx->obj.size - 0.3) < 0.001)
+				printf(" obj.color %.0f %.0f %.0f\n", ctx->obj.color.x, ctx->obj.color.y, ctx->obj.color.z);
 	 while (i < ctx->scene.len)
 	{
 		if (i == id)
@@ -75,8 +78,8 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 			i++;
 			continue;
 		}
-		ctx->obj = *(t_object *)vec_get(&ctx->scene, i);
-		if (ctx->obj.type == SPHERE)
+		o = *(t_object *)vec_get(&ctx->scene, i);
+		if (o.type == SPHERE)
 		{
 			if (intersects_sphere(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->obj, &distance, 0))
 			{
@@ -84,7 +87,7 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 					return (0);
 			}
 		}
-		if (ctx->obj.type == PLANE)
+		if (o.type == PLANE)
 		{
 			if (intersects_plane(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->obj, &distance))
 			{
@@ -92,7 +95,7 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 					return (0);
 			}
 		}
-		if (ctx->obj.type == CYLINDER)
+		if (o.type == CYLINDER)
 		{
 			if (intersects_cylinder(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->obj, &distance))
 			{
@@ -100,7 +103,7 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 					return (0);
 			}
 		}
-		if (ctx->obj.type == CONE)
+		if (o.type == CONE)
 		{
 			if (intersects_cone(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->obj, &distance))
 			{

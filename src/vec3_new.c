@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:14:47 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/08/16 19:33:29 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:52:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_vec3	vec3_new(double x, double y, double z)
 {
-	t_vec3 new;
+	t_vec3	new;
+
 	new.x = x;
 	new.y = y;
 	new.z = z;

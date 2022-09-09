@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 19:07:52 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:27:16 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_vec3 new_vec3()
 	v.x = 0.0;
 	v.y = 0.0;
 	v.z = 0.0;
+	return (v);
 }
 
 t_object default_object()
@@ -81,7 +82,7 @@ int init(t_context *ctx)
 	ctx->obj = default_object();
 	ctx->hit = hit_record_new();
 	printf("id in init? %d \n", ctx->obj.type);
-	init_camera(&cam, (t_point){0.0, 0.0, 2.0});
+	init_camera(&cam, (t_point){0.0, 0.0, 7.0});
 	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){155, 155, 255}, 20);
 	ctx->cam = cam;
 	// The window we'll be rendering to

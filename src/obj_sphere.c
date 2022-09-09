@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 18:59:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:55:35 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vec3 get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance)
 	return (result);
 }
 
-int intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug)
+int intersects_sphere(t_ray *ray, t_object *sphere, double *distance)
 {
 	t_vec3 ray_origin_to_sphere;
 	double tc;
@@ -76,22 +76,6 @@ int intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug)
 	tp = sqrt(sphere->size * sphere->size - d * d);
 	distance_to_intersection = tc - tp;
 	// if intersection point behind projection plane
-	if (debug == 1)
-	{
-		// c = sphere->loc;
-		// printf("sphere->loc is: %f %f %f - ", c.x, c.y, c.z);
-		// c = ray->dir;
-		// printf("ray->dir is: %f %f %f \n", c.x, c.y, c.z);
-
-		// c = ray_origin_to_sphere;
-		/* printf("ray_origin_to_sphere is: %f %f %f \n", c.x, c.y, c.z);
-		printf("tc is: %f \n", tc);
-		printf("d is: %f \n", d);
-		printf("tp is: %f \n", tp);
-		printf("tctc is: %f \n", tc*tc);
-		printf("vec3sqr is: %f \n", vec3_sqr(ray_origin_to_sphere));
-		printf("tctc - vec3sqr is: %f \n", tc*tc - vec3_sqr(ray_origin_to_sphere)); */
-	}
 	if (distance_to_intersection < 0)
 		return (0);
 	*distance = distance_to_intersection;

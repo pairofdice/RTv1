@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 17:14:22 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/09 14:24:09 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_hit_record
 	double max_distance;
 	double closest_distance;
 	int closest_id;
+	t_color color;
 } t_hit_record;
 
 typedef struct s_frame_buffer
@@ -108,6 +109,8 @@ int	handle_args(int argc, char **argv, t_context *ctx);
 int	load_scene(int fd, t_context *ctx);
 void	check_type(char **str, t_context *ctx);
 //char *skip_whitespace(char *str);
+t_point read_triple(t_context *ctx, char **strs);
+float	ft_atof(char *str);
 
 
 
