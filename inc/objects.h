@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 18:49:30 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:52:44 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum
 	CONE,
 	NOT_LIGHT,
 	LIGHT,
+	CAMERA,
 	NOTHING,
 	PROCESSING,
 };
