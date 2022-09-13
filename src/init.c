@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 14:59:45 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:08:07 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,6 @@ int st_error()
 	// TODO
 	printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 	return (0);
-}
-
-void init_camera(t_cam *cam, t_point loc)
-{
-	// t_vec3 c;
-	cam->loc = loc;
-	cam->coi = (t_point){0.0, 0.0, -1.0};
-	cam->scene_up = (t_point){0.0, 1.0, 0.0};
-	cam->distance_to_proj = 0.1;
-	cam->aspect = (float)WIN_W / WIN_H;
-	// 1.4 radians is ~80 degrees
-	// 1.05 radians is ~60 degrees
-	cam->projection_plane_h = tan(1.05 / 2) * 2 * cam->distance_to_proj;
-	cam->projection_plane_w = cam->projection_plane_h * cam->aspect;
-	cam->scene_up = vec3_unit(cam->scene_up);
-	// c = cam->scene_up;
-	cam->dir = vec3_unit(vec3_sub(cam->coi, cam->loc));
-	//// c = cam->dir;
-	cam->n = vec3_neg(cam->dir);
-	// c = cam->n;
-	cam->right = vec3_cross(cam->scene_up, cam->n);
-	// c = cam->right;
-	cam->up = vec3_cross(cam->n, cam->right);
-	// c = cam->up;
-	cam->projection_plane_center = vec3_add(cam->loc, vec3_scalar_mult(cam->dir, cam->distance_to_proj));
-	// c = cam->projection_plane_center;
-	// c = cam->loc;
-	cam->cam_to_proj = vec3_sub(cam->loc, cam->projection_plane_center);
-	// c = cam->cam_to_proj;
 }
 
 t_vec3 new_vec3()

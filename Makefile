@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/09/05 16:19:44 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/13 15:26:47 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,9 @@ SRC = $Smain.c \
 	$Sobj_cylinder.c \
 	$Sload.c \
 	$Sparse.c \
+	$Scamera.c \
+	$Scurrent_ray.c \
+	
 #	$Sft_memcpy.c \
 #	$Sft_memset.c \
 

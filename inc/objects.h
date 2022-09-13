@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 14:52:44 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:17:20 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_light
 
 typedef struct s_cam
 {
-
+	t_point	L;
 	t_point loc;
 	t_vec3 dir;
 	t_vec3 up;
