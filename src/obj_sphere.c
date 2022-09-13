@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/09 13:55:35 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:43:20 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "RTv1.h"
 #include "objects.h"
 #include <math.h>
 #include <stdio.h>
@@ -30,13 +30,13 @@ t_object sphere_new(t_vec3 loc, double radius, int r, int g, int b)
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 //*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
-t_vec3 get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance)
+t_vec3 get_sphere_normal(t_context *ctx)
 {
 	t_vec3 result;
 
-	result = vec3_scalar_mult(ray.dir, distance);
-	result = vec3_add(ray.orig, result);
-	result = vec3_sub(result, sphere_loc);
+	result = vec3_scalar_mult(ctx->ray.dir, ctx->hit.closest_distance);
+	result = vec3_add(ctx->ray.orig, result);
+	result = vec3_sub(result, ctx->obj.loc);
 	result = vec3_unit(result);
 	return (result);
 }

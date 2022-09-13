@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 18:51:41 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:53:48 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/vec3.h"
+#include "RTv1.h"
 #include "../inc/objects.h"
 //#include <math.h>
 #include <math.h>
@@ -33,11 +33,11 @@ t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 }
 
 
-t_vec3	get_plane_normal(t_object plane, t_ray cam_to_plane)
+t_vec3	get_plane_normal(t_context *ctx)
 {
-	if (vec3_dot(plane.rot, cam_to_plane.dir) > 0)
-		return (vec3_neg(plane.rot));
-	return (plane.rot);
+	if (vec3_dot(ctx->obj.rot, ctx->ray.dir) > 0)
+		return (vec3_neg(ctx->obj.rot));
+	return (ctx->obj.rot);
 }
 
 /*

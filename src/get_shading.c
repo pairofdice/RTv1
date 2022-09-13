@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/09 17:29:42 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:41:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 		o = *(t_object *)vec_get(&ctx->scene, i);
 		if (o.type == SPHERE)
 		{
-			if (intersects_sphere(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->obj, &distance, 0))
+			if (intersects_sphere(&(t_ray){normal.orig, vec3_unit(to_light)}, &ctx->obj, &distance))
 			{
 				if (distance < vec3_mag(to_light))
 					return (0);

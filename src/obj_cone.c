@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 18:51:55 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:47:22 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "RTv1.h"
 #include "objects.h"
 
 t_abc static	calc_abc_cone(t_vec3 raydir, t_vec3 conedir, t_vec3 raycyl, double radius)
@@ -41,16 +41,17 @@ t_object	cone_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b)
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 //*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
-t_vec3	get_cone_normal(t_object cone, t_ray ray, double distance)
+// t_vec3	get_cone_normal(t_object cone, t_ray ray, double distance)
+t_vec3	get_cone_normal(t_context *ctx)
 {
 	t_vec3 result;
 	t_vec3 hit_loc;
 	t_vec3 hypotenuse;
 
-	hit_loc = vec3_ray_at(ray, distance);
-	hypotenuse = vec3_sub(hit_loc, cone.loc);
-	result = vec3_unit(vec3_cross(hypotenuse, vec3_cross(hypotenuse, cone.rot)));
-	if (vec3_dot(ray.dir, result) > 0)
+	hit_loc = vec3_ray_at(ctx->ray, ctx->hit.closest_distance);
+	hypotenuse = vec3_sub(hit_loc, ctx->obj.loc);
+	result = vec3_unit(vec3_cross(hypotenuse, vec3_cross(hypotenuse, ctx->obj.rot)));
+	if (vec3_dot(ctx->ray.dir, result) > 0)
 		result = vec3_neg(result);
 	return (result);
 }

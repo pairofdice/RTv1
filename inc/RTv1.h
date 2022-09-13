@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 15:34:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:50:52 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,6 @@ void	close_rtv1(t_context *ctx);
 void	draw(t_context *ctx);
 void	write_buffer(t_context *ctx, int *texture_data, int *texture_pitch, int render);
 
-t_vec3	get_sphere_normal(t_vec3 sphere_loc, t_ray ray, double distance);
-// t_vec3		get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
-t_vec3	get_plane_normal(t_object plane, t_ray cam_to_plane);
 t_vec3	vec3_new(double x, double y, double z);
 double	get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, size_t id);
 t_color	debug_shading(t_vec3 normal);
@@ -99,14 +96,17 @@ t_object	sphere_new(t_vec3 sphere_loc, double radius, int r, int g, int b);
 t_object	plane_new(t_vec3 plane_loc, t_vec3 plane_rot, int r, int g, int b);
 t_object	cylinder_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b);
 t_object	cone_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b);
-int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance, int debug);
+int		intersects_sphere(t_ray *ray, t_object *sphere, double *distance);
 int		intersects_plane(t_ray *ray, t_object *plane, double *distance);
 int		intersects_cylinder(t_ray *ray, t_object *cylinder, double *distance);
 int		intersects_cone(t_ray *ray, t_object *cone, double *distance);
-t_vec3	get_cylinder_normal(t_object cylinder, t_ray ray, double distance);
-t_vec3	get_cone_normal(t_object cone, t_ray ray, double distance);
-int	handle_args(int argc, char **argv, t_context *ctx);
-int	load_scene(int fd, t_context *ctx);
+// t_vec3		get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
+t_vec3	get_sphere_normal(t_context *ctx);
+t_vec3	get_plane_normal(t_context *ctx);
+t_vec3	get_cylinder_normal(t_context *ctx);
+t_vec3	get_cone_normal(t_context *ctx);
+int		handle_args(int argc, char **argv, t_context *ctx);
+int		load_scene(int fd, t_context *ctx);
 void	check_type(char **str, t_context *ctx);
 //char *skip_whitespace(char *str);
 t_point read_triple(t_context *ctx, char **strs);

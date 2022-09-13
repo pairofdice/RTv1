@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:16:59 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/09 14:26:06 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:41:23 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void intersects(t_context *ctx, double distance, int light)
 		if (ctx->obj.type == SPHERE)
 		{
  			
-			if (intersects_sphere(&ctx->ray, &ctx->obj, &distance, 0))
+			if (intersects_sphere(&ctx->ray, &ctx->obj, &distance))
 			{
 				
 				if (light)

@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 18:51:50 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:52:39 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#include "RTv1.h"
 #include "objects.h"
 #include <stdio.h>
 
@@ -40,16 +40,16 @@ t_object cylinder_new(t_vec3 loc, t_vec3 rot, double radius, int r, int g, int b
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 //*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
-t_vec3 get_cylinder_normal(t_object cylinder, t_ray ray, double distance)
+t_vec3 get_cylinder_normal(t_context *ctx)
 {
 	t_vec3 result;
 	t_vec3 hit_loc;
 	t_vec3 hypotenuse;
 	t_vec3 hit_along_cyldir;
 
-	hit_loc = vec3_ray_at(ray, distance);
-	hypotenuse = vec3_sub(hit_loc, cylinder.loc);
-	hit_along_cyldir = vec3_ray_at((t_ray){cylinder.loc, cylinder.rot}, vec3_dot(hypotenuse, cylinder.rot));
+	hit_loc = vec3_ray_at(ctx->ray, ctx->hit.closest_distance);
+	hypotenuse = vec3_sub(hit_loc, ctx->obj.loc);
+	hit_along_cyldir = vec3_ray_at((t_ray){ctx->obj.loc, ctx->obj.rot}, vec3_dot(hypotenuse, ctx->obj.rot));
 	result = vec3_sub(hit_loc, hit_along_cyldir);
 	return (result);
 }
