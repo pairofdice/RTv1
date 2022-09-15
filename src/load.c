@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/09 15:16:35 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:28:31 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,18 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 	i = 0;
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
-	**words =   ft_strtrim(**words);
+	**words = ft_strtrim(**words);
 	if (ft_strncmp(**words, "loc", 3) == 0)
+	{
 		ctx->obj.loc = read_triple(ctx, *words);
+		printf("?? %f %f %f\n", ctx->obj.loc.x, ctx->obj.loc.y, ctx->obj.loc.z);
+	}
+	if (ft_strncmp(**words, "rot", 3) == 0)
+	{
+		
+		ctx->obj.rot = read_triple(ctx, *words);
+		ctx->obj.rot = vec3_unit(ctx->obj.rot);
+	}
 	if (ft_strncmp(**words, "color", 5) == 0)
 		ctx->obj.color = read_triple(ctx, *words);
 		printf("\n %f %f %f  \n", ctx->obj.color.x, ctx->obj.color.y , ctx->obj.color.z);

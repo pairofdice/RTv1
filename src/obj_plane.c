@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 16:53:48 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:45:46 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <math.h>
 #include <stdio.h>
 
-t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b) 
+/* t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b) 
 {
 	// fix rgb with maybe union, maybe struct, maybe 0xFFFFFF00(hex) colors
 	t_object	s;
@@ -32,7 +32,7 @@ t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 	return (s);
 }
 
-
+ */
 t_vec3	get_plane_normal(t_context *ctx)
 {
 	if (vec3_dot(ctx->obj.rot, ctx->ray.dir) > 0)

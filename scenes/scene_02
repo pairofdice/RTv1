@@ -65,6 +65,13 @@ Hello? Comments outside of blocks seem to be fine
 	color: 0.0 0.0 1.0
 }
 
+{ cylinder
+	loc: 0.0, 0.0, -7.0
+	rot: 0.0, 1.0, 0.0
+	size: 0.2
+	color: 0.0 0.0 1.0
+}
+
 { light
 	loc: 1.23 4.56 -0.789
 	color: 1.0 1.0 1.0

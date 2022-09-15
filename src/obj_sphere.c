@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 16:43:20 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:45:53 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <math.h>
 #include <stdio.h>
 
-t_object sphere_new(t_vec3 loc, double radius, int r, int g, int b)
+/* t_object sphere_new(t_vec3 loc, double radius, int r, int g, int b)
 {
 	t_object s;
 
@@ -26,11 +26,11 @@ t_object sphere_new(t_vec3 loc, double radius, int r, int g, int b)
 	s.size = radius;
 	s.type = SPHERE;
 	return (s);
-}
+} */
 // get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
 //*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
-t_vec3 get_sphere_normal(t_context *ctx)
+t_vec3	get_sphere_normal(t_context *ctx)
 {
 	t_vec3 result;
 
@@ -41,7 +41,7 @@ t_vec3 get_sphere_normal(t_context *ctx)
 	return (result);
 }
 
-int intersects_sphere(t_ray *ray, t_object *sphere, double *distance)
+int	intersects_sphere(t_ray *ray, t_object *sphere, double *distance)
 {
 	t_vec3 ray_origin_to_sphere;
 	double tc;

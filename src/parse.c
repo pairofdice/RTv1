@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 14:53:19 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:56:07 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,16 @@ void	check_type(char **str, t_context *ctx)
 	char	*temp;
 
 	temp = *(++str);
-	if (ft_strcmp(*str, "light") == 0)
+	if (ft_strncmp(*str, "light", 5) == 0)
 		ctx->obj.type = LIGHT;
-	else if (ft_strcmp(*str, "cone") == 0)
+	else if (ft_strncmp(*str, "cone", 4) == 0)
 		ctx->obj.type = CONE;
-	else if (ft_strcmp(*str, "plane") == 0)
+	else if (ft_strncmp(*str, "plane", 5) == 0)
 		ctx->obj.type = PLANE;
-	else if (ft_strcmp(*str, "cylinder") == 0)
+	else if (ft_strncmp(*str, "cylinder", 8) == 0)
 		ctx->obj.type = CYLINDER;
-	else if (ft_strcmp(*str, "sphere") == 0)
+	else if (ft_strncmp(*str, "sphere", 6) == 0)
 		ctx->obj.type = SPHERE;
-	else if (ft_strcmp(*str, "camera") == 0)
+	else if (ft_strncmp(*str, "camera", 6) == 0)
 		ctx->obj.type = CAMERA;
 }
