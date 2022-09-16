@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/15 19:05:34 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:54:31 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ typedef struct s_context
 	t_vec			scene;
 	int				parse_state;
 	t_object		obj;
+	char			**words;
+	char			**temp;
+	char			*line;
 } t_context;
 
 void tests(void);

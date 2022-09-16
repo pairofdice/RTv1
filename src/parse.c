@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/15 18:56:07 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:49:10 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	check_type(char **str, t_context *ctx)
 {
 	char	*temp;
 
+	ctx->parse_state = PROCESSING;
 	temp = *(++str);
 	if (ft_strncmp(*str, "light", 5) == 0)
 		ctx->obj.type = LIGHT;
