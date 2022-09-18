@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/15 19:28:31 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:55:25 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 	}
 	if (ft_strncmp(**words, "rot", 3) == 0)
 	{
-		
 		ctx->obj.rot = read_triple(ctx, *words);
 		ctx->obj.rot = vec3_unit(ctx->obj.rot);
 	}
@@ -74,41 +73,34 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 	}
 }
 
+void	set_camera()
+{
+	
+}
+
 int	load_scene(int fd, t_context *ctx)
 {
-	char	*line;
-	char	**words;
-	char	**temp;
-	//t_vec	obj_vec;
-
-	printf("...\n");
 	vec_new(&ctx->scene, BUFF_SIZE * 2, sizeof(t_object));
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &ctx->line))
 	{
-		words = ft_strsplit(line, ' ');
-		temp = words;
-		if (*temp)
+		ctx->words = ft_strsplit(ctx->line, ' ');
+		ctx->temp = ctx->words;
+		if (*ctx->temp)
 		{
-			if (ctx->parse_state == NOTHING && **temp == '{')
+			if (ctx->parse_state == NOTHING && **ctx->temp == '{')
+				check_type(ctx->temp, ctx);
+			else if (**ctx->temp == '}')
 			{
-				ctx->parse_state = PROCESSING;
-				check_type(temp, ctx);
-				//vec_new(&obj_vec, ft_strlen(line) / 2 + 1, sizeof(t_object));
-			}
-			else if (**temp == '}')
-			{
-				// printf("Hello\n");
+				if (ctx->obj.type == CAMERA)
+					set_camera();
 				ctx->parse_state = NOTHING;
-				//push_obj(ctx);
 				vec_push(&ctx->scene, &ctx->obj);
 			}
 			else if (ctx->parse_state == PROCESSING)
-			{
-				process_line(ctx, &words/* , &obj_vec  */);
-			}
+				process_line(ctx, &ctx->words);
 		}
-		free_array((void *)&temp);
-		ft_strdel(&line);
+		free_array((void *)&ctx->temp);
+		ft_strdel(&ctx->line);
 	}
 	return (1);
 }
