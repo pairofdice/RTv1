@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 15:17:20 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:27:42 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ enum
 typedef struct s_object
 {
 	t_point loc;
+	t_point coi;
 	t_vec3 rot;
 	double size;
-/* 	int r;
-	int g;
-	int b; */
 	t_color color;
 	double	brightness;
 	int type;

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/16 14:54:31 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:49:01 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 #define AMBIENT 0.0001
 #define RENDER 1
 #define NO_RENDER 0
+#define TRUE 1
+#define FALSE 0
 
 // #define BUFF_SIZE 110
 //# define MAX_FD 8192
@@ -74,6 +76,10 @@ typedef struct s_context
 	char			**words;
 	char			**temp;
 	char			*line;
+	int				render;
+	int 			quit;
+	int				gnl; // if gnl fails, error handling
+
 } t_context;
 
 void tests(void);

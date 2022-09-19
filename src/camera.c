@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:53:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 15:20:51 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:26:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,13 @@ void init_camera(t_cam *cam, t_point loc)
 	cam->cam_to_proj = vec3_sub(cam->loc, cam->projection_plane_center);
 	cam->L = vec3_sub(cam->projection_plane_center, vec3_scalar_mult(cam->right, 0.5 * cam->projection_plane_w));
 	cam->L = vec3_sub(cam->L, vec3_scalar_mult(cam->up, 0.5 * cam->projection_plane_h));
+}
+
+void	set_camera(t_context *ctx)
+{
+	// TODO
+	init_camera(&
+	ctx->cam, ctx->obj.loc);
+	ctx->cam.loc = ctx->obj.loc;
+	ctx->cam.coi = ctx->obj.coi;
 }

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/16 14:55:25 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:04:46 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,34 +73,40 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 	}
 }
 
-void	set_camera()
+static void	parse_line(t_context *ctx)
 {
-	
+	if (ctx->parse_state == NOTHING && **ctx->temp == '{')
+		check_type(ctx->temp, ctx);
+	else if (**ctx->temp == '}')
+	{
+		if (ctx->obj.type == CAMERA)
+			set_camera(ctx);
+		ctx->parse_state = NOTHING;
+		if (vec_push(&ctx->scene, &ctx->obj) == -1)
+			exit (1);
+	}
+	else if (ctx->parse_state == PROCESSING)
+		process_line(ctx, &ctx->words);
 }
 
 int	load_scene(int fd, t_context *ctx)
 {
-	vec_new(&ctx->scene, BUFF_SIZE * 2, sizeof(t_object));
-	while (get_next_line(fd, &ctx->line))
+	if (!(vec_new(&ctx->scene, BUFF_SIZE * 2, sizeof(t_object))))
+		exit(1);
+	ctx->gnl = 1;
+	while (ctx->gnl == 1)
 	{
+		ctx->gnl = get_next_line(fd, &ctx->line);
+		if (ctx->gnl <= 0)
+			break ;
 		ctx->words = ft_strsplit(ctx->line, ' ');
 		ctx->temp = ctx->words;
 		if (*ctx->temp)
-		{
-			if (ctx->parse_state == NOTHING && **ctx->temp == '{')
-				check_type(ctx->temp, ctx);
-			else if (**ctx->temp == '}')
-			{
-				if (ctx->obj.type == CAMERA)
-					set_camera();
-				ctx->parse_state = NOTHING;
-				vec_push(&ctx->scene, &ctx->obj);
-			}
-			else if (ctx->parse_state == PROCESSING)
-				process_line(ctx, &ctx->words);
-		}
+			parse_line(ctx);
 		free_array((void *)&ctx->temp);
 		ft_strdel(&ctx->line);
 	}
+	if (ctx->gnl != 0)
+		return (0);
 	return (1);
 }

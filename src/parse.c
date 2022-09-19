@@ -6,13 +6,13 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/16 14:49:10 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:41:15 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
 
-float	ft_atof(char *str)
+float	ft_atof(char *str) // return type to int/error and give pointer to float
 {
 	float	result;
 	int		fraction;
@@ -49,7 +49,7 @@ int	check_triple_length(char **strs)
 	return (1);
 }
 
-t_point	read_triple(t_context *ctx, char **strs)
+t_point	read_triple(t_context *ctx, char **strs) // return type to int/error and give pointer to values isnum
 {
 	t_point	p;
 	int		valid;

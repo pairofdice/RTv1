@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 16:56:14 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:08:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,13 @@ void write_buffer(t_context *ctx, int *texture_data, int *texture_pitch, int ren
 	ctx->frame_buffer.data = malloc(WIN_H * WIN_W * 4);
 	if (render == RENDER)
 	{
-		// What was I doing here?
-		// Oh, right, on_expose.
+		
 	}
-	ft_memset(ctx->frame_buffer.data, 0, WIN_H * WIN_W * 4);
-	draw(ctx);
+		ft_memset(ctx->frame_buffer.data, 0, WIN_H * WIN_W * 4);
+		draw(ctx);
+		printf("Rendered!\n");
+	printf("Exposed!\n");
+
 	ft_memcpy(texture_data, ctx->frame_buffer.data, WIN_H * WIN_W * 4);
 	SDL_UnlockTexture(ctx->texture);
 }

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 14:43:34 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/19 17:44:37 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void close_rtv1(t_context *ctx)
 	ctx->window = NULL;
 	// Quit SDL subsystems
 	SDL_Quit();
+	exit(0);
 }
 
 void test_load(t_context * ctx)
@@ -63,7 +64,8 @@ int main(int argc, char **argv)
 		handle_args(argc, argv, &ctx);
 		test_load(&ctx);
 		// Main loop flag
-		bool quit = false;
+		// bool quit = false;
+		ctx.quit = FALSE;
 		// Event handler
 		SDL_Event e;
 
@@ -72,7 +74,7 @@ int main(int argc, char **argv)
 		int *texture_data;
 		texture_data = NULL;
 		write_buffer(&ctx, texture_data, &texture_pitch, RENDER);
-		while (!quit)
+		while (!ctx.quit)
 		{
 			// Handle events on queue
 			if (SDL_WaitEvent(&e) != 0)
@@ -80,19 +82,23 @@ int main(int argc, char **argv)
 				// User requests quit
 				if (e.type == SDL_QUIT)
 				{
-					quit = true;
+					ctx.quit = true;
 				}
-				if (e.type == SDL_WINDOWEVENT)
+				else if (e.type == SDL_WINDOWEVENT)
 				{
+					
 					if (e.window.event == SDL_WINDOWEVENT_EXPOSED)
-						//printf("Exposed!\n");
+					{
+						printf("tahti!\n");
 						write_buffer(&ctx, texture_data, &texture_pitch, NO_RENDER);
+						
+					}
 				}
-				if (e.type == SDL_KEYDOWN)
+				else if (e.type == SDL_KEYDOWN)
 				{
 					if (e.key.keysym.sym == SDLK_ESCAPE)
 					{
-						quit = true;
+						ctx.quit = true;
 					}
 					if (e.key.keysym.sym == SDLK_w)
 					{
