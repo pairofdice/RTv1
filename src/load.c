@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/19 18:04:46 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:44:10 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ static void	free_array(void **array)
 
 static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 {
-	int			i;
-
-	i = 0;
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
 	**words = ft_strtrim(**words);
@@ -57,10 +54,9 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 		printf("?? %f %f %f\n", ctx->obj.loc.x, ctx->obj.loc.y, ctx->obj.loc.z);
 	}
 	if (ft_strncmp(**words, "rot", 3) == 0)
-	{
-		ctx->obj.rot = read_triple(ctx, *words);
-		ctx->obj.rot = vec3_unit(ctx->obj.rot);
-	}
+		ctx->obj.rot = vec3_unit(read_triple(ctx, *words));
+	if (ft_strncmp(**words, "coi", 3) == 0)
+		ctx->cam.coi = read_triple(ctx, *words);
 	if (ft_strncmp(**words, "color", 5) == 0)
 		ctx->obj.color = read_triple(ctx, *words);
 		printf("\n %f %f %f  \n", ctx->obj.color.x, ctx->obj.color.y , ctx->obj.color.z);

@@ -6,35 +6,34 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/19 17:41:15 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:59:22 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
 
-float	ft_atof(char *str) // return type to int/error and give pointer to float
+int	ft_atof(char *str, float *result) // return type to int/error and give pointer to float
 {
-	float	result;
 	int		fraction;
 	int		fraction_len;
 	float	neg;
+	int		i;
 
 	neg = 1.0;
 	if (!str)
-		return (0.0);
+		return (0);
+	while (st)
 	if (*str == '-')
 	{
 		neg = -1.0;
 	}
-	result = ft_abs(ft_atoi(str));
+	*result = ft_abs(ft_atoi(str));
 	str = ft_strchr(str, '.');
-	if (!str)
-		return (0.0);
 	str++;
 	fraction = ft_abs(ft_atoi(str));
 	fraction_len = ft_nbrlen(fraction);
-	result += (float)fraction / pow(10, fraction_len);
-	return (result * neg);
+	*result += (float)fraction / pow(10, fraction_len);
+	return (*result * neg);
 }
 
 int	check_triple_length(char **strs)
@@ -52,11 +51,14 @@ int	check_triple_length(char **strs)
 t_point	read_triple(t_context *ctx, char **strs) // return type to int/error and give pointer to values isnum
 {
 	t_point	p;
-	int		valid;
 
-	valid = 0;
+	p.x = 0.0;
+	p.y = 0.0;
+	p.z = 0.0;
 	if (!check_triple_length(++strs))
-		close_rtv1(ctx);
+		return (p);
+	if (!(ft_isdigit(strs[0]) && ft_isdigit(strs[0]) && ft_isdigit(strs[0])))
+		return (p);
 	if (strs[0])
 	p.x = ft_atof(strs[0]);
 	p.y = ft_atof(strs[1]);

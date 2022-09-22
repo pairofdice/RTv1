@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:53:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/19 17:26:28 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:41:41 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void init_camera(t_cam *cam, t_point loc)
 {
 
 	cam->loc = loc;
-	cam->coi = (t_point){0.0, 0.0, -1.0};
+	// cam->coi = (t_point){0.0, 0.0, -1.0};
 	cam->scene_up = (t_point){0.0, 1.0, 0.0};
 	cam->distance_to_proj = 0.1;
 	cam->aspect = (float)WIN_W / WIN_H;
