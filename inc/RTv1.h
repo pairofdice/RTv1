@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/23 15:31:46 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:29:19 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "../libsdl2/include/SDL.h"
 // #include "../sdl_include/SDL.h"
 
-#define WIN_W 1601
-#define WIN_H 1043
+#define WIN_W 1234
+#define WIN_H 771
 #define NUM_OBJECTS 1
 #define GAMMA 2.2
 #define AMBIENT 0.0001
@@ -123,6 +123,7 @@ t_point read_triple(t_context *ctx, char **strs);
 int	ft_atof(char *str, float *result);
 void init_camera(t_cam *cam, t_point loc);
 void	calc_current_ray(t_context *ctx, int x, int y);
+void	set_camera(t_context *ctx);
 
 
 

@@ -46,3 +46,4 @@ libsdl2_net/libtool
 libsdl2_net/showinterfaces
 libsdl2_net/showinterfaces.o
 libsdl2/include/SDL_revision.h
+libft/libft.a
