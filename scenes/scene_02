@@ -1,73 +1,73 @@
 { sphere
-	loc: 0.0, 0.0, -10.0
+	loc: 0.0 0.0 -10.0
 	size: 5.0
 	color: 1.0  0.874 0.4352
 }
 
 { sphere
-	loc: -2.0, -1.0, -7.0
+	loc: -2.0 -1.0 -7.0
 	size: 2.0
 	color: 1.0 1.0 1.0
 }
 
 { sphere
-	loc: 2.0, -1.0, -7.0
+	loc: 2.0 -1.0 -7.0
 	size: 2.0
 	color: 1.0 1.0 1.0
 }
 
 { sphere
-	loc: 0.0, 1.5, -7.0
+	loc: 0.0 1.5 -7.0
 	size: 2.0
 	color: 1.0 1.0 1.0
 }
 
 { sphere
-	loc: -2.0, -1.0, -5.45
+	loc: -2.0 -1.0 -5.45
 	size: 0.6
 	color: 0.0 0.0 0.0
 }
 
 { sphere
-	loc: 2.0, -1.0, -5.45
+	loc: 2.0 -1.0 -5.45
 	size: 0.6
 	color: 0.0 0.0 0.0
 }
 
 { sphere
-	loc: -0.5, 1.65, -5.35
+	loc: -0.5 1.65 -5.35
 	size: 0.3
 	color: 0.0 0.0 0.0
 }
 
 { sphere
-	loc: 0.5, 1.65, -5.35
+	loc: 0. 1.65 -5.35
 	size: 0.3
 	color: 0.0 0.0 0.0
 }
 
 { sphere
-	loc: -10.0, 4.0, -7.0
+	loc: -10.0 4.0 -7.0
 	size: 1.0
 	color: 1.0 0.0 0.0
 }
 
 { sphere
-	loc: 0.0, 4.0, -3.0
+	loc: 0.0 4.0 -3.0
 	size: 1.0
 	color: 0.0 1.0 0.0
 }
 Hello? Comments outside of blocks seem to be fine
 { sphere
 	Inside as well?
-	loc: 10.0, 4.0, -7.0
+	loc: 10.0 4.0 -7.0
 	size: 1.0
 	color: 0.0 0.0 1.0
 }
 
 { cylinder
-	loc: 0.0, 0.0, -7.0
-	rot: 0.0, 1.0, 0.0
+	loc: 0.0 0.0 -7.0
+	rot: 0.0 1.0, 0.0
 	size: 0.2
 	color: 0.0 0.0 1.0
 }

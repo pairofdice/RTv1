@@ -6,11 +6,37 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/22 14:59:22 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:54:09 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
+
+int	is_valid_float(char *str)
+{
+	int	sign;
+
+	sign = 0;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str != '\0' && ft_isdigit(*str))
+	{
+		str++;
+	}
+	if (*str != '.')
+		return(0);
+	str++;
+	if (!ft_isdigit(*str))
+		return (0);
+	str++;
+	while (*str != '\0')
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
 
 int	ft_atof(char *str, float *result) // return type to int/error and give pointer to float
 {
@@ -19,21 +45,22 @@ int	ft_atof(char *str, float *result) // return type to int/error and give point
 	float	neg;
 	int		i;
 
+	i = 1;
 	neg = 1.0;
-	if (!str)
+	*result = 0.0;
+	if (!str /* || !is_valid_float(str) */)
 		return (0);
-	while (st)
 	if (*str == '-')
-	{
 		neg = -1.0;
-	}
 	*result = ft_abs(ft_atoi(str));
 	str = ft_strchr(str, '.');
 	str++;
 	fraction = ft_abs(ft_atoi(str));
-	fraction_len = ft_nbrlen(fraction);
-	*result += (float)fraction / pow(10, fraction_len);
-	return (*result * neg);
+	fraction_len = ft_strlen(str);
+	*result += ((float)fraction / pow(10, fraction_len));
+	*result *= neg;
+	printf("...%f...", *result);
+	return (1);
 }
 
 int	check_triple_length(char **strs)
@@ -51,18 +78,28 @@ int	check_triple_length(char **strs)
 t_point	read_triple(t_context *ctx, char **strs) // return type to int/error and give pointer to values isnum
 {
 	t_point	p;
+	float	f;
 
 	p.x = 0.0;
 	p.y = 0.0;
 	p.z = 0.0;
 	if (!check_triple_length(++strs))
 		return (p);
-	if (!(ft_isdigit(strs[0]) && ft_isdigit(strs[0]) && ft_isdigit(strs[0])))
-		return (p);
+	printf("Hi _%s_\n", *strs);
+	// while (*str != '\0')
+	// 	str++;
+/* 	if (!(ft_isdigit(strs[0]) && ft_isdigit(strs[0]) && ft_isdigit(strs[0])))
+		return (p); */
 	if (strs[0])
-	p.x = ft_atof(strs[0]);
-	p.y = ft_atof(strs[1]);
-	p.z = ft_atof(strs[2]);
+	// p.x = ft_atof(strs[0]);
+	ft_atof(strs[0], &f);
+	p.x = f;
+	printf("p.x__%f___ %s\n", f, strs[0]);
+	// p.y = ft_atof(strs[1]);
+	ft_atof(strs[1], &f);
+	p.y = f;
+	ft_atof(strs[2], &f);
+	p.z = f;
 	return (p);
 }
 

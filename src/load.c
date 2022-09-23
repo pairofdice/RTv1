@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/22 14:44:10 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/23 17:01:34 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	free_array(void **array)
 
 static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 {
+	float	f;
+
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
 	**words = ft_strtrim(**words);
@@ -64,10 +66,23 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 	{
 		(*words)++;
 		printf("%s", **words);
-		ctx->obj.size = ft_atof(**words);
+		// ctx->obj.size = ft_atof(**words);
+		// ft_atof(**words, ctx->obj->size);
+		ft_atof(**words, &f);
+		ctx->obj.size = f;
 		printf(" - %f", ctx->obj.size);
 	}
 }
+/* 
+void	set_light(t_context *ctx)
+{
+	// TODO
+	init_camera(&
+	ctx->, ctx->obj.loc);
+	ctx->cam.loc = ctx->obj.loc;
+	ctx->cam.coi = ctx->obj.coi;
+}
+ */
 
 static void	parse_line(t_context *ctx)
 {
@@ -77,6 +92,8 @@ static void	parse_line(t_context *ctx)
 	{
 		if (ctx->obj.type == CAMERA)
 			set_camera(ctx);
+		/* if (ctx->obj.type == LIGHT)
+			set_light(ctx); */
 		ctx->parse_state = NOTHING;
 		if (vec_push(&ctx->scene, &ctx->obj) == -1)
 			exit (1);

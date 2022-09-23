@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/19 17:49:01 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/23 15:31:46 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_context
 	t_cam			cam;
 	t_ray			ray;
 	t_light			ambient;
+	t_light			light;
 	t_ray			normal;
 	// t_object		OBJECTS[NUM_OBJECTS];
 	t_hit_record	hit;
@@ -119,7 +120,7 @@ int		load_scene(int fd, t_context *ctx);
 void	check_type(char **str, t_context *ctx);
 //char *skip_whitespace(char *str);
 t_point read_triple(t_context *ctx, char **strs);
-float	ft_atof(char *str);
+int	ft_atof(char *str, float *result);
 void init_camera(t_cam *cam, t_point loc);
 void	calc_current_ray(t_context *ctx, int x, int y);
 
