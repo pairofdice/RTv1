@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
+#    By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/09/13 15:26:47 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/24 19:22:14 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC = $Smain.c \
 	$Sparse.c \
 	$Scamera.c \
 	$Scurrent_ray.c \
-	
+
 #	$Sft_memcpy.c \
 #	$Sft_memset.c \
 
@@ -65,7 +65,7 @@ LIBFT = libft/
 LIBA = libft/libft.a
 
 CFLAGS += -c -Wall -Wextra #-Werror
-#CFLAGS += -Wconversion -Wuninitialized
+#ßCFLAGS += -Wconversion -Wuninitialized
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)
 

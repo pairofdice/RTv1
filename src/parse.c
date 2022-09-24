@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/23 16:54:09 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:47:46 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_atof(char *str, float *result) // return type to int/error and give point
 	i = 1;
 	neg = 1.0;
 	*result = 0.0;
-	if (!str /* || !is_valid_float(str) */)
+	if (!str || !is_valid_float(str))
 		return (0);
 	if (*str == '-')
 		neg = -1.0;

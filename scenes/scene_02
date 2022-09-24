@@ -41,7 +41,7 @@
 }
 
 { sphere
-	loc: 0. 1.65 -5.35
+	loc: 0.5 1.65 -5.35
 	size: 0.3
 	color: 0.0 0.0 0.0
 }
@@ -67,7 +67,7 @@ Hello? Comments outside of blocks seem to be fine
 
 { cylinder
 	loc: 0.0 0.0 -7.0
-	rot: 0.0 1.0, 0.0
+	rot: 0.0 1.0 0.0
 	size: 0.2
 	color: 0.0 0.0 1.0
 }
