@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/23 17:01:34 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:55:33 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,20 @@ static void	free_array(void **array)
 
 static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 {
-	float	f;
-
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
 	**words = ft_strtrim(**words);
 	if (ft_strncmp(**words, "loc", 3) == 0)
 	{
-		ctx->obj.loc = read_triple(ctx, *words);
+		ctx->obj.loc = read_triple(*words);
 		printf("?? %f %f %f\n", ctx->obj.loc.x, ctx->obj.loc.y, ctx->obj.loc.z);
 	}
 	if (ft_strncmp(**words, "rot", 3) == 0)
-		ctx->obj.rot = vec3_unit(read_triple(ctx, *words));
+		ctx->obj.rot = vec3_unit(read_triple(*words));
 	if (ft_strncmp(**words, "coi", 3) == 0)
-		ctx->cam.coi = read_triple(ctx, *words);
+		ctx->cam.coi = read_triple(*words);
 	if (ft_strncmp(**words, "color", 5) == 0)
-		ctx->obj.color = read_triple(ctx, *words);
+		ctx->obj.color = read_triple(*words);
 		printf("\n %f %f %f  \n", ctx->obj.color.x, ctx->obj.color.y , ctx->obj.color.z);
 	if (ft_strncmp(**words, "size", 4) == 0)
 	{
@@ -68,12 +66,12 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 		printf("%s", **words);
 		// ctx->obj.size = ft_atof(**words);
 		// ft_atof(**words, ctx->obj->size);
-		ft_atof(**words, &f);
-		ctx->obj.size = f;
+		ft_atof(**words, &ctx->obj.size);
+
 		printf(" - %f", ctx->obj.size);
 	}
 }
-/* 
+/*
 void	set_light(t_context *ctx)
 {
 	// TODO

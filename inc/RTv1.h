@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/24 20:45:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:54:23 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,9 @@ int		handle_args(int argc, char **argv, t_context *ctx);
 int		load_scene(int fd, t_context *ctx);
 void	check_type(char **str, t_context *ctx);
 //char *skip_whitespace(char *str);
-t_point read_triple(t_context *ctx, char **strs);
-int	ft_atof(char *str, float *result);
+t_point read_triple(char **strs);
+int	ft_atof(char *str, double *result);
+// int	ft_atofd(char *str, double *result);
 void init_camera(t_cam *cam, t_point loc);
 void	calc_current_ray(t_context *ctx, int x, int y);
 void	set_camera(t_context *ctx);
