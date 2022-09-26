@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 15:31:21 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:41:59 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 void	close_rtv1(t_context *ctx)
 {
 	vec_free(&ctx->scene);
+	free(ctx->frame_buffer.data);
 	SDL_DestroyWindow(ctx->window);
+	SDL_DestroyTexture(ctx->texture);
+	SDL_DestroyRenderer(ctx->renderer);
 	ctx->window = NULL;
 	SDL_Quit();
 	exit(0);

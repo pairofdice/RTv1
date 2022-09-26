@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 15:08:07 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:37:09 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,26 @@ int init(t_context *ctx)
 	ctx->hit = hit_record_new();
 	printf("id in init? %d \n", ctx->obj.type);
 	init_camera(&cam, (t_point){0.0, 0.0, 7.0});
-	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){155, 155, 255}, 20);
+	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){0.1, 0.1, 0.2}, 0.001);
 	ctx->cam = cam;
 	// The window we'll be rendering to
 	ctx->window = NULL;
 	// The surface contained by the window
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		return (st_error()); // printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
+		close_rtv1(ctx); // printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
 	ctx->window = SDL_CreateWindow("RTv1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, SDL_WINDOW_ALLOW_HIGHDPI);
 	if (ctx->window == NULL)
-		return (st_error()); // printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+		close_rtv1(ctx); // printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
 	ctx->renderer = SDL_CreateRenderer(ctx->window, -1, 0);
+	if (ctx->renderer == NULL)
+		close_rtv1(ctx);
 	ctx->texture = SDL_CreateTexture(ctx->renderer, SDL_PIXELFORMAT_RGBA8888,
 									 SDL_TEXTUREACCESS_STREAMING, WIN_W, WIN_H);
+	if (ctx->texture == NULL)
+		close_rtv1(ctx);
+	// ctx->frame_buffer.data = (char *)malloc(WIN_H * WIN_W * 4);
+	/* if (!ctx->frame_buffer.data)
+		close_rtv1(ctx); */
 	
 	//handle_args(int argc, char **argv, t_context *ctx)
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 15:00:58 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:21:48 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ t_color shade(t_object obj, double shading, t_light *ambient)
 {
 	t_color c;
 
-	shading += AMBIENT;
-	if (ambient->color.x < 100)
-	{
-	}
+	 shading += AMBIENT;
 	c.x = obj.color.x * shading * 100 * 255;
 	c.x += shading * 1000.0;
 	c.x = pow(c.x, 1 / GAMMA) * 15;
@@ -66,6 +63,7 @@ double get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
 	to_light =  vec3_sub(ctx->light.loc, normal.orig);
 	i = 0;
 	distance = vec3_mag(to_light);
+	distance -= 0.001;
 
 	while (i < ctx->scene.len)
 	{
@@ -79,7 +77,7 @@ double get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
 		{
 			if (intersects_sphere(&(t_ray){normal.orig, vec3_unit(to_light)}, &o, &distance))
 			{
-				if (distance < vec3_mag(to_light))
+				if (distance + LIGHTBULB_SIZE < vec3_mag(to_light))
 					return (0);
 			}
 		}
@@ -87,7 +85,7 @@ double get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
 		{
 			if (intersects_plane(&(t_ray){normal.orig, vec3_unit(to_light)}, &o, &distance))
 			{
-				if (distance < vec3_mag(to_light))
+				if (distance + LIGHTBULB_SIZE< vec3_mag(to_light))
 					return (0);
 			}
 		}
@@ -95,7 +93,7 @@ double get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
 		{
 			if (intersects_cylinder(&(t_ray){normal.orig, vec3_unit(to_light)}, &o, &distance))
 			{
-				if (distance < vec3_mag(to_light))
+				if (distance + LIGHTBULB_SIZE < vec3_mag(to_light))
 					return (0);
 			}
 		}
@@ -103,7 +101,7 @@ double get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
 		{
 			if (intersects_cone(&(t_ray){normal.orig, vec3_unit(to_light)}, &o, &distance))
 			{
-				if (distance < vec3_mag(to_light))
+				if (distance + LIGHTBULB_SIZE < vec3_mag(to_light))
 					return (0);
 			}
 		}
@@ -116,6 +114,5 @@ double get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
 	if (dot < 0)
 		dot = 0;
 	dot = dot / (vec3_mag(to_light) * vec3_mag(to_light));
-	// printf("Segfault DB?%d\n", NUM_OBJECTS);
 	return (dot);
 }

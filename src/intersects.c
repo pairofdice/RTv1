@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:16:59 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 16:18:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:22:57 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	update_hit_record(t_hit_record *hit, double *distance, int i)
 	}
 }
 
-void	intersections_per_type(t_context *ctx, double distance, size_t i)
+static void	gg_intersections_per_type(t_context *ctx, double distance, size_t i)
 {
 	ctx->obj = *(t_object *)vec_get(&ctx->scene, i);
 	if (ctx->obj.type == SPHERE)
@@ -55,7 +55,7 @@ void	intersects(t_context *ctx, double distance, int light)
 	ctx->hit = hit_record_new();
 	while (i < ctx->scene.len)
 	{
-		intersections_per_type(ctx, distance, i);
+		gg_intersections_per_type(ctx, distance, i);
 		i++;
 	}
 }

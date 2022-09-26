@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 16:43:17 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:41:21 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define NUM_OBJECTS 1
 #define GAMMA 2.2
 #define AMBIENT 0.0001
+#define LIGHTBULB_SIZE 0.0001
 #define RENDER 1
 #define NO_RENDER 0
 #define TRUE 1
@@ -101,7 +102,7 @@ double	get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id);
 t_color	debug_shading(t_vec3 normal);
 t_color	shade(t_object obj, double shading, t_light *ambient);
 void	init_camera(t_cam *cam, t_point loc);
-void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, unsigned int color);
+void	img_pixel_put(t_frame_buffer *fb, unsigned long x, unsigned long y, t_color color);
 t_light	light_new(t_point loc, t_color color, double intensity);
 t_hit_record	hit_record_new();
 void	intersects(t_context *ctx, double distance, int light);
