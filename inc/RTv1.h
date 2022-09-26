@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RTv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/25 22:23:14 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:28:16 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "../libsdl2/include/SDL.h"
 // #include "../sdl_include/SDL.h"
 
-#define WIN_W 1234
+#define WIN_W 1235
 #define WIN_H 771
 #define NUM_OBJECTS 1
 #define GAMMA 2.2
@@ -38,13 +38,15 @@
 
 typedef struct s_hit_record
 {
-	t_point loc;
-	t_vec3 normal;
-	int is_hit;
-	double max_distance;
-	double closest_distance;
-	int closest_id;
-	t_color color;
+	t_point	loc;
+	t_vec3	normal;
+	int		is_hit;
+	double	max_distance;
+	double	closest_distance;
+	int		closest_id;
+	t_color	color;
+	double	light_level;
+	
 } t_hit_record;
 
 typedef struct s_frame_buffer

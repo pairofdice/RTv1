@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/25 15:26:50 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:26:34 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ static void	find_normal(t_context *ctx)
 
 void	draw(t_context *ctx)
 {
-	// t_point	light;
 	double	distance;
 	int		x;
 	int		y;
 	double	light_level;
 
-	// light = vec3_new(6.0, 2.0, -1.0);
 	y = 0;
 	while (y < WIN_H)
 	{
