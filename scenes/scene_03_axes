@@ -1,21 +1,21 @@
 
 { cylinder
 	loc 0.0 0.0 -6.0
-	rot 0.0 1.0 0.0
+	dir 0.0 1.0 0.0
 	size 0.1
 	color 0.0 1.0 0.0
 }
 
 { cylinder
 	loc 0.0 0.0 -6.0
-	rot 1.0 0.0 0.0
+	dir 1.0 0.0 0.0
 	size 0.1
 	color 1.0 0.0 0.0
 }
 
 { cylinder
 	loc 0.0 0.0 -6.0
-	rot -0.2 0.2 1.0
+	dir -0.2 0.2 1.0
 	size 0.1
 	color 0.0 0.0 1.0
 }

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/24 21:54:23 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:23:14 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #define NO_RENDER 0
 #define TRUE 1
 #define FALSE 0
+#define PI 3.141592653
 
 // #define BUFF_SIZE 110
 //# define MAX_FD 8192
@@ -65,9 +66,9 @@ typedef struct s_context
 	SDL_Texture		*texture;
 	t_frame_buffer	frame_buffer;
 	t_cam			cam;
+	t_light			light;
 	t_ray			ray;
 	t_light			ambient;
-	t_light			light;
 	t_ray			normal;
 	// t_object		OBJECTS[NUM_OBJECTS];
 	t_hit_record	hit;
@@ -94,7 +95,7 @@ void	draw(t_context *ctx);
 void	write_buffer(t_context *ctx, int *texture_data, int *texture_pitch, int render);
 
 t_vec3	vec3_new(double x, double y, double z);
-double	get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, size_t id);
+double	get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id);
 t_color	debug_shading(t_vec3 normal);
 t_color	shade(t_object obj, double shading, t_light *ambient);
 void	init_camera(t_cam *cam, t_point loc);
@@ -125,6 +126,9 @@ int	ft_atof(char *str, double *result);
 void init_camera(t_cam *cam, t_point loc);
 void	calc_current_ray(t_context *ctx, int x, int y);
 void	set_camera(t_context *ctx);
+void	set_light(t_context *ctx);
+t_vec3	vec3_rotate(t_vec3 u, t_vec3 v);
+double	to_radians(double degrees);
 
 
 

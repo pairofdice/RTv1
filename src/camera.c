@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:53:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/22 14:41:41 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:40:55 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void init_camera(t_cam *cam, t_point loc)
 	// 1.05 radians is ~60 degrees
 	cam->projection_plane_h = tan(1.05 / 2) * 2 * cam->distance_to_proj;
 	cam->projection_plane_w = cam->projection_plane_h * cam->aspect;
-	cam->scene_up = vec3_unit(cam->scene_up);
+	cam->scene_up = vec3_neg( vec3_unit(cam->scene_up));
 	cam->dir = vec3_unit(vec3_sub(cam->coi, cam->loc));
 	cam->n = vec3_neg(cam->dir);
 	cam->right = vec3_cross(cam->scene_up, cam->n);

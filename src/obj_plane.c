@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   obj_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/15 16:45:46 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 00:54:12 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <math.h>
 #include <stdio.h>
 
-/* t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b) 
+/* t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
 {
 	// fix rgb with maybe union, maybe struct, maybe 0xFFFFFF00(hex) colors
 	t_object	s;
@@ -56,7 +56,7 @@ N • (R.p + t * R.d) - N • T = 0
 N • (R.p + t * R.d) = N • T
 N • R.p + t * (N • R.d) = N • T
 t * (N • R.d) = N • T - N • R.p
-t = (N • T - N • R.p) /  (N • R.d) 
+t = (N • T - N • R.p) /  (N • R.d)
 t = (N • (T - R.p)) /  (N • R.d)
 */
 int	intersects_plane(t_ray *ray, t_object *plane, double *distance)
@@ -68,8 +68,8 @@ int	intersects_plane(t_ray *ray, t_object *plane, double *distance)
 	normal_dot_raydir = vec3_dot(plane->rot, ray->dir);
 	tr = vec3_sub(plane->loc, ray->orig);
 	normal_dot_tr = vec3_dot(plane->rot, tr);
-	if ((normal_dot_tr < 0 && normal_dot_raydir > 0)
-		|| (normal_dot_tr > 0 && normal_dot_raydir < 0))
+	if ((normal_dot_tr < 0.0001 && normal_dot_raydir > 0.0)
+		|| (normal_dot_tr > 0.0 && normal_dot_raydir < 0.0))
 		return (0);
 	*distance = normal_dot_tr / normal_dot_raydir;
 	return (1);

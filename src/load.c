@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/24 21:55:33 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/25 23:52:27 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 	if (ft_strncmp(**words, "loc", 3) == 0)
 	{
 		ctx->obj.loc = read_triple(*words);
-		printf("?? %f %f %f\n", ctx->obj.loc.x, ctx->obj.loc.y, ctx->obj.loc.z);
 	}
-	if (ft_strncmp(**words, "rot", 3) == 0)
+	if (ft_strncmp(**words, "translate", 9) == 0)
+		ctx->obj.loc = vec3_add(ctx->obj.loc, read_triple(*words));
+	if (ft_strncmp(**words, "dir", 3) == 0)
 		ctx->obj.rot = vec3_unit(read_triple(*words));
+	if (ft_strncmp(**words, "rotate", 6) == 0)
+		ctx->obj.rot = vec3_unit(vec3_rotate(ctx->obj.rot, read_triple(*words)));
 	if (ft_strncmp(**words, "coi", 3) == 0)
 		ctx->cam.coi = read_triple(*words);
 	if (ft_strncmp(**words, "color", 5) == 0)
@@ -71,16 +74,12 @@ static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
 		printf(" - %f", ctx->obj.size);
 	}
 }
-/*
+
 void	set_light(t_context *ctx)
 {
-	// TODO
-	init_camera(&
-	ctx->, ctx->obj.loc);
-	ctx->cam.loc = ctx->obj.loc;
-	ctx->cam.coi = ctx->obj.coi;
+	ctx->light.loc = ctx->obj.loc;
 }
- */
+
 
 static void	parse_line(t_context *ctx)
 {
@@ -90,8 +89,8 @@ static void	parse_line(t_context *ctx)
 	{
 		if (ctx->obj.type == CAMERA)
 			set_camera(ctx);
-		/* if (ctx->obj.type == LIGHT)
-			set_light(ctx); */
+		if (ctx->obj.type == LIGHT)
+			set_light(ctx);
 		ctx->parse_state = NOTHING;
 		if (vec_push(&ctx->scene, &ctx->obj) == -1)
 			exit (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_shading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/13 16:41:00 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 00:22:46 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,16 @@ t_color shade(t_object obj, double shading, t_light *ambient)
 	return (c);
 }
 
-double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, size_t id)
+double get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
 {
-	// t_vec3 temp;
 	t_vec3 to_light;
 	double distance;
-	// t_ray test;
 	t_object o;
 
 	double dot;
 	size_t i;
 
-	to_light = vec3_sub(light, normal.orig);
+	to_light = vec3_sub(ctx->light.loc, normal.orig);
 	i = 0;
 	distance = vec3_mag(to_light);
 
@@ -113,7 +111,7 @@ double get_light_level(t_ray normal, t_point light, t_ray ray, t_context *ctx, s
 		}
 
 		i++;
-	} 
+	}
 
 	dot = vec3_dot(normal.dir, vec3_unit(to_light));
 	vec3_dot(vec3_neg(ray.dir), normal.dir);

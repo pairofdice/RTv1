@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/09/24 19:22:14 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/25 22:20:22 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ SRC = $Smain.c \
 	$Sobj_cone.c \
 	$Sobj_cylinder.c \
 	$Sload.c \
+	$Sto_radians.c \
+	$Svec3_rotate.c \
 	$Sparse.c \
 	$Scamera.c \
 	$Scurrent_ray.c \
