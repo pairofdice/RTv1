@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/25 23:52:27 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:35:30 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,43 +43,30 @@ static void	free_array(void **array)
 	*array = NULL;
 }
 
-static void	process_line(t_context *ctx, char ***words/* , t_vec *obj_vec */)
+static void	process_line(t_context *ctx, char ***words)
 {
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
 	**words = ft_strtrim(**words);
 	if (ft_strncmp(**words, "loc", 3) == 0)
-	{
 		ctx->obj.loc = read_triple(*words);
-	}
 	if (ft_strncmp(**words, "translate", 9) == 0)
 		ctx->obj.loc = vec3_add(ctx->obj.loc, read_triple(*words));
 	if (ft_strncmp(**words, "dir", 3) == 0)
 		ctx->obj.rot = vec3_unit(read_triple(*words));
 	if (ft_strncmp(**words, "rotate", 6) == 0)
-		ctx->obj.rot = vec3_unit(vec3_rotate(ctx->obj.rot, read_triple(*words)));
+		ctx->obj.rot = vec3_unit(vec3_rotate(ctx->obj.rot,
+					read_triple(*words)));
 	if (ft_strncmp(**words, "coi", 3) == 0)
 		ctx->cam.coi = read_triple(*words);
 	if (ft_strncmp(**words, "color", 5) == 0)
 		ctx->obj.color = read_triple(*words);
-		printf("\n %f %f %f  \n", ctx->obj.color.x, ctx->obj.color.y , ctx->obj.color.z);
 	if (ft_strncmp(**words, "size", 4) == 0)
 	{
 		(*words)++;
-		printf("%s", **words);
-		// ctx->obj.size = ft_atof(**words);
-		// ft_atof(**words, ctx->obj->size);
 		ft_atof(**words, &ctx->obj.size);
-
-		printf(" - %f", ctx->obj.size);
 	}
 }
-
-void	set_light(t_context *ctx)
-{
-	ctx->light.loc = ctx->obj.loc;
-}
-
 
 static void	parse_line(t_context *ctx)
 {
@@ -90,7 +77,7 @@ static void	parse_line(t_context *ctx)
 		if (ctx->obj.type == CAMERA)
 			set_camera(ctx);
 		if (ctx->obj.type == LIGHT)
-			set_light(ctx);
+			ctx->light.loc = ctx->obj.loc;
 		ctx->parse_state = NOTHING;
 		if (vec_push(&ctx->scene, &ctx->obj) == -1)
 			exit (1);

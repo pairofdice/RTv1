@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/24 21:55:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:19:56 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_valid_float(char *str)
 		str++;
 	}
 	if (*str != '.')
-		return(0);
+		return (0);
 	str++;
 	if (!ft_isdigit(*str))
 		return (0);
@@ -35,7 +35,7 @@ int	is_valid_float(char *str)
 	return (1);
 }
 
-int	ft_atof(char *str, double *result) // return type to int/error and give pointer to float
+int	ft_atof(char *str, double *result)
 {
 	int		fraction;
 	int		fraction_len;
@@ -69,7 +69,7 @@ int	check_triple_length(char **strs)
 	return (1);
 }
 
-t_point	read_triple(char **strs) // return type to int/error and give pointer to values isnum
+t_point	read_triple(char **strs)
 {
 	t_point	p;
 
@@ -78,7 +78,6 @@ t_point	read_triple(char **strs) // return type to int/error and give pointer to
 	p.z = 0.0;
 	if (!check_triple_length(++strs))
 		return (p);
-
 	ft_atof(strs[0], &p.x);
 	ft_atof(strs[1], &p.y);
 	ft_atof(strs[2], &p.z);

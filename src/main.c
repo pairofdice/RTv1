@@ -6,26 +6,24 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/19 17:44:37 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:31:21 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../inc/RTv1.h"
 #include "RTv1.h"
 #include <stdbool.h>
 #include <stdio.h>
 
-void close_rtv1(t_context *ctx) 
+void	close_rtv1(t_context *ctx)
 {
-	// Destroy window
+	vec_free(&ctx->scene);
 	SDL_DestroyWindow(ctx->window);
 	ctx->window = NULL;
-	// Quit SDL subsystems
 	SDL_Quit();
 	exit(0);
 }
 
-void test_load(t_context * ctx)
+/* void test_load(t_context * ctx)
 {
 	size_t i;
 	t_object o;
@@ -42,17 +40,13 @@ void test_load(t_context * ctx)
 		i++;
 	}
 }
+ */
+void	handle_events(SDL_Event e);
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_context ctx;
 
-	//tests();
-	// Start up SDL and create window
-
-
-
-	
 	if (!init(&ctx))
 	{
 		printf("Failed to initialize!\n");
@@ -60,46 +54,30 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		//handle_args(int argc, char **argv, t_context *ctx)
 		handle_args(argc, argv, &ctx);
-		test_load(&ctx);
-		// Main loop flag
-		// bool quit = false;
 		ctx.quit = FALSE;
-		// Event handler
 		SDL_Event e;
-
-		// While application is running
 		int texture_pitch;
 		int *texture_data;
 		texture_data = NULL;
 		write_buffer(&ctx, texture_data, &texture_pitch, RENDER);
 		while (!ctx.quit)
 		{
-			// Handle events on queue
+			// handle_events();
 			if (SDL_WaitEvent(&e) != 0)
 			{
-				// User requests quit
 				if (e.type == SDL_QUIT)
-				{
 					ctx.quit = true;
-				}
 				else if (e.type == SDL_WINDOWEVENT)
 				{
 					
 					if (e.window.event == SDL_WINDOWEVENT_EXPOSED)
-					{
-						printf("tahti!\n");
 						write_buffer(&ctx, texture_data, &texture_pitch, NO_RENDER);
-						
-					}
 				}
 				else if (e.type == SDL_KEYDOWN)
 				{
 					if (e.key.keysym.sym == SDLK_ESCAPE)
-					{
 						ctx.quit = true;
-					}
 					if (e.key.keysym.sym == SDLK_w)
 					{
 						printf("W!\n");
@@ -138,13 +116,10 @@ int main(int argc, char **argv)
 					}
 				}
 			}
-			// Render texture to screen
 			SDL_RenderCopy(ctx.renderer, ctx.texture, NULL, NULL);
-			// Update screen
 			SDL_RenderPresent(ctx.renderer);
 		}
 	}
-	// Free resources and close SDL
 	close_rtv1(&ctx);
 	return 0;
 }

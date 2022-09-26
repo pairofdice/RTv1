@@ -13,7 +13,6 @@ Makefilejh
 jh_gitignore
 hello_world.bmp
 build/
-libsdl2/
 libsdl2_old/
 libsdl2/build/
 libsdl2/gen/

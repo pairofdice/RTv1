@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:14:47 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 00:23:13 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:18:29 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
-
 
 static void	gg_vec_rotate_x(t_vec3 *v, double deg)
 {
@@ -54,7 +53,7 @@ static void	gg_vec_rotate_z(t_vec3 *v, double deg)
 
 t_vec3	vec3_rotate(t_vec3 dir, t_vec3 rot)
 {
-	t_vec3 result;
+	t_vec3	result;
 
 	result = dir;
 	gg_vec_rotate_x(&result, rot.x);
