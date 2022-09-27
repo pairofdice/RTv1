@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 19:57:58 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:11:34 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ static void	process_line(t_context *ctx, char ***words)
 		ctx->obj.rot = vec3_unit(vec3_rotate(ctx->obj.rot,
 					read_triple(*words)));
 	if (ft_strncmp(**words, "coi", 3) == 0)
-		ctx->cam.coi = read_triple(*words);
+		ctx->obj.coi = read_triple(*words);
+	if (ft_strncmp(**words, "up", 2) == 0)
+		ctx->cam.scene_up = read_triple(*words);
 	if (ft_strncmp(**words, "color", 5) == 0)
 		ctx->obj.color = read_triple(*words);
 	if (ft_strncmp(**words, "size", 4) == 0)

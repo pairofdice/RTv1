@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 20:37:09 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/27 17:56:40 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int init(t_context *ctx)
 	ctx->obj = default_object();
 	ctx->hit = hit_record_new();
 	printf("id in init? %d \n", ctx->obj.type);
+	cam.scene_up = (t_point){0.0, 1.0, 0.0};
+	cam.scene_up = vec3_neg(vec3_unit(cam.scene_up));
 	init_camera(&cam, (t_point){0.0, 0.0, 7.0});
 	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){0.1, 0.1, 0.2}, 0.001);
 	ctx->cam = cam;

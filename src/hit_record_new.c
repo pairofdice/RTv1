@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:14:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/08 18:37:39 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:47:57 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_hit_record	hit_record_new()
 {
 	t_hit_record	hit;
 
-	hit.closest_distance = 1.0/0.0;
-	hit.max_distance = 1.0/0.0;
+	hit.closest_distance = INFINITY;
+	hit.max_distance = INFINITY;
 	hit.closest_id = -1;
 	hit.is_hit = 0;
 /* 	hit.loc;
