@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 20:41:21 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:16:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_frame_buffer
 	size_t bits_per_pixel;
 	unsigned long line_length;
 	int height;
+	int texture_pitch;
+	int *texture_data;
 
 } t_frame_buffer;
 
@@ -84,6 +86,7 @@ typedef struct s_context
 	int				render;
 	int 			quit;
 	int				gnl; // if gnl fails, error handling
+	SDL_Event 		e;
 
 } t_context;
 
@@ -95,7 +98,7 @@ void	close_rtv1(t_context *ctx);
 
 
 void	draw(t_context *ctx);
-void	write_buffer(t_context *ctx, int *texture_data, int *texture_pitch, int render);
+void	write_buffer(t_context *ctx, int *texture_data, int *texture_pitch);
 
 t_vec3	vec3_new(double x, double y, double z);
 double	get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id);

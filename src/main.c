@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/27 17:47:29 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:37:19 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,112 +17,67 @@
 void	close_rtv1(t_context *ctx)
 {
 	vec_free(&ctx->scene);
-	free(ctx->frame_buffer.data);
+	ft_memdel((void **)&ctx->frame_buffer.data);
 	SDL_DestroyWindow(ctx->window);
+	ctx->window = NULL;
 	SDL_DestroyTexture(ctx->texture);
+	ctx->texture = NULL;
 	SDL_DestroyRenderer(ctx->renderer);
 	ctx->window = NULL;
 	SDL_Quit();
 	exit(0);
 }
 
-/* void test_load(t_context * ctx)
+void	move_cam(t_context *ctx, t_vec3 dir)
 {
-	size_t i;
-	t_object o;
+	t_point loc = ctx->cam.loc;
+	loc = vec3_add(loc, dir);
+	init_camera(&ctx->cam, loc);
+	draw(ctx);
+	write_buffer(ctx, ctx->frame_buffer.texture_data, &ctx->frame_buffer.texture_pitch);
+}
 
-	printf("\n--- ctx->scene contents:\n");
-	i = 0;
-	while (i < ctx->scene.len)
+void	handle_events(t_context *ctx)
+{
+	if (ctx->e.key.keysym.sym == SDLK_ESCAPE)
+		ctx->quit = true;
+	if (ctx->e.key.keysym.sym == SDLK_w)
+		move_cam(ctx, ctx->cam.dir);
+	if (ctx->e.key.keysym.sym == SDLK_a)
+		move_cam(ctx, vec3_neg(ctx->cam.right));
+	if (ctx->e.key.keysym.sym == SDLK_s)
+		move_cam(ctx, vec3_neg(ctx->cam.dir));
+	if (ctx->e.key.keysym.sym == SDLK_d)
+		move_cam(ctx, ctx->cam.right);
+}
+
+void	run_rtv1(t_context *ctx)
+{
+	while (!ctx->quit)
 	{
-		o = *(t_object *) vec_get(&ctx->scene, i);
-		printf("obj type: %d\n", o.type);
-		printf("obj loc:  %f %f %f\n", o.loc.x, o.loc.y, o.loc.z);
-		printf("obj color:  %f %f %f\n", o.color.x, o.color.y, o.color.z);
-
-		i++;
+		if (SDL_WaitEvent(&ctx->e) != 0)
+		{
+			if (ctx->e.type == SDL_QUIT)
+				ctx->quit = true;
+			else if (ctx->e.type == SDL_WINDOWEVENT)
+			{
+				if (ctx->e.window.event == SDL_WINDOWEVENT_EXPOSED)
+					write_buffer(ctx, ctx->frame_buffer.texture_data, &  ctx->frame_buffer.texture_pitch);
+			}
+			else if (ctx->e.type == SDL_KEYDOWN)
+				handle_events(ctx);
+		}
 	}
 }
- */
-void	handle_events(SDL_Event e);
 
 int	main(int argc, char **argv)
 {
 	t_context ctx;
 
-	if (!init(&ctx))
-	{
-		printf("Failed to initialize!\n");
-		close_rtv1(&ctx);
-	}
-	else
-	{
-		handle_args(argc, argv, &ctx);
-		ctx.quit = FALSE;
-		SDL_Event e;
-		int texture_pitch;
-		int *texture_data;
-		texture_data = NULL;
-		write_buffer(&ctx, texture_data, &texture_pitch, RENDER);
-		while (!ctx.quit)
-		{
-			// handle_events();
-			if (SDL_WaitEvent(&e) != 0)
-			{
-				if (e.type == SDL_QUIT)
-					ctx.quit = true;
-				else if (e.type == SDL_WINDOWEVENT)
-				{
-					
-					if (e.window.event == SDL_WINDOWEVENT_EXPOSED)
-						write_buffer(&ctx, texture_data, &texture_pitch, NO_RENDER);
-				}
-				else if (e.type == SDL_KEYDOWN)
-				{
-					if (e.key.keysym.sym == SDLK_ESCAPE)
-						ctx.quit = true;
-					if (e.key.keysym.sym == SDLK_w)
-					{
-						printf("W!\n");
-						t_point loc = ctx.cam.loc;
-						t_vec3 dir = ctx.cam.dir;
-						loc = vec3_add(loc, dir);
-						init_camera(&ctx.cam, loc);
-						write_buffer(&ctx, texture_data, &texture_pitch, RENDER);
-					}
-					if (e.key.keysym.sym == SDLK_a)
-					{
-						printf("A!\n");
-						t_point loc = ctx.cam.loc;
-						t_vec3 dir = vec3_neg(ctx.cam.right);
-						loc = vec3_add(loc, dir);
-						init_camera(&ctx.cam, loc);
-						write_buffer(&ctx, texture_data, &texture_pitch, RENDER);
-					}
-					if (e.key.keysym.sym == SDLK_s)
-					{
-						printf("Q!\n");
-						t_point loc = ctx.cam.loc;
-						t_vec3 dir = vec3_neg(ctx.cam.dir);
-						loc = vec3_add(loc, dir);
-						init_camera(&ctx.cam, loc);
-						write_buffer(&ctx, texture_data, &texture_pitch, RENDER);
-					}
-					if (e.key.keysym.sym == SDLK_d)
-					{
-						printf("Q!\n");
-						t_point loc = ctx.cam.loc;
-						t_vec3 dir = ctx.cam.right;
-						loc = vec3_add(loc, dir);
-						init_camera(&ctx.cam, loc);
-						write_buffer(&ctx, texture_data, &texture_pitch, RENDER);
-					}
-				}
-			}
-			SDL_RenderCopy(ctx.renderer, ctx.texture, NULL, NULL);
-			SDL_RenderPresent(ctx.renderer);
-		}
-	}
+	init(&ctx);
+	handle_args(argc, argv, &ctx);	
+	draw(&ctx);
+	run_rtv1(&ctx);
 	close_rtv1(&ctx);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/27 17:56:40 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:12:03 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int init(t_context *ctx)
 	ctx->hit = hit_record_new();
 	printf("id in init? %d \n", ctx->obj.type);
 	cam.scene_up = (t_point){0.0, 1.0, 0.0};
-	cam.scene_up = vec3_neg(vec3_unit(cam.scene_up));
+	//cam.scene_up = vec3_neg(vec3_unit(cam.scene_up));
 	init_camera(&cam, (t_point){0.0, 0.0, 7.0});
 	ctx->ambient = light_new((t_point){0, 0, 0}, (t_color){0.1, 0.1, 0.2}, 0.001);
 	ctx->cam = cam;
@@ -73,9 +73,11 @@ int init(t_context *ctx)
 									 SDL_TEXTUREACCESS_STREAMING, WIN_W, WIN_H);
 	if (ctx->texture == NULL)
 		close_rtv1(ctx);
-	// ctx->frame_buffer.data = (char *)malloc(WIN_H * WIN_W * 4);
-	/* if (!ctx->frame_buffer.data)
-		close_rtv1(ctx); */
+	ctx->frame_buffer.data = (char *)malloc(WIN_H * WIN_W * 4);
+	if (!ctx->frame_buffer.data)
+		close_rtv1(ctx);
+	ctx->frame_buffer.texture_data = NULL;
+	ctx->quit = FALSE;
 	
 	//handle_args(int argc, char **argv, t_context *ctx)
 	return (1);

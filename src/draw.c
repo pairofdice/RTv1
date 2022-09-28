@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 20:41:30 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:46:38 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	draw_pixel(t_context *ctx, int x, int y)
 					ctx->hit.closest_distance), ctx->hit.normal},
 				ctx->ray, ctx, ctx->hit.closest_id);
 		ctx->hit.color = shade(ctx->obj, ctx->hit.light_level, &ctx->ambient);
-		img_pixel_put(&ctx->frame_buffer, x, y, ctx->hit.color);
+		img_pixel_put(&ctx->frame_buffer, x, WIN_H - 1 - y, ctx->hit.color);
 	}
 	else
-		img_pixel_put(&ctx->frame_buffer, x, y, ctx->ambient.color);
+		img_pixel_put(&ctx->frame_buffer, x, WIN_H - 1 - y, ctx->ambient.color);
 }
 
 void	draw(t_context *ctx)
@@ -72,19 +72,11 @@ void	draw(t_context *ctx)
 
 void	write_buffer(t_context *ctx,
 					int *texture_data,
-					int *texture_pitch,
-					int render)
+					int *texture_pitch)
 {
 	SDL_LockTexture(ctx->texture, NULL, (void *)&texture_data, texture_pitch);
-	ctx->frame_buffer.data = malloc(WIN_H * WIN_W * 4);
-	if (render == RENDER)
-	{
-		// TODO
-	}
-	ft_memset(ctx->frame_buffer.data, 0, WIN_H * WIN_W * 4);
-	draw(ctx);
-	printf("Rendered!\n");
-	printf("Exposed!\n");
 	ft_memcpy(texture_data, ctx->frame_buffer.data, WIN_H * WIN_W * 4);
 	SDL_UnlockTexture(ctx->texture);
+	SDL_RenderCopy(ctx->renderer, ctx->texture, NULL, NULL);
+	SDL_RenderPresent(ctx->renderer);
 }

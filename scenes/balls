@@ -1,37 +1,116 @@
 { sphere
-	loc 4.2 0.0 0.0
+	loc 1.0 0.0 0.0
 	color 1.0 0.3 0.3
-	size 1.69
+	size 0.15
 }
 
 { sphere
-	loc -4.2 0.0 0.0
+	loc -1.0 0.0 0.0
 	color 0.3 1.0 1.0
-	size 1.69
+	size 0.15
 }
 
 { sphere
-	loc 0.0 4.2 0.0
+	loc 0.0 1.0 0.0
 	color 0.3 1.0 0.3
-	size 1.69
+	size 0.15
 }
 
 { sphere
-	loc 0.0 -4.2 0.0
+	loc 0.0 -1.0 0.0
 	color 1.0 0.3 1.0
-	size 1.69
+	size 0.15
 }
 { sphere
-	loc 0.0 0.0 4.2
+	loc 0.0 0.0 1.0
 	color 0.3 0.3 1.0
-	size 1.69
+	size 0.15
 }
 
 { sphere
-	loc 0.0 0.0 -4.2
+	loc 0.0 0.0 -1.0
 	color 1.0 1.0 0.3
-	size 1.69
+	size 0.15
 }
+
+------- 2--- 
+
+{ sphere
+	loc 2.0 0.0 0.0
+	color 1.0 0.3 0.3
+	size 0.15
+}
+
+{ sphere
+	loc -2.0 0.0 0.0
+	color 0.3 1.0 1.0
+	size 0.15
+}
+
+{ sphere
+	loc 0.0 2.0 0.0
+	color 0.3 1.0 0.3
+	size 0.15
+}
+
+{ sphere
+	loc 0.0 -2.0 0.0
+	color 1.0 0.3 1.0
+	size 0.15
+}
+{ sphere
+	loc 0.0 0.0 2.0
+	color 0.3 0.3 1.0
+	size 0.15
+}
+
+{ sphere
+	loc 0.0 0.0 -2.0
+	color 1.0 1.0 0.3
+	size 0.15
+}
+-----3 
+
+{ sphere
+	loc 3.0 0.0 0.0
+	color 1.0 0.3 0.3
+	size 0.15
+}
+
+{ sphere
+	loc -3.0 0.0 0.0
+	color 0.3 1.0 1.0
+	size 0.15
+}
+
+{ sphere
+	loc 0.0 3.0 0.0
+	color 0.3 1.0 0.3
+	size 0.15
+}
+
+{ sphere
+	loc 0.0 -3.0 0.0
+	color 1.0 0.3 1.0
+	size 0.15
+}
+{ sphere
+	loc 0.0 0.0 3.0
+	color 0.3 0.3 1.0
+	size 0.15
+}
+
+{ sphere
+	loc 0.0 0.0 -3.0
+	color 1.0 1.0 0.3
+	size 0.15
+}
+
+
+
+
+
+
 
 
 
@@ -40,6 +119,6 @@
 }
 
 { camera
-	loc 0.0 6.0 10.0
+	loc 2.0 2.0 10.0
 	coi 0.0 0.0 0.0
 }
