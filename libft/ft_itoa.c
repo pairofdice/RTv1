@@ -6,13 +6,12 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 15:29:14 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/07 14:37:08 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:50:34 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
-
 
 static void	ft_set_nb(long int *nb, int *neg)
 {

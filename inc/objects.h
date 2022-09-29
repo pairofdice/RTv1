@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/27 16:10:21 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:52:45 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,12 @@ typedef struct s_cam
 	t_vec3 n;
 	t_point coi;
 	t_vec3 scene_up;
-	// pp = projection plane
 	double distance_to_proj;
 	t_vec3 cam_to_proj;
 	t_vec3 projection_plane_center;
 	double projection_plane_h;
 	double projection_plane_w;
 	double aspect;
-	// double	closest_hit;
-	// int		is_hit;
-	// int		closest_id;
 } t_cam;
 
 #endif

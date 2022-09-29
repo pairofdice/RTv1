@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_radians.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:02:09 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/25 22:20:37 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:53:53 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 double	to_radians(double degrees)
 {
-	return (degrees * PI / 180);
+	return (degrees * M_PI / 180);
 }

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:16:59 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 19:22:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:29:04 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	gg_intersections_per_type(t_context *ctx, double distance, size_t i)
 	}
 }
 
-void	intersects(t_context *ctx, double distance, int light)
+void	intersects(t_context *ctx, double distance)
 {
 	size_t	i;
 

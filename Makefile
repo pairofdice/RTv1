@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+         #
+#    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/09/25 22:20:22 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/29 15:28:11 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ SRC = $Smain.c \
 	$Shit_record_new.c \
 	$Sintersects.c \
 	$Squadratic.c \
-	$Stests.c \
 	$Svec3_add.c \
 	$Svec3_cross.c \
 	$Svec3_dot.c \
@@ -51,9 +50,8 @@ SRC = $Smain.c \
 	$Sparse.c \
 	$Scamera.c \
 	$Scurrent_ray.c \
+	$Sshadow_ray_tests.c \
 
-#	$Sft_memcpy.c \
-#	$Sft_memset.c \
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
@@ -67,7 +65,7 @@ LIBFT = libft/
 LIBA = libft/libft.a
 
 CFLAGS += -c -Wall -Wextra #-Werror
-#ßCFLAGS += -Wconversion -Wuninitialized
+#CFLAGS += -Wconversion -Wuninitialized
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)
 

@@ -6,15 +6,15 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/28 17:37:19 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:14:32 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RTv1.h"
+#include "../inc/RTv1.h"
 #include <stdbool.h>
 #include <stdio.h>
 
-void	close_rtv1(t_context *ctx)
+void	rt_close(t_context *ctx)
 {
 	vec_free(&ctx->scene);
 	ft_memdel((void **)&ctx->frame_buffer.data);
@@ -30,11 +30,15 @@ void	close_rtv1(t_context *ctx)
 
 void	move_cam(t_context *ctx, t_vec3 dir)
 {
-	t_point loc = ctx->cam.loc;
+	t_point	loc;
+
+	loc = ctx->cam.loc;
 	loc = vec3_add(loc, dir);
 	init_camera(&ctx->cam, loc);
 	draw(ctx);
-	write_buffer(ctx, ctx->frame_buffer.texture_data, &ctx->frame_buffer.texture_pitch);
+	write_buffer(ctx,
+		ctx->frame_buffer.texture_data,
+		&ctx->frame_buffer.texture_pitch);
 }
 
 void	handle_events(t_context *ctx)
@@ -51,7 +55,7 @@ void	handle_events(t_context *ctx)
 		move_cam(ctx, ctx->cam.right);
 }
 
-void	run_rtv1(t_context *ctx)
+void	rt_run(t_context *ctx)
 {
 	while (!ctx->quit)
 	{
@@ -62,7 +66,9 @@ void	run_rtv1(t_context *ctx)
 			else if (ctx->e.type == SDL_WINDOWEVENT)
 			{
 				if (ctx->e.window.event == SDL_WINDOWEVENT_EXPOSED)
-					write_buffer(ctx, ctx->frame_buffer.texture_data, &  ctx->frame_buffer.texture_pitch);
+					write_buffer(ctx,
+						ctx->frame_buffer.texture_data,
+						&ctx->frame_buffer.texture_pitch);
 			}
 			else if (ctx->e.type == SDL_KEYDOWN)
 				handle_events(ctx);
@@ -72,12 +78,12 @@ void	run_rtv1(t_context *ctx)
 
 int	main(int argc, char **argv)
 {
-	t_context ctx;
+	t_context	ctx;
 
 	init(&ctx);
-	handle_args(argc, argv, &ctx);	
+	handle_args(argc, argv, &ctx);
 	draw(&ctx);
-	run_rtv1(&ctx);
-	close_rtv1(&ctx);
-	return 0;
+	rt_run(&ctx);
+	rt_close(&ctx);
+	return (0);
 }

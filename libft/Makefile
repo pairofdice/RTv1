@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 12:23:08 by jsaarine          #+#    #+#              #
-#    Updated: 2022/09/07 15:00:57 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/29 15:48:44 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRCS =	ft_memset.c		ft_bzero.c		ft_memcpy.c		ft_memccpy.c	\
 		vec_push.c		vec_append.c	vec_strapp.c	vec_intapp.c	\
 		vec_ptrapp.c	vec_get.c	\
 		\
-		ft_getnextline.c
+		ft_getnextline.c vec3_reflect.c
 
 
 

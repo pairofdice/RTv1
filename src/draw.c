@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/28 15:46:38 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:29:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	draw_pixel(t_context *ctx, int x, int y)
 
 	calc_current_ray(ctx, x, y);
 	distance = 1.0 / 0.0;
-	intersects(ctx, distance, NOT_LIGHT);
+	intersects(ctx, distance);
 	if (ctx->hit.is_hit && ctx->hit.closest_id >= 0)
 	{
 		find_normal(ctx);
 		ctx->hit.light_level = get_light_level((t_ray){vec3_ray_at(ctx->ray,
 					ctx->hit.closest_distance), ctx->hit.normal},
 				ctx->ray, ctx, ctx->hit.closest_id);
-		ctx->hit.color = shade(ctx->obj, ctx->hit.light_level, &ctx->ambient);
+		ctx->hit.color = shade(ctx->obj, ctx->hit.light_level);
 		img_pixel_put(&ctx->frame_buffer, x, WIN_H - 1 - y, ctx->hit.color);
 	}
 	else
@@ -53,7 +53,6 @@ void	draw_pixel(t_context *ctx, int x, int y)
 
 void	draw(t_context *ctx)
 {
-	double	distance;
 	int		x;
 	int		y;
 
