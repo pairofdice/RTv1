@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 13:21:26 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:07:50 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_context
 	char			**words;
 	char			**temp;
 	char			*line;
+	char			*trimmed;
 	int				render;
 	int				quit;
 	int				gnl;

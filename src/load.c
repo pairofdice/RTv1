@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:23:27 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:09:11 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	free_array(void **array)
 	while (*temp)
 	{
 		ft_memdel(temp);
-		temp++;	
+		temp++;
 	}
 	free(*array);
 	*array = NULL;
@@ -48,30 +48,30 @@ static void	free_array(void **array)
 
 static void	process_line(t_context *ctx, char ***words)
 {
-
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
-	**words = ft_strtrim(**words);
-	if (ft_strncmp(**words, "loc", 3) == 0)
+	ctx->trimmed = ft_strtrim(**words);
+	if (ft_strncmp(ctx->trimmed, "loc", 3) == 0)
 		ctx->obj.loc = read_triple(*words);
-	if (ft_strncmp(**words, "translate", 9) == 0)
+	if (ft_strncmp(ctx->trimmed, "translate", 9) == 0)
 		ctx->obj.loc = vec3_add(ctx->obj.loc, read_triple(*words));
-	if (ft_strncmp(**words, "dir", 3) == 0)
+	if (ft_strncmp(ctx->trimmed, "dir", 3) == 0)
 		ctx->obj.rot = vec3_unit(read_triple(*words));
-	if (ft_strncmp(**words, "rotate", 6) == 0)
+	if (ft_strncmp(ctx->trimmed, "rotate", 6) == 0)
 		ctx->obj.rot = vec3_unit(vec3_rotate(ctx->obj.rot,
 					read_triple(*words)));
-	if (ft_strncmp(**words, "coi", 3) == 0)
+	if (ft_strncmp(ctx->trimmed, "coi", 3) == 0)
 		ctx->obj.coi = read_triple(*words);
-	if (ft_strncmp(**words, "up", 2) == 0)
+	if (ft_strncmp(ctx->trimmed, "up", 2) == 0)
 		ctx->cam.scene_up = read_triple(*words);
-	if (ft_strncmp(**words, "color", 5) == 0)
+	if (ft_strncmp(ctx->trimmed, "color", 5) == 0)
 		ctx->obj.color = read_triple(*words);
-	if (ft_strncmp(**words, "size", 4) == 0)
+	if (ft_strncmp(ctx->trimmed, "size", 4) == 0)
 	{
 		(*words)++;
 		ft_atof(**words, &ctx->obj.size);
 	}
+	ft_strdel(&ctx->trimmed);
 }
 
 static void	parse_line(t_context *ctx)

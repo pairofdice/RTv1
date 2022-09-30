@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:16:03 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:34:54 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 #include "objects.h"
 #include <math.h>
 #include <stdio.h>
-
-/* t_object sphere_new(t_vec3 loc, double radius, int r, int g, int b)
-{
-	t_object s;
-
-	s.color.x = r;
-	s.color.y = g;
-	s.color.z = b;
-	s.loc = loc;
-	s.size = radius;
-	s.type = SPHERE;
-	return (s);
-} */
-// get_normal(SPHERES[ctx->cam.closest_id].loc, ctx->ray, ctx->cam.closest_hit);
-//*normal = vec3_unit( vec3_sub( vec3_add(ray->orig, 
-// vec3_scalar_mult(ray->dir, distance_to_intersection)), sphere->loc ) );
 
 t_vec3	get_sphere_normal(t_context *ctx)
 {
@@ -39,18 +23,12 @@ t_vec3	get_sphere_normal(t_context *ctx)
 	result = vec3_add(ctx->ray.orig, result);
 	result = vec3_sub(result, ctx->obj.loc);
 	result = vec3_unit(result);
-/* 	if (vec3_dot(ctx->ray.dir, result) > 0)
-		return (vec3_neg(result)); */
 	return (result);
 }
 
-	// t_vec3 c;
-	// printf("AAAAAAAAA %f\n", sphere->r);
 	// tc = distance along ray closest to sphere center
 	// if tc is negative we're looking in the wrong direction
 	// d = distance from sphere center to t
-	// printf("FINE?\n");
-	// printf("AAAAAAAAA %f\n", sphere->size);
 	// our ray, so one again pythagoras gives us the closest intersection
 	// so, once again
 	// d = distance to ray from sphere center

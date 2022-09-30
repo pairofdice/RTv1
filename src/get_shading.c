@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:16:08 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:32:57 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,9 @@ static int	sf_shadow_object_intersect(t_context *ctx,
 	size_t		i;
 
 	i = 0;
-	if (id)
-	{}
 	while (i < ctx->scene.len)
 	{
- 		if ((int)i == id)
+		if ((int)i == id)
 		{
 			i++;
 			continue ;
