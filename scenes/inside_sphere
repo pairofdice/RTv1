@@ -4,6 +4,12 @@
 	color 1.0 0.0 0.0
 }
 
+{ sphere
+	loc 0.0 0.0 10.0
+	size 3.42
+	color 0.0 0.0 1.0
+} 
+
 { light
 	loc 0.0 0.0 10.0
 }

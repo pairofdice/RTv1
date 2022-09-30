@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/28 20:29:28 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:16:11 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	find_normal(t_context *ctx)
 {
-	ctx->obj = *(t_object *)vec_get(&ctx->scene, ctx->hit.closest_id);
+	ctx->obj = *(t_object *)vec_get(&ctx->scene, (size_t)ctx->hit.closest_id);
 	if (ctx->obj.type == SPHERE)
 		ctx->hit.normal = get_sphere_normal(ctx);
 	else if (ctx->obj.type == PLANE)
@@ -31,7 +31,7 @@ static void	find_normal(t_context *ctx)
 	// direction is location of virtual pixel minus location of camera
 	// c = debug_shading(normal);
 
-void	draw_pixel(t_context *ctx, int x, int y)
+void	draw_pixel(t_context *ctx, unsigned int x, unsigned int y)
 {
 	double	distance;
 
@@ -53,8 +53,8 @@ void	draw_pixel(t_context *ctx, int x, int y)
 
 void	draw(t_context *ctx)
 {
-	int		x;
-	int		y;
+	unsigned int		x;
+	unsigned int		y;
 
 	y = 0;
 	while (y < WIN_H)

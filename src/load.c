@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 15:27:48 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:23:27 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,17 @@ static void	free_array(void **array)
 
 	temp = *array;
 	while (*temp)
-		ft_memdel(temp++);
+	{
+		ft_memdel(temp);
+		temp++;	
+	}
 	free(*array);
 	*array = NULL;
 }
 
 static void	process_line(t_context *ctx, char ***words)
 {
+
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
 	**words = ft_strtrim(**words);
@@ -72,9 +76,9 @@ static void	process_line(t_context *ctx, char ***words)
 
 static void	parse_line(t_context *ctx)
 {
-	if (ctx->parse_state == NOTHING && **ctx->temp == '{')
-		check_type(ctx->temp, ctx);
-	else if (**ctx->temp == '}')
+	if (ctx->parse_state == NOTHING && **ctx->words == '{')
+		check_type(ctx->words, ctx);
+	else if (**ctx->words == '}')
 	{
 		if (ctx->obj.type == CAMERA)
 			set_camera(ctx);
@@ -99,6 +103,8 @@ int	load_scene(int fd, t_context *ctx)
 		if (ctx->gnl <= 0)
 			break ;
 		ctx->words = ft_strsplit(ctx->line, ' ');
+		if (!ctx->words)
+			rt_close(ctx);
 		ctx->temp = ctx->words;
 		if (*ctx->temp)
 			parse_line(ctx);

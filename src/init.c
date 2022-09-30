@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 15:45:03 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:16:07 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ t_vec3	new_vec3(void)
 
 t_object	default_object(void)
 {
-	t_object	o;
+	t_object	obj;
 
-	o.type = NOTHING;
-	o.loc = new_vec3();
-	o.rot = new_vec3();
-	o.color = new_vec3();
-	o.brightness = 100.0;
-	o.size = 1.0;
-	return (o);
+	obj.type = NOTHING;
+	obj.loc = new_vec3();
+	obj.rot = new_vec3();
+	obj.color = new_vec3();
+	obj.brightness = 100.0;
+	obj.size = 1.0;
+	return (obj);
 }
 
 void	rt_sdl_init(t_context *ctx)

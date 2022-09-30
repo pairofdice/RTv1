@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 15:53:26 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:16:08 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,17 @@ int	test_objects(t_context *ctx, t_object obj, t_ray normal, t_vec3 to_light)
 static int	sf_shadow_object_intersect(t_context *ctx,
 							t_ray normal,
 							t_vec3 to_light,
-							size_t id)
+							int id)
 {
 	t_object	obj;
 	size_t		i;
 
 	i = 0;
+	if (id)
+	{}
 	while (i < ctx->scene.len)
 	{
-		if (i == id)
+ 		if ((int)i == id)
 		{
 			i++;
 			continue ;
@@ -103,7 +105,7 @@ static int	sf_shadow_object_intersect(t_context *ctx,
 	return (1);
 }
 
-double	get_light_level(t_ray normal, t_ray ray, t_context *ctx, size_t id)
+double	get_light_level(t_ray normal, t_ray ray, t_context *ctx, int id)
 {
 	t_vec3	to_light;
 

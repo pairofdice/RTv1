@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:53:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/28 20:10:13 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:16:14 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	init_camera(t_cam *cam, t_point loc)
 	cam->projection_plane_center = vec3_add(cam->loc,
 			vec3_scalar_mult(cam->dir, cam->distance_to_proj));
 	cam->cam_to_proj = vec3_sub(cam->loc, cam->projection_plane_center);
-	cam->L = vec3_sub(cam->projection_plane_center, vec3_scalar_mult(cam->right,
+	cam->virtual_screen_anchor = vec3_sub(cam->projection_plane_center,
+			vec3_scalar_mult(cam->right,
 				0.5 * cam->projection_plane_w));
-	cam->L = vec3_sub(cam->L, vec3_scalar_mult(cam->up,
+	cam->virtual_screen_anchor = vec3_sub(cam->virtual_screen_anchor,
+			vec3_scalar_mult(cam->up,
 				0.5 * cam->projection_plane_h));
 }
 

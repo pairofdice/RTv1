@@ -6,14 +6,14 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 12:55:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:21:27 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
-# include "vec3.h"
 # define OBJECTS_H
-# define EPSILON 0.000001
+
+# include "vec3.h"
 
 enum
 {
@@ -49,13 +49,13 @@ typedef struct s_light
 
 typedef struct s_cam
 {
-	t_point	L;
+	t_point	virtual_screen_anchor;
 	t_point	loc;
 	t_vec3	dir;
 	t_vec3	up;
 	t_vec3	right;
 	t_vec3	n;
-	t_point coi;
+	t_point	coi;
 	t_vec3	scene_up;
 	double	distance_to_proj;
 	t_vec3	cam_to_proj;

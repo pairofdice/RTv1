@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/09/29 15:28:11 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/09/30 13:50:39 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,12 +64,12 @@ SDL2_LDFLAGS = `$Dlibsdl2/bin/sdl2-config --libs`
 LIBFT = libft/
 LIBA = libft/libft.a
 
-CFLAGS += -c -Wall -Wextra #-Werror
-#CFLAGS += -Wconversion -Wuninitialized
+CFLAGS += -c -Wall -Wextra -Werror
+CFLAGS += -Wconversion -Wuninitialized
 CFLAGS += $(SDL2_CFLAGS)
 CFLAGS += $(addprefix -I, $I)
 
-LDFLAGS += -g -fsanitize=address
+LDFLAGS += -g #-fsanitize=address
 LDFLAGS += $(SDL2_LDFLAGS)
 
 OBJ = $(SRC:$S%=$O%.o)
@@ -99,22 +99,12 @@ $D:
 
 $(DEP): | $D
 
-#INCLUDES	=	-I./frameworks/SDL2.framework/Versions/A/Headers \
-				-I./frameworks/SDL2_ttf.framework/Versions/A/Headers \
-				-I./frameworks/SDL2_image.framework/Versions/A/Headers \
-				-I./frameworks/SDL2_mixer.framework/Headers \
-				-F./frameworks/
-#FRAMEWORKS	=	-F./frameworks \
-				-rpath ./frameworks \
-				-framework OpenGL -framework AppKit -framework OpenCl \
-				-framework SDL2 -framework SDL2_ttf -framework SDL2_image \
-				-framework SDL2_mixer
-
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
 $(SDL2_MK):
-	cd libsdl2 && ./configure --prefix=$(abspath $Dlibsdl2) --disable-shared --disable-video-wayland
+	cd libsdl2 && ./configure --prefix=$(abspath $Dlibsdl2) \
+		--disable-shared --disable-video-wayland
 	$(MAKE) --directory=libsdl2
 
 $(SDL2_LIB): $(SDL2_MK) | $D

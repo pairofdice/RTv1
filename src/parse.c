@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 20:03:12 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:16:02 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_valid_float(char *str)
 int	ft_atof(char *str, double *result)
 {
 	int		fraction;
-	int		fraction_len;
+	size_t	fraction_len;
 	double	neg;
 
 	neg = 1.0;
@@ -57,10 +57,12 @@ int	ft_atof(char *str, double *result)
 	return (1);
 }
 
-int	check_triple_length(char **strs)
+int	check_triple_length(char **temp)
 {
 	int	c;
+	char **strs;
 
+	strs = temp;
 	c = 0;
 	while (strs[c] != 0)
 		c++;
@@ -69,10 +71,12 @@ int	check_triple_length(char **strs)
 	return (1);
 }
 
-t_point	read_triple(char **strs)
+t_point	read_triple(char **temp)
 {
 	t_point	p;
+	char **strs;
 
+	strs = temp;
 	p.x = 0.0;
 	p.y = 0.0;
 	p.z = 0.0;
@@ -86,21 +90,23 @@ t_point	read_triple(char **strs)
 
 void	check_type(char **str, t_context *ctx)
 {
+	char **temp;
 	ctx->parse_state = PROCESSING;
-	++str;
-	if (*str)
+	temp = str;
+	++temp;
+	if (*temp)
 	{
-		if (ft_strncmp(*str, "light", 5) == 0)
+		if (ft_strncmp(*temp, "light", 5) == 0)
 			ctx->obj.type = LIGHT;
-		else if (ft_strncmp(*str, "cone", 4) == 0)
+		else if (ft_strncmp(*temp, "cone", 4) == 0)
 			ctx->obj.type = CONE;
-		else if (ft_strncmp(*str, "plane", 5) == 0)
+		else if (ft_strncmp(*temp, "plane", 5) == 0)
 			ctx->obj.type = PLANE;
-		else if (ft_strncmp(*str, "cylinder", 8) == 0)
+		else if (ft_strncmp(*temp, "cylinder", 8) == 0)
 			ctx->obj.type = CYLINDER;
-		else if (ft_strncmp(*str, "sphere", 6) == 0)
+		else if (ft_strncmp(*temp, "sphere", 6) == 0)
 			ctx->obj.type = SPHERE;
-		else if (ft_strncmp(*str, "camera", 6) == 0)
+		else if (ft_strncmp(*temp, "camera", 6) == 0)
 			ctx->obj.type = CAMERA;
 	}
 }

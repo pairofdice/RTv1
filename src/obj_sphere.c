@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 15:23:37 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:16:03 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_vec3	get_sphere_normal(t_context *ctx)
 	result = vec3_add(ctx->ray.orig, result);
 	result = vec3_sub(result, ctx->obj.loc);
 	result = vec3_unit(result);
+/* 	if (vec3_dot(ctx->ray.dir, result) > 0)
+		return (vec3_neg(result)); */
 	return (result);
 }
 

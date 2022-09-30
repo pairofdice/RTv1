@@ -6,17 +6,17 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 12:52:17 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:21:26 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
-# include "../libft/libft.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
 # include "objects.h"
 # include "../libsdl2/include/SDL.h"
 // # include "SDL2/SDL.h"
@@ -24,12 +24,9 @@
 
 # define WIN_W 1235
 # define WIN_H 771
-# define NUM_OBJECTS 1
 # define GAMMA 2.2
 # define AMBIENT 0.0001
 # define LIGHTBULB_SIZE 0.0001
-# define RENDER 1
-# define NO_RENDER 0
 # define TRUE 1
 # define FALSE 0
 
@@ -79,9 +76,7 @@ typedef struct s_context
 	SDL_Event		e;
 }	t_context;
 
-void			close_rtv1(t_context *ctx);
 int				init(t_context *ctx);
-void			close_rtv1(t_context *ctx);
 void			draw(t_context *ctx);
 void			write_buffer(t_context *ctx,
 					int *texture_data,
@@ -92,25 +87,21 @@ t_vec3			vec3_new(double x,
 double			get_light_level(t_ray normal,
 					t_ray ray,
 					t_context *ctx,
-					size_t id);
+					int id);
 t_color			debug_shading(t_vec3 normal);
 t_color			shade(t_object obj,
 					double shading);
 void			init_camera(t_cam *cam,
 					t_point loc);
 void			img_pixel_put(t_frame_buffer *fb,
-					unsigned long x,
-					unsigned long y,
+					unsigned int x,
+					unsigned int y,
 					t_color color);
 t_light			light_new(t_point loc,
 					t_color color,
 					double intensity);
 t_hit_record	hit_record_new(void);
 void			intersects(t_context *ctx, double distance);
-t_object		cone_new(t_vec3 loc,
-					t_vec3 rot,
-					double radius,
-					t_color c);
 int				intersects_sphere(t_ray *ray,
 					t_object *sphere,
 					double *distance);
@@ -141,7 +132,9 @@ int				ft_atof(char *str,
 					double *result);
 // int	ft_atofd(char *str, double *result);
 void			init_camera(t_cam *cam, t_point loc);
-void			calc_current_ray(t_context *ctx, int x, int y);
+void			calc_current_ray(t_context *ctx,
+					unsigned int x,
+					unsigned int y);
 void			set_camera(t_context *ctx);
 void			set_light(t_context *ctx);
 t_vec3			vec3_rotate(t_vec3 u, t_vec3 v);

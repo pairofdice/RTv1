@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 15:55:52 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:21:26 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,29 @@ typedef struct s_abc
 	double	c;
 }	t_abc;
 
-int		rgb_to_int(int r, int g, int b);
-t_vec3	vec3_add(t_vec3 i, t_vec3 j);
-double	vec3_mag(t_vec3 i);
-t_vec3	vec3_scalar_mult(t_vec3 u, double x);
-t_vec3	vec3_cross(t_vec3 u, t_vec3 v);
-t_vec3	vec3_unit(t_vec3 u);
-t_vec3	vec3_sub(t_vec3 u, t_vec3 v);
-t_vec3	vec3_neg(t_vec3 u);
-double	vec3_dot(t_vec3 u, t_vec3 v);
-double	vec3_sqr(t_vec3 u);
-t_vec3	vec3_ray_at(t_ray u, double x);
-t_vec3	vec3_reflect(t_vec3 incoming, t_ray normal);
-double	quadratic(t_abc abc, double b2_4ac);
-double	calc_b2_4ac(t_abc abc);
+unsigned int	rgb_to_int(unsigned int r,
+					unsigned int g,
+					unsigned int b);
+t_vec3			vec3_add(t_vec3 i,
+					t_vec3 j);
+double			vec3_mag(t_vec3 i);
+t_vec3			vec3_scalar_mult(t_vec3 u,
+					double x);
+t_vec3			vec3_cross(t_vec3 u,
+					t_vec3 v);
+t_vec3			vec3_unit(t_vec3 u);
+t_vec3			vec3_sub(t_vec3 u,
+					t_vec3 v);
+t_vec3			vec3_neg(t_vec3 u);
+double			vec3_dot(t_vec3 u,
+					t_vec3 v);
+double			vec3_sqr(t_vec3 u);
+t_vec3			vec3_ray_at(t_ray u,
+					double x);
+t_vec3			vec3_reflect(t_vec3 incoming,
+					t_ray normal);
+double			quadratic(t_abc abc,
+					double b2_4ac);
+double			calc_b2_4ac(t_abc abc);
 
 #endif
