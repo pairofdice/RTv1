@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 16:09:54 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:52:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_hit_record	hit_record_new(void);
 void			intersects(t_context *ctx, double distance);
 t_object		cone_new(t_vec3 loc,
 					t_vec3 rot,
-					 double radius,
+					double radius,
 					t_color c);
 int				intersects_sphere(t_ray *ray,
 					t_object *sphere,
@@ -118,7 +118,7 @@ int				intersects_plane(t_ray *ray,
 					t_object *plane,
 					double *distance);
 int				intersects_cylinder(t_ray *ray,
-					 t_object *cylinder,
+					t_object *cylinder,
 					double *distance);
 int				intersects_cone(t_ray *ray,
 					t_object *cone,
@@ -136,7 +136,7 @@ int				load_scene(int fd,
 void			check_type(char **str,
 					t_context *ctx);
 //char *skip_whitespace(char *str);
-t_point 		read_triple(char **strs);
+t_point			read_triple(char **strs);
 int				ft_atof(char *str,
 					double *result);
 // int	ft_atofd(char *str, double *result);
@@ -152,16 +152,16 @@ int				test_sphere(t_ray normal,
 					t_object *obj,
 					double *distance);
 int				test_plane(t_ray normal,
-					 t_vec3 to_light,
+					t_vec3 to_light,
 					t_object *obj,
 					double *distance);
 int				test_cone(t_ray normal,
 					t_vec3 to_light,
-					 t_object *obj,
+					t_object *obj,
 					double *distance);
 int				test_cylinder(t_ray normal,
 					t_vec3 to_light,
 					t_object *obj,
-					 double *distance);
+					double *distance);
 
 #endif

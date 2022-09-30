@@ -6,17 +6,16 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:37:24 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 15:52:45 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/30 12:55:04 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECTS_H
-#define OBJECTS_H
+# include "vec3.h"
+# define OBJECTS_H
+# define EPSILON 0.000001
 
-#include "vec3.h"
-#define EPSILON 0.000001
-
-enum 
+enum
 {
 	SPHERE,
 	PLANE,
@@ -31,39 +30,39 @@ enum
 
 typedef struct s_object
 {
-	t_point loc;
-	t_point coi;
-	t_vec3 up;
-	t_vec3 rot;
-	double size;
-	t_color color;
+	t_point	loc;
+	t_point	coi;
+	t_vec3	up;
+	t_vec3	rot;
+	double	size;
+	t_color	color;
 	double	brightness;
-	int type;
-} t_object;
+	int		type;
+}	t_object;
 
 typedef struct s_light
 {
-	t_point loc;
-	t_color color;
-	double intensity;
-} t_light;
+	t_point	loc;
+	t_color	color;
+	double	intensity;
+}	t_light;
 
 typedef struct s_cam
 {
 	t_point	L;
-	t_point loc;
-	t_vec3 dir;
-	t_vec3 up;
-	t_vec3 right;
-	t_vec3 n;
+	t_point	loc;
+	t_vec3	dir;
+	t_vec3	up;
+	t_vec3	right;
+	t_vec3	n;
 	t_point coi;
-	t_vec3 scene_up;
-	double distance_to_proj;
-	t_vec3 cam_to_proj;
-	t_vec3 projection_plane_center;
-	double projection_plane_h;
-	double projection_plane_w;
-	double aspect;
-} t_cam;
+	t_vec3	scene_up;
+	double	distance_to_proj;
+	t_vec3	cam_to_proj;
+	t_vec3	projection_plane_center;
+	double	projection_plane_h;
+	double	projection_plane_w;
+	double	aspect;
+}	t_cam;
 
 #endif
