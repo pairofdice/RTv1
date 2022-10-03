@@ -6,31 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 19:58:36 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:33:55 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
-
-int	handle_args(int argc, char **argv, t_context *ctx)
-{
-	int	fd;
-
-	if (argc == 2)
-	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd < 0)
-			exit(1);
-	}
-	else
-	{
-		ft_putstr("Usage: ./RTv1 <scene>\n");
-		exit(1);
-	}
-	load_scene(fd, ctx);
-	close(fd);
-	return (1);
-}
 
 static void	sf_free_array(void **array)
 {
@@ -94,7 +74,7 @@ static void	sf_parse_line(t_context *ctx)
 		sf_process_line(ctx, &ctx->words);
 }
 
-int	load_scene(int fd, t_context *ctx)
+static int	sf_load_scene(int fd, t_context *ctx)
 {
 	if (!(vec_new(&ctx->scene, BUFF_SIZE * 2, sizeof(t_object))))
 		exit(1);
@@ -115,5 +95,25 @@ int	load_scene(int fd, t_context *ctx)
 	}
 	if (ctx->gnl != 0)
 		return (0);
+	return (1);
+}
+
+int	handle_args(int argc, char **argv, t_context *ctx)
+{
+	int	fd;
+
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		if (fd < 0)
+			exit(1);
+	}
+	else
+	{
+		ft_putstr("Usage: ./RTv1 <scene>\n");
+		exit(1);
+	}
+	sf_load_scene(fd, ctx);
+	close(fd);
 	return (1);
 }

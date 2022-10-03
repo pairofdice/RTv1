@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 17:52:30 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:49:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int				intersects_cylinder(t_ray *ray,
 int				intersects_cone(t_ray *ray,
 					t_object *cone,
 					double *distance);
-// t_vec3		get_plane_normal(t_vec3 plane_loc, t_ray ray, double distance);
 t_vec3			get_sphere_normal(t_context *ctx);
 t_vec3			get_plane_normal(t_context *ctx);
 t_vec3			get_cylinder_normal(t_context *ctx);
@@ -121,22 +120,17 @@ t_vec3			get_cone_normal(t_context *ctx);
 int				handle_args(int argc,
 					char **argv,
 					t_context *ctx);
-void	handle_events(t_context *ctx);
-int				load_scene(int fd,
-					t_context *ctx);
+void			handle_events(t_context *ctx);
 void			check_type(char **str,
 					t_context *ctx);
-//char *skip_whitespace(char *str);
 t_point			read_triple(char **strs);
 int				ft_atof(char *str,
 					double *result);
-// int	ft_atofd(char *str, double *result);
 void			init_camera(t_cam *cam, t_point loc);
 void			calc_current_ray(t_context *ctx,
 					unsigned int x,
 					unsigned int y);
 void			set_camera(t_context *ctx);
-void			set_light(t_context *ctx);
 t_vec3			vec3_rotate(t_vec3 u, t_vec3 v);
 double			to_radians(double degrees);
 void			rt_close(t_context *ctx);

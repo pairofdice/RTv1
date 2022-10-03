@@ -6,12 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:14:47 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/09 13:51:48 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:14:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
-#include <math.h>
 
 t_vec3	vec3_neg(t_vec3 u)
 {

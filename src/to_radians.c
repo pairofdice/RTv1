@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:02:09 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 15:53:53 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:13:41 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 
 double	to_radians(double degrees)
 {

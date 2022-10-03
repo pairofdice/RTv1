@@ -6,12 +6,12 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 10:49:20 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/28 20:15:16 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:13:14 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "../inc/objects.h"
+#include "objects.h"
 
 double	calc_b2_4ac(t_abc abc)
 {

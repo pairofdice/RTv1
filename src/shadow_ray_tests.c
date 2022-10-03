@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 18:50:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/28 20:30:52 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:13:25 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 
 int	test_sphere(t_ray normal,
 				t_vec3 to_light,

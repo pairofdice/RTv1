@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:16:07 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:48:55 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int	init(t_context *ctx)
 	ctx->obj = default_object();
 	ctx->hit = hit_record_new();
 	cam.scene_up = (t_point){0.0, 1.0, 0.0};
-	ctx->ambient = light_new((t_point){0, 0, 0},
-			(t_color){0.1, 0.1, 0.2}, 0.001);
 	ctx->cam = cam;
 	rt_sdl_init(ctx);
 	ctx->frame_buffer.data = (char *)malloc(WIN_H * WIN_W * 4);
