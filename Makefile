@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/10/03 15:59:38 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/10/03 17:52:42 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC = $Smain.c \
 	$Svec3_rotate.c \
 	$Sparse.c \
 	$Scamera.c \
+	$Sevents.c \
 	$Scurrent_ray.c \
 	$Sshadow_ray_tests.c \
 

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 15:59:53 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:52:30 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_vec3			get_cone_normal(t_context *ctx);
 int				handle_args(int argc,
 					char **argv,
 					t_context *ctx);
+void	handle_events(t_context *ctx);
 int				load_scene(int fd,
 					t_context *ctx);
 void			check_type(char **str,

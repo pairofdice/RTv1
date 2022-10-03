@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:53:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 17:33:11 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:46:23 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	move_cam(t_context *ctx, t_vec3 dir)
 
 // Sets up the virtual screen from camera location, center of interest
 // and scene up direction (assumed to be positive y).
+// Virtual screen (projection plane)is a small offset away from camera pivot.
+// First we build the direction vectors of the camera with vector cross product
+// Then we set the center of the projection plane and the lower left anchor
 void	init_camera(t_cam *cam, t_point loc)
 {
 	cam->loc = loc;

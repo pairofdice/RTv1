@@ -6,12 +6,12 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:16:11 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:52:04 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
-#include "../inc/vec3.h"
+#include "RTv1.h"
+#include "vec3.h"
 
 static void	find_normal(t_context *ctx)
 {
@@ -69,6 +69,7 @@ void	draw(t_context *ctx)
 	}
 }
 
+// Copy framebuffer to a texture for SDL to put it to screen
 void	write_buffer(t_context *ctx,
 					int *texture_data,
 					int *texture_pitch)

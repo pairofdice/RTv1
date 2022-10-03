@@ -6,14 +6,10 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:23:03 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 18:32:57 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:49:44 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// get_shading(normal, light, &SPHERES,ctx->cam.closest_id);
-
-//#include "vec3.h"
-//#include "objects.h"
 #include "RTv1.h"
 
 t_color	shade(t_object obj, double shading)
@@ -53,7 +49,6 @@ static double	sf_calc_normal_light_dot(t_ray ray,
 	return (dot);
 }
 
-// shadow_object_intersect(ctx, normal, to_light, id, distance);
 int	test_objects(t_context *ctx, t_object obj, t_ray normal, t_vec3 to_light)
 {
 	if (obj.type == SPHERE)
@@ -79,6 +74,8 @@ int	test_objects(t_context *ctx, t_object obj, t_ray normal, t_vec3 to_light)
 	return (1);
 }
 
+// Shoot a ray from the hit location a/the light and check if any intersecting
+// surface is closer than the light
 static int	sf_shadow_object_intersect(t_context *ctx,
 							t_ray normal,
 							t_vec3 to_light,

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 17:35:05 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:51:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ void	rt_close(t_context *ctx)
 	exit(0);
 }
 
-void	handle_events(t_context *ctx)
-{
-	if (ctx->e.key.keysym.sym == SDLK_ESCAPE)
-		ctx->quit = TRUE;
-	if (ctx->e.key.keysym.sym == SDLK_w)
-		move_cam(ctx, ctx->cam.dir);
-	if (ctx->e.key.keysym.sym == SDLK_a)
-		move_cam(ctx, vec3_neg(ctx->cam.right));
-	if (ctx->e.key.keysym.sym == SDLK_s)
-		move_cam(ctx, vec3_neg(ctx->cam.dir));
-	if (ctx->e.key.keysym.sym == SDLK_d)
-		move_cam(ctx, ctx->cam.right);
-}
 
 void	rt_run(t_context *ctx)
 {
