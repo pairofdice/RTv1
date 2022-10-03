@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 20:33:55 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:32:28 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	sf_parse_line(t_context *ctx)
 static int	sf_load_scene(int fd, t_context *ctx)
 {
 	if (!(vec_new(&ctx->scene, BUFF_SIZE * 2, sizeof(t_object))))
-		exit(1);
+		rt_close(ctx);
 	ctx->gnl = 1;
 	while (ctx->gnl == 1)
 	{
@@ -106,7 +106,7 @@ int	handle_args(int argc, char **argv, t_context *ctx)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			exit(1);
+			rt_close(ctx);
 	}
 	else
 	{
