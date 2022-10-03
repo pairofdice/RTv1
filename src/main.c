@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:16:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:41:40 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ void	rt_close(t_context *ctx)
 	ctx->window = NULL;
 	SDL_Quit();
 	exit(0);
-}
-
-void	move_cam(t_context *ctx, t_vec3 dir)
-{
-	t_point	loc;
-
-	loc = ctx->cam.loc;
-	loc = vec3_add(loc, dir);
-	init_camera(&ctx->cam, loc);
-	draw(ctx);
-	write_buffer(ctx,
-		ctx->frame_buffer.texture_data,
-		&ctx->frame_buffer.texture_pitch);
 }
 
 void	handle_events(t_context *ctx)

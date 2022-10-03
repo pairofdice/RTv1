@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 14:27:55 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:59:53 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include "objects.h"
-//# include "../libsdl2/include/SDL.h"
 # include "SDL2/SDL.h"
-//#include "../sdl_include/SDL.h"
 
-# define WIN_W 1235
-# define WIN_H 771
+# define WIN_W 1615
+# define WIN_H 1009
 # define GAMMA 2.2
 # define AMBIENT 0.0001
 # define LIGHTBULB_SIZE 0.0001
@@ -157,5 +155,7 @@ int				test_cylinder(t_ray normal,
 					t_vec3 to_light,
 					t_object *obj,
 					double *distance);
+void			move_cam(t_context *ctx,
+					t_vec3 dir);
 
 #endif

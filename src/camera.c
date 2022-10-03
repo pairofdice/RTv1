@@ -6,11 +6,24 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:53:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:16:14 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:41:53 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
+
+void	move_cam(t_context *ctx, t_vec3 dir)
+{
+	t_point	loc;
+
+	loc = ctx->cam.loc;
+	loc = vec3_add(loc, dir);
+	init_camera(&ctx->cam, loc);
+	draw(ctx);
+	write_buffer(ctx,
+		ctx->frame_buffer.texture_data,
+		&ctx->frame_buffer.texture_pitch);
+}
 
 	// 1.4 radians is ~80 degrees
 	// 1.05 radians is ~60 degrees

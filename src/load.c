@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 17:09:11 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:46:08 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_args(int argc, char **argv, t_context *ctx)
 	return (1);
 }
 
-static void	free_array(void **array)
+static void	sf_free_array(void **array)
 {
 	void	**temp;
 
@@ -46,11 +46,13 @@ static void	free_array(void **array)
 	*array = NULL;
 }
 
-static void	process_line(t_context *ctx, char ***words)
+static void	sf_process_line(t_context *ctx, char ***words)
 {
 	if (!words || !(*words) || !(**words) || !(***words))
 		return ;
 	ctx->trimmed = ft_strtrim(**words);
+	if (!ctx->trimmed)
+		rt_close(ctx);
 	if (ft_strncmp(ctx->trimmed, "loc", 3) == 0)
 		ctx->obj.loc = read_triple(*words);
 	if (ft_strncmp(ctx->trimmed, "translate", 9) == 0)
@@ -74,7 +76,7 @@ static void	process_line(t_context *ctx, char ***words)
 	ft_strdel(&ctx->trimmed);
 }
 
-static void	parse_line(t_context *ctx)
+static void	sf_parse_line(t_context *ctx)
 {
 	if (ctx->parse_state == NOTHING && **ctx->words == '{')
 		check_type(ctx->words, ctx);
@@ -89,7 +91,7 @@ static void	parse_line(t_context *ctx)
 			exit (1);
 	}
 	else if (ctx->parse_state == PROCESSING)
-		process_line(ctx, &ctx->words);
+		sf_process_line(ctx, &ctx->words);
 }
 
 int	load_scene(int fd, t_context *ctx)
@@ -107,8 +109,8 @@ int	load_scene(int fd, t_context *ctx)
 			rt_close(ctx);
 		ctx->temp = ctx->words;
 		if (*ctx->temp)
-			parse_line(ctx);
-		free_array((void *)&ctx->temp);
+			sf_parse_line(ctx);
+		sf_free_array((void *)&ctx->temp);
 		ft_strdel(&ctx->line);
 	}
 	if (ctx->gnl != 0)

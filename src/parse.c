@@ -6,13 +6,13 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 18:36:23 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:46:39 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
 
-int	is_valid_float(char *str)
+static int	sf_is_valid_float(char *str)
 {
 	if (*str == '-' || *str == '+')
 		str++;
@@ -43,7 +43,7 @@ int	ft_atof(char *str, double *result)
 
 	neg = 1.0;
 	*result = 0.0;
-	if (!str || !is_valid_float(str))
+	if (!str || !sf_is_valid_float(str))
 		return (0);
 	if (*str == '-')
 		neg = -1.0;
