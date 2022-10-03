@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 17:07:50 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:17:31 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdlib.h>
 # include "../libft/libft.h"
 # include "objects.h"
-# include "../libsdl2/include/SDL.h"
-// # include "SDL2/SDL.h"
+//# include "../libsdl2/include/SDL.h"
+# include "SDL2/SDL.h"
 //#include "../sdl_include/SDL.h"
 
 # define WIN_W 1235
