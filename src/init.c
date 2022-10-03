@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 16:09:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 20:48:55 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:09:58 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	rt_sdl_init(t_context *ctx)
 	if (ctx->window == NULL)
 		rt_close(ctx);
 	ctx->renderer = SDL_CreateRenderer(ctx->window, -1, 0);
+	// ctx->renderer = NULL;
 	if (ctx->renderer == NULL)
 		rt_close(ctx);
 	ctx->texture = SDL_CreateTexture(ctx->renderer, SDL_PIXELFORMAT_RGBA8888,

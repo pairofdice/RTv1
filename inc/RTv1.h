@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:16:55 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 20:49:00 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:53:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,10 @@ void			draw(t_context *ctx);
 void			write_buffer(t_context *ctx,
 					int *texture_data,
 					int *texture_pitch);
-t_vec3			vec3_new(double x,
-					double y,
-					double z);
 double			get_light_level(t_ray normal,
 					t_ray ray,
 					t_context *ctx,
 					int id);
-t_color			debug_shading(t_vec3 normal);
 t_color			shade(t_object obj,
 					double shading);
 void			init_camera(t_cam *cam,
@@ -96,9 +92,6 @@ void			img_pixel_put(t_frame_buffer *fb,
 					unsigned int x,
 					unsigned int y,
 					t_color color);
-t_light			light_new(t_point loc,
-					t_color color,
-					double intensity);
 t_hit_record	hit_record_new(void);
 void			intersects(t_context *ctx, double distance);
 int				intersects_sphere(t_ray *ray,

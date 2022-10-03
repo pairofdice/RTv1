@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_sqr.c                                         :+:      :+:    :+:   */
+/*   vec3_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:14:47 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 21:20:18 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:52:17 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
-#include <math.h>
 
-double	vec3_sqr(t_vec3 u)
+t_vec3	vec3_new(double x, double y, double z)
 {
-	return (u.x * u.x + u.y * u.y + u.z * u.z);
+	t_vec3	new;
+
+	new.x = x;
+	new.y = y;
+	new.z = z;
+	return (new);
 }

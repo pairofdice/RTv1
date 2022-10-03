@@ -6,7 +6,7 @@
 #    By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/25 15:52:34 by jsaarine          #+#    #+#              #
-#    Updated: 2022/10/03 20:14:59 by jsaarine         ###   ########.fr        #
+#    Updated: 2022/10/03 21:32:00 by jsaarine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRC = $Smain.c \
 	$Sdraw.c \
 	$Spixel_put_color.c \
 	$Sget_shading.c \
-	$Slight_new.c \
 	$Shit_record_new.c \
 	$Sintersects.c \
 	$Squadratic.c \
@@ -88,7 +87,7 @@ $(NAME): $(OBJ) $(LIBA)
 $O:
 	@mkdir $@
 
-$(OBJ): $(SDL2_LIB) | $O
+$(OBJ): $(SDL2_LIB) Makefile | $O
 $(OBJ):| $O
 
 $(OBJ): $O%.o: $S% $(LIBA) | $O
@@ -130,7 +129,10 @@ clean: cleanobjdir cleandepdir
 
 fclean: clean
 	$(RM) $(NAME)
-	make -C $(LIBFT) fclean
+	make -C $(LIBFT) fclean	
+	if test -f $(SDL2_MK); then $(MAKE) \
+	AUTOMAKE=: --directory=libsdl2 distclean; fi
+
 
 re: fclean all
 
