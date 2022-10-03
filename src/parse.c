@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:09:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 15:46:39 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:11:47 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 
 static int	sf_is_valid_float(char *str)
 {
@@ -57,7 +57,7 @@ int	ft_atof(char *str, double *result)
 	return (1);
 }
 
-int	check_triple_length(char **strs)
+static int	sf_check_triple_length(char **strs)
 {
 	int	c;
 
@@ -76,7 +76,7 @@ t_point	read_triple(char **strs)
 	p.x = 0.0;
 	p.y = 0.0;
 	p.z = 0.0;
-	if (!check_triple_length(++strs))
+	if (!sf_check_triple_length(++strs))
 		return (p);
 	ft_atof(strs[0], &p.x);
 	ft_atof(strs[1], &p.y);

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/15 16:42:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:06:00 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,6 @@ t_abc static
 	return (abc);
 }
 
-/* t_object	cone_new(t_vec3 loc, t_vec3 rot, double radius, t_color c)
-{
-	t_object	s;
-
-	s.color.x = c.x;
-	s.color.y = c.y;
-	s.color.z = c.z;
-	s.loc = loc;
-	s.size = radius;
-	s.rot = vec3_unit(rot);
-	s.type = CONE;
-	return (s);
-}
- */
 t_vec3	get_cone_normal(t_context *ctx)
 {
 	t_vec3	result;

@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:00:22 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 15:46:08 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:58:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 
 int	handle_args(int argc, char **argv, t_context *ctx)
 {

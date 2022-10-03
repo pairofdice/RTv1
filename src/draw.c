@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 13:59:07 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 17:52:04 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:02:37 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static void	find_normal(t_context *ctx)
 		ctx->hit.normal = get_cone_normal(ctx);
 }
 
-	// create a ray for this pixel. origin is the virtual pixel
-	// on the projection plane
-	// direction is location of virtual pixel minus location of camera
-	// c = debug_shading(normal);
+// create a ray for this pixel. origin is the virtual pixel
+// on the projection plane
+// direction is location of virtual pixel minus location of camera
+// c = debug_shading(normal);
 
 void	draw_pixel(t_context *ctx, unsigned int x, unsigned int y)
 {

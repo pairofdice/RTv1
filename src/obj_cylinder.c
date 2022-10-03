@@ -6,13 +6,12 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 13:12:21 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:06:24 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
 #include "objects.h"
-#include <stdio.h>
 
 t_abc static	calc_abc_cylinder(t_ray ray,
 									t_vec3 cyldir,
@@ -28,22 +27,6 @@ t_abc static	calc_abc_cylinder(t_ray ray,
 		* vec3_dot(raycyl, cyldir) - radius * radius;
 	return (abc);
 }
-
-/* t_object cylinder_new(t_vec3 loc,
-						t_vec3 rot,
-						double radius, int r, int g, int b)
-{
-	t_object s;
-
-	s.color.x = r;
-	s.color.y = g;
-	s.color.z = b;
-	s.loc = loc;
-	s.size = radius;
-	s.rot = vec3_unit(rot);
-	s.type = CYLINDER;
-	return (s);
-} */
 
 t_vec3	get_cylinder_normal(t_context *ctx)
 {

@@ -3,36 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   obj_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsaarine <jsaarine@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/26 00:54:12 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:08:21 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
-#include "../inc/objects.h"
-//#include <math.h>
-#include <math.h>
-#include <stdio.h>
+#include "objects.h"
 
-/* t_object	plane_new(t_vec3 plane_loc, t_vec3 rot, int r, int g, int b)
-{
-	// fix rgb with maybe union, maybe struct, maybe 0xFFFFFF00(hex) colors
-	t_object	s;
-
-
-	s.color.x = r;
-	s.color.y = g;
-	s.color.z = b;
-	s.loc = plane_loc;
-	s.rot = vec3_unit(rot);
-	s.type = PLANE;
-	s.size = 1;
-	return (s);
-}
-
- */
 t_vec3	get_plane_normal(t_context *ctx)
 {
 	if (vec3_dot(ctx->obj.rot, ctx->ray.dir) > 0)
@@ -42,7 +22,7 @@ t_vec3	get_plane_normal(t_context *ctx)
 
 /*
 Ray and plane intersection
-T = Taso, plane.loc
+T = Taso = plane.loc
 N = Plane normal, plane.rot
 P = A point on the plane
 R = ray with a start position, R.p, and a direction, R.d.

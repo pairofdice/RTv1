@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:16:59 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 15:16:06 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:57:48 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 
 void	update_hit_record(t_hit_record *hit, double *distance, int i)
 {

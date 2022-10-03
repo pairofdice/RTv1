@@ -6,14 +6,12 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:24:39 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/30 18:34:54 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:09:03 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RTv1.h"
 #include "objects.h"
-#include <math.h>
-#include <stdio.h>
 
 t_vec3	get_sphere_normal(t_context *ctx)
 {

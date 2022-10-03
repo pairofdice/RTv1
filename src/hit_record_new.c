@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:14:56 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/09/29 15:38:34 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 19:57:36 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 
 t_hit_record	hit_record_new(void)
 {

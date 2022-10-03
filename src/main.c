@@ -6,11 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 17:51:28 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:05:44 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RTv1.h"
+#include "RTv1.h"
 
 void	rt_close(t_context *ctx)
 {
