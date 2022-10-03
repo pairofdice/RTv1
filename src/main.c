@@ -6,13 +6,11 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:46:34 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 15:41:40 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:35:05 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RTv1.h"
-#include <stdbool.h>
-#include <stdio.h>
 
 void	rt_close(t_context *ctx)
 {
@@ -31,7 +29,7 @@ void	rt_close(t_context *ctx)
 void	handle_events(t_context *ctx)
 {
 	if (ctx->e.key.keysym.sym == SDLK_ESCAPE)
-		ctx->quit = true;
+		ctx->quit = TRUE;
 	if (ctx->e.key.keysym.sym == SDLK_w)
 		move_cam(ctx, ctx->cam.dir);
 	if (ctx->e.key.keysym.sym == SDLK_a)
@@ -49,7 +47,7 @@ void	rt_run(t_context *ctx)
 		if (SDL_WaitEvent(&ctx->e) != 0)
 		{
 			if (ctx->e.type == SDL_QUIT)
-				ctx->quit = true;
+				ctx->quit = TRUE;
 			else if (ctx->e.type == SDL_WINDOWEVENT)
 			{
 				if (ctx->e.window.event == SDL_WINDOWEVENT_EXPOSED)

@@ -6,7 +6,7 @@
 /*   By: jsaarine <jsaarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:53:37 by jsaarine          #+#    #+#             */
-/*   Updated: 2022/10/03 15:41:53 by jsaarine         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:33:11 by jsaarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	move_cam(t_context *ctx, t_vec3 dir)
 		&ctx->frame_buffer.texture_pitch);
 }
 
-	// 1.4 radians is ~80 degrees
-	// 1.05 radians is ~60 degrees
+// Sets up the virtual screen from camera location, center of interest
+// and scene up direction (assumed to be positive y).
 void	init_camera(t_cam *cam, t_point loc)
 {
 	cam->loc = loc;
