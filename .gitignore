@@ -9,4 +9,5 @@ dep/
 .vscode/
 *.o
 build/
+libsdl2/include/SDL_config.h
 libft/libft.a
